@@ -13,20 +13,20 @@
   },
   "dependencies": {
     "express": "5.2.1",
-    "phaser": "^3.90.0"
+    "phaser": "3.90.0"
   },
   "devDependencies": {
     "@types/express": "5.0.6",
-    "@types/node": "^25.5.2",
-    "@types/webpack": "^5.28.5",
-    "css-loader": "^7.1.4",
-    "html-webpack-plugin": "^5.6.6",
-    "style-loader": "^4.0.0",
+    "@types/node": "25.5.2",
+    "@types/webpack": "5.28.5",
+    "css-loader": "7.1.4",
+    "html-webpack-plugin": "5.6.6",
+    "style-loader": "4.0.0",
     "ts-loader": "9.5.7",
     "ts-node": "10.9.2",
     "typescript": "6.0.2",
     "webpack": "5.105.4",
     "webpack-cli": "7.0.2",
-    "webpack-dev-server": "^5.2.3"
+    "webpack-dev-server": "5.2.3"
   }
 }
