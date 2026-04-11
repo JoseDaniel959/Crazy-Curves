@@ -1,0 +1,30 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // "rootDir": "./src/game/",
+    "outDir": "./src/dist/",
+    "noImplicitAny": true,
+    "noImplicitThis": false,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "lib": [
+      "es6",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "paths": {  
+      "@/*": [
+        "./src/*"
+      ]
+    },
+     "typeRoots": [
+      "./node_modules/phaser/types",
+      "./node_modules/@types"
+    ],
+
+  },
+}
