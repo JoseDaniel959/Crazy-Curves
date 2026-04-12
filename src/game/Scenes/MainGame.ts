@@ -1,15 +1,13 @@
 import Phaser from "phaser"
-import SpaceshipSprite from "./GameObjects/Palas"
-import SpaceshipAsset from "../assets/Spaceship.png"
+import SpaceshipSprite from "../GameObjects/SpaceshipSprite"
 
 export default class BootLoader extends Phaser.Scene{
     private jugador: SpaceshipSprite | undefined;
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined
     constructor(){
-        super({key:'BootLoader'})
+        super('MainGame')
     }
     preload(){
-        this.load.image("Spaceship",SpaceshipAsset)
     }
     create(){
         this.cursors = this.input.keyboard?.createCursorKeys();

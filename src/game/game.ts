@@ -1,12 +1,16 @@
 import type { Types } from "phaser";
 import { Game } from "phaser";
-import BootLoader from "./BootLoader"
+import Boot from "./Scenes/Boot"
 import Preloader from "./Scenes/Preloader";
+import MainMenu from "./Scenes/MainMenu";
+import MainGame from "./Scenes/MainGame";
+
+
     var config: Types.Core.GameConfig = {
         type: Phaser.AUTO,
         width: 800,
         height: 600,
-        scene: [Preloader,BootLoader],
+        scene: [Boot,Preloader,MainMenu, MainGame],
         physics:{
             default:"arcade",
             arcade: {

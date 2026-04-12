@@ -1,4 +1,6 @@
 import music1 from "../../assets/music/nastelbom-funk-437330.mp3"
+import SpaceshipAsset from "../../assets/images/Spaceship_01_BLUE.png"
+
 export default class Preloader extends Phaser.Scene
 {
     constructor ()
@@ -8,7 +10,9 @@ export default class Preloader extends Phaser.Scene
 
     preload ()
     {
-         this.load.audio('music1', [music1]);
+        this.load.audio('music1', [music1]);
+        this.load.image("Spaceship",SpaceshipAsset)
+
     }
     create(){
       
@@ -16,7 +20,7 @@ export default class Preloader extends Phaser.Scene
         element.setInteractive();
      
         element.once('pointerdown', () => {
-            this.scene.start("BootLoader")
+            this.scene.start("MainGame")
         });
         
     }
