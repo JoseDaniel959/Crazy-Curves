@@ -11,7 +11,8 @@ const __dirname = path.dirname(__filename);
 
 const config: (webpack.Configuration | webpackDevServer) = {
   entry: "./src/game/game.ts",
- plugins: [
+  mode: "development",
+  plugins: [
     new HtmlWebpackPlugin({
       title: 'Output Management',
     }),
@@ -23,8 +24,12 @@ const config: (webpack.Configuration | webpackDevServer) = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
-        {
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(mp3)$/i,
         type: 'asset/resource',
       },
     ],
@@ -33,15 +38,15 @@ const config: (webpack.Configuration | webpackDevServer) = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "./src/dist/"),
   },
   devtool: 'eval',
-  devServer:  {
+  devServer: {
     static: "./src/dist",
   },
-   
-  
+
+
 };
 
 
