@@ -17,18 +17,18 @@ export default class BootLoader extends Phaser.Scene{
     }
     update(time: number, delta: number): void {
         if(this.jugador && this.jugador.body) this.physics.velocityFromAngle(this.jugador.angle , 150, this.jugador.body.velocity);
-         
+         console.log(this.jugador?.x)
         if (this.cursors?.left.isUp ||this.cursors?.right.isUp )
         {
             this.jugador?.idle()
         }
         if (this.cursors?.left.isDown)
         {
-            this.jugador?.moveLeft()
+            this.jugador?.moveRight()
         }
         if (this.cursors?.right.isDown)
         {
-            this.jugador?.moveRight()
+            this.jugador?.moveLeft()
         }
     }
 }
