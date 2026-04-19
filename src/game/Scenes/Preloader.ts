@@ -1,8 +1,7 @@
 import music1 from "../../assets/music/nastelbom-funk-437330.mp3"
 import SpaceshipAsset from "../../assets/images/Spaceship_01_BLUE.png"
-
-export default class Preloader extends Phaser.Scene
-{
+import Tail from  "../../assets/images/New Piskel.png"
+export default class Preloader extends Phaser.Scene{
     constructor ()
     {
         super('Preloader');
@@ -12,6 +11,8 @@ export default class Preloader extends Phaser.Scene
     {
         this.load.audio('music1', [music1]);
         this.load.image("Spaceship",SpaceshipAsset)
+        this.load.image("Tail",Tail)
+
 
     }
     create(){
