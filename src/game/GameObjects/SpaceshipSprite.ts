@@ -43,12 +43,13 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
         this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
     }
 
-    checkCollisitions(){
+    checkCollisions():void{
         this.scene.physics.collide(this, this.tail,()=> console.log("COLISION!!!!!"));
     }
 
 
     move() {
+        this.checkCollisions();
         this.addLine()
         this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity)
 
