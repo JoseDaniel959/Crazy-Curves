@@ -1,4 +1,5 @@
 import TailSprite from "./TailSprite";
+import BulletProjectil from "./Weapons/BulletProjectile";
 
 export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
@@ -26,25 +27,24 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    idle() {
+    idle():void {
         this.setAngularVelocity(0);
     }
 
-    moveLeft() {
+    moveLeft():void {
         this.setAngularVelocity(100)
     }
 
-    moveRight() {
+    moveRight():void {
         this.setAngularVelocity(-100)
     }
 
-    addLine(){
+    addLine():void{
         this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
-        this.scene.physics.collide(this, this.tail,()=> console.log("COLISION!!!!!"));
     }
 
     checkCollisitions(){
-
+        this.scene.physics.collide(this, this.tail,()=> console.log("COLISION!!!!!"));
     }
 
 
