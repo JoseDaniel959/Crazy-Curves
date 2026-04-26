@@ -10,15 +10,13 @@ import MainGame from "./Scenes/MainGame";
         type: Phaser.AUTO,
         width: 800,
         height: 600,
+        autoCenter:Phaser.Scale.CENTER_BOTH,
         scene: [Boot,Preloader,MainMenu, MainGame],
         physics:{
             default:"arcade",
             arcade: {
             debug: true
         }
-        },
-         audio: {
-            disableWebAudio: true
         },
         parent: 'phaser-example',
         dom:{
