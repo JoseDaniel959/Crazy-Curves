@@ -1,6 +1,5 @@
 import ExplodeSprite from "./ExplodeSprite";
 import TailSprite from "./TailSprite";
-import BulletProjectil from "./Weapons/BulletProjectile";
 
 export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
@@ -22,12 +21,10 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
         this.setCircle(70, 200, 180)
         this.setOrigin(0.5, 0.5)
 
-
         //setting a random angle         
         this.angle = Phaser.Math.Angle.RandomDegrees();
 
-        // 
-        this.setCollideWorldBounds(true);
+        this.setCollideWorldBounds(true, 0, 0, true);
     }
 
     idle(): void {
@@ -46,13 +43,20 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
         this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
     }
 
-    checkCollisions() {
+    checkTailCollisions(): boolean {
         return this.scene.physics.collide(this, this.tail, () => true);
     }
 
+    checkWordBoundsCollisions() {
+        this.scene.physics.world.on('worldbounds', () => {
+            this.explode(this.x, this.y)
+            this.disableBody(true, true)
+        });
+    }
 
     move() {
-        if (!this.checkCollisions()) {
+        this.checkWordBoundsCollisions()
+        if (!this.checkTailCollisions()) {
             this.addLine()
             this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity)
 
@@ -66,13 +70,12 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
                 this.moveLeft()
             }
         }
-        else{
-            this.explode(this.x,this.y)
-            this.disableBody(true,true)
+        else {
+            this.explode(this.x, this.y)
+            this.disableBody(true, true)
         }
 
     }
-
 
     explode(x: number, y: number): ExplodeSprite {
         return new ExplodeSprite(this.scene, this.x, this.y)
