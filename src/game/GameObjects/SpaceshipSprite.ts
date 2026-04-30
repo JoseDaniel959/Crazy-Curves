@@ -5,7 +5,8 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     private offset = -20;
     private tail: TailSprite[] = [];
-
+    private elapsedTime: number = 250; 
+    private randomNumber: number = 20;
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, "Spaceship")
 
@@ -32,19 +33,37 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     }
 
     moveLeft(): void {
-        this.setAngularVelocity(100)
+        this.setAngularVelocity(165)
     }
 
     moveRight(): void {
-        this.setAngularVelocity(-100)
+        this.setAngularVelocity(-165)
     }
 
-    addLine(): void {
-        this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
+    addLine(deltaTime:number): void {
+        if(this.elapsedTime === 250){
+            this.randomNumber =Phaser.Math.Between(0, 50);
+           this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
+        }
+        if(this.randomNumber === 1){
+            this.updateTime(deltaTime)
+        }
+        console.log(this.randomNumber)
     }
 
     checkTailCollisions(): boolean {
         return this.scene.physics.collide(this, this.tail, () => true);
+    }
+
+    updateTime(deltaTime:number):void{
+       if(this.elapsedTime > 0){
+            this.elapsedTime -= deltaTime
+            console.log(this.elapsedTime )
+
+       }
+       else{
+         this.elapsedTime = 250;
+       }
     }
 
     checkWordBoundsCollisions() {
@@ -54,10 +73,10 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
         });
     }
 
-    move() {
+    move(deltaTime:number) {
         this.checkWordBoundsCollisions()
         if (!this.checkTailCollisions()) {
-            this.addLine()
+            this.addLine(deltaTime)
             this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity)
 
             if (this.cursors?.left.isUp || this.cursors?.right.isUp) {
