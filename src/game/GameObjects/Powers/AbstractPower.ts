@@ -1,22 +1,22 @@
-export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.Sprite {
+export default abstract class AbstractPower extends Phaser.Physics.Arcade.Sprite {
   private positionX: number;
   private positionY: number;
-  private projectileVelocity: number;
-  private ProjectileTexture: string;
+  private PowerVelocity: number;
+  private PowerTexture: string;
 
   constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
     texture: string,
-    projectileVelocity: number
+    PowerVelocity: number
   ) {
     super(scene, x, y, texture as string);
 
     this.positionX = x;
     this.positionY = y;
-    this.ProjectileTexture = texture;
-    this.projectileVelocity = projectileVelocity;
+    this.PowerTexture = texture;
+    this.PowerVelocity = PowerVelocity;
 
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -33,12 +33,12 @@ export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.S
     return this.positionY;
   }
 
-  public getprojectileVelocity(): number {
-    return this.projectileVelocity;
+  public getPowerVelocity(): number {
+    return this.PowerVelocity;
   }
 
-  public getProjectileTexture(): string {
-    return this.ProjectileTexture;
+  public getPowerTexture(): string {
+    return this.PowerTexture;
   }
 
   // Setters
@@ -52,12 +52,12 @@ export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.S
     this.setY(y);
   }
 
-  public setprojectileVelocity(projectileVelocity: number): void {
-    this.projectileVelocity = projectileVelocity;
+  public setPowerVelocity(PowerVelocity: number): void {
+    this.PowerVelocity = PowerVelocity;
   }
 
-  public setProjectileTexture(texture: string): void {
-    this.ProjectileTexture = texture;
+  public setPowerTexture(texture: string): void {
+    this.PowerTexture = texture;
     this.setTexture(texture as string);
   }
 }
