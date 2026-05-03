@@ -1,18 +1,19 @@
-export default abstract class AbstractPower extends Phaser.Physics.Arcade.Sprite {
+import SpaceshipSprite from "../SpaceshipSprite";
+
+export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.Sprite {
   private positionX: number;
   private positionY: number;
   private PowerVelocity: number;
   private PowerTexture: string;
-
-  constructor(
+  
+  public constructor(
     scene: Phaser.Scene,
     x: number,
     y: number,
     texture: string,
-    PowerVelocity: number
+    PowerVelocity: number,
   ) {
     super(scene, x, y, texture as string);
-
     this.positionX = x;
     this.positionY = y;
     this.PowerTexture = texture;
