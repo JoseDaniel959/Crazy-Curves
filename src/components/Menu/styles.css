@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Honk";
+  src:  url('../fonts/Honk-Regular-VariableFont_MORF\,SHLN.ttf') format(truetype);
+}
+
+
+
+h1{
+    font-family: 'Honk';
+}
