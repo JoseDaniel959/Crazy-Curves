@@ -25,7 +25,7 @@ export default class Preloader extends Phaser.Scene {
         element.setInteractive();
 
         element.once('pointerdown', () => {
-            this.scene.start("MainGame")
+            this.scene.start("MainMenu")
         });
 
     }
