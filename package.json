@@ -12,7 +12,6 @@
     "start": "webpack serve --open"
   },
   "dependencies": {
-    "express": "5.2.1",
     "phaser": "3.90.0"
   },
   "devDependencies": {
