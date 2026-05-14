@@ -32,6 +32,10 @@ const config: (webpack.Configuration | webpackDevServer) = {
         test: /\.(mp3)$/i,
         type: 'asset/resource',
       },
+       {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   resolve: {
