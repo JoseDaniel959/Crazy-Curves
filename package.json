@@ -12,7 +12,8 @@
     "start": "webpack serve --open"
   },
   "dependencies": {
-    "phaser": "3.90.0"
+    "phaser": "3.90.0",
+    "socket.io-client": "4.8.3"
   },
   "devDependencies": {
     "@types/express": "5.0.6",
