@@ -10,7 +10,6 @@ const app = express();
 const httpServer = createServer(app);
 const port = 3000
 const io = new Server(httpServer);
-let menuOffSet: number = 0;
 app.use(express.static(__dirname + '/public'));
 
 
@@ -22,11 +21,8 @@ app.get('/', function (req, res) {
 io.on("connection", (socket) => {
   getAllPlayers()
   socket.on("newPlayerInMenuFromClient", () => {
-    socket.emit('newPlayerFromServer', menuOffSet);
-    menuOffSet = menuOffSet + 80;
-    console.log("QUE ENTROO")
-    let players = getAllPlayers()
-    socket.emit('getPlayers',{players, menuOffSet})
+    socket.emit('newPlayerFromServer');
+    io.emit('getAllPlayersFromServer',getAllPlayers())
   })
 });
 
