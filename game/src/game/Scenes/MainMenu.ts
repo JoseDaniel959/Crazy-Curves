@@ -8,10 +8,16 @@ export default class MainMenu extends Phaser.Scene {
     }
     create() {
         emitNewPlayerInMenu();
-        socket.on("getPlayers", (players) => {
-            console.log(players)
+        socket.on("getAllPlayersFromServer",(playersArray)=>{
+            let offset = 0;
+            for (const player in playersArray) {
+                playerDiv(this,'HandsomeMCT',offset);
+                offset = offset + 80;             
+
+            }
+
         })
-        
+      
 
     }
 
