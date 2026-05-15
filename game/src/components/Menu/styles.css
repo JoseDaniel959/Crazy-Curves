@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Honk";
+  src:  url('../fonts/Honk-Regular-VariableFont_MORF\,SHLN.ttf') format(truetype);
+}
+
+
+
+h1{
+    color: white;
+}
+
+div{
+  background-color: purple;
+  width: 20vw;
+  height: 3vw;
+  border-radius: 30px;;
+}
