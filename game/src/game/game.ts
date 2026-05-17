@@ -4,6 +4,7 @@ import Boot from "./Scenes/Boot"
 import Preloader from "./Scenes/Preloader";
 import MainMenu from "./Scenes/MainMenu";
 import MainGame from "./Scenes/MainGame";
+import indexStyles from "../indexStyles.css"
 
 var config: Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -20,9 +21,9 @@ var config: Types.Core.GameConfig = {
     parent: 'phaser-example',
     dom: {
         createContainer: true,
-    }
+    },
 };
-
+indexStyles
 let game = new Game(config);
 
 
