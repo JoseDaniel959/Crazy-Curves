@@ -12,6 +12,7 @@ export default class BootLoader extends Phaser.Scene {
     create() {
         this.add.image(400,300,"Background").setToBack()
         const music = this.sound.add('music1').setVolume(0.3);
+        this.jugador = new SpaceshipSprite(this,200,200);
         music.play()
         
     }

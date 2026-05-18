@@ -20,3 +20,7 @@ export const onNewPlayerFromServer = (scene:BootLoader):void =>{
     socket.on("newPlayerFromServer",()=>{
     })
 }
+
+socket.on("getAllPlayers", (players) => {
+     console.log(players)
+})

@@ -9,6 +9,39 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/cjs.js!./indexStyles.css"
+/*!********************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/cjs.js!./indexStyles.css ***!
+  \********************************************************************************************************************/
+(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/noSourceMaps.js */ \"../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/noSourceMaps.js\");\n/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/api.js */ \"../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/api.js\");\n/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);\n// Imports\n\n\nvar ___CSS_LOADER_EXPORT___ = _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, `body{\n    background-color: #323243;\n}`, \"\"]);\n// Exports\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);\n\n\n//# sourceURL=webpack:///./indexStyles.css?../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/cjs.js\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/api.js"
+/*!**********************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/api.js ***!
+  \**********************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\nmodule.exports = function (cssWithMappingToString) {\n  var list = [];\n\n  // return the list of modules as css string\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = \"\";\n      var needLayer = typeof item[5] !== \"undefined\";\n      if (item[4]) {\n        content += \"@supports (\".concat(item[4], \") {\");\n      }\n      if (item[2]) {\n        content += \"@media \".concat(item[2], \" {\");\n      }\n      if (needLayer) {\n        content += \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\");\n      }\n      content += cssWithMappingToString(item);\n      if (needLayer) {\n        content += \"}\";\n      }\n      if (item[2]) {\n        content += \"}\";\n      }\n      if (item[4]) {\n        content += \"}\";\n      }\n      return content;\n    }).join(\"\");\n  };\n\n  // import a list of modules into the list\n  list.i = function i(modules, media, dedupe, supports, layer) {\n    if (typeof modules === \"string\") {\n      modules = [[null, modules, undefined]];\n    }\n    var alreadyImportedModules = {};\n    if (dedupe) {\n      for (var k = 0; k < this.length; k++) {\n        var id = this[k][0];\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n    for (var _k = 0; _k < modules.length; _k++) {\n      var item = [].concat(modules[_k]);\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        continue;\n      }\n      if (typeof layer !== \"undefined\") {\n        if (typeof item[5] === \"undefined\") {\n          item[5] = layer;\n        } else {\n          item[1] = \"@layer\".concat(item[5].length > 0 ? \" \".concat(item[5]) : \"\", \" {\").concat(item[1], \"}\");\n          item[5] = layer;\n        }\n      }\n      if (media) {\n        if (!item[2]) {\n          item[2] = media;\n        } else {\n          item[1] = \"@media \".concat(item[2], \" {\").concat(item[1], \"}\");\n          item[2] = media;\n        }\n      }\n      if (supports) {\n        if (!item[4]) {\n          item[4] = \"\".concat(supports);\n        } else {\n          item[1] = \"@supports (\".concat(item[4], \") {\").concat(item[1], \"}\");\n          item[4] = supports;\n        }\n      }\n      list.push(item);\n    }\n  };\n  return list;\n};\n\n//# sourceURL=webpack:///../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/api.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/noSourceMaps.js"
+/*!*******************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/noSourceMaps.js ***!
+  \*******************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\nmodule.exports = function (i) {\n  return i[1];\n};\n\n//# sourceURL=webpack:///../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/runtime/noSourceMaps.js?\n}");
+
+/***/ },
+
 /***/ "../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/browser.js"
 /*!***************************************************************************!*\
   !*** ../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/browser.js ***!
@@ -49,6 +82,149 @@ eval("{(function webpackUniversalModuleDefinition(root, factory) {\n\tif(true)\n
 
 /***/ },
 
+/***/ "./indexStyles.css"
+/*!*************************!*\
+  !*** ./indexStyles.css ***!
+  \*************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleDomAPI.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleDomAPI.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertBySelector.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertBySelector.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertStyleElement.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertStyleElement.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleTagTransform.js */ \"../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleTagTransform.js\");\n/* harmony import */ var _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_cjs_js_indexStyles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/cjs.js!./indexStyles.css */ \"../node_modules/.pnpm/css-loader@7.1.4_webpack@5.105.4/node_modules/css-loader/dist/cjs.js!./indexStyles.css\");\n\n      \n      \n      \n      \n      \n      \n      \n      \n      \n\nvar options = {};\n\noptions.styleTagTransform = (_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());\noptions.setAttributes = (_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());\noptions.insert = _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, \"head\");\noptions.domAPI = (_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());\noptions.insertStyleElement = (_node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());\n\nvar update = _node_modules_pnpm_style_loader_4_0_0_webpack_5_105_4_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_cjs_js_indexStyles_css__WEBPACK_IMPORTED_MODULE_6__[\"default\"], options);\n\n\n\n\n       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_cjs_js_indexStyles_css__WEBPACK_IMPORTED_MODULE_6__[\"default\"] && _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_cjs_js_indexStyles_css__WEBPACK_IMPORTED_MODULE_6__[\"default\"].locals ? _node_modules_pnpm_css_loader_7_1_4_webpack_5_105_4_node_modules_css_loader_dist_cjs_js_indexStyles_css__WEBPACK_IMPORTED_MODULE_6__[\"default\"].locals : undefined);\n\n\n//# sourceURL=webpack:///./indexStyles.css?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js"
+/*!***********************************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \***********************************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\nvar stylesInDOM = [];\nfunction getIndexByIdentifier(identifier) {\n  var result = -1;\n  for (var i = 0; i < stylesInDOM.length; i++) {\n    if (stylesInDOM[i].identifier === identifier) {\n      result = i;\n      break;\n    }\n  }\n  return result;\n}\nfunction modulesToDom(list, options) {\n  var idCountMap = {};\n  var identifiers = [];\n  for (var i = 0; i < list.length; i++) {\n    var item = list[i];\n    var id = options.base ? item[0] + options.base : item[0];\n    var count = idCountMap[id] || 0;\n    var identifier = \"\".concat(id, \" \").concat(count);\n    idCountMap[id] = count + 1;\n    var indexByIdentifier = getIndexByIdentifier(identifier);\n    var obj = {\n      css: item[1],\n      media: item[2],\n      sourceMap: item[3],\n      supports: item[4],\n      layer: item[5]\n    };\n    if (indexByIdentifier !== -1) {\n      stylesInDOM[indexByIdentifier].references++;\n      stylesInDOM[indexByIdentifier].updater(obj);\n    } else {\n      var updater = addElementStyle(obj, options);\n      options.byIndex = i;\n      stylesInDOM.splice(i, 0, {\n        identifier: identifier,\n        updater: updater,\n        references: 1\n      });\n    }\n    identifiers.push(identifier);\n  }\n  return identifiers;\n}\nfunction addElementStyle(obj, options) {\n  var api = options.domAPI(options);\n  api.update(obj);\n  var updater = function updater(newObj) {\n    if (newObj) {\n      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap && newObj.supports === obj.supports && newObj.layer === obj.layer) {\n        return;\n      }\n      api.update(obj = newObj);\n    } else {\n      api.remove();\n    }\n  };\n  return updater;\n}\nmodule.exports = function (list, options) {\n  options = options || {};\n  list = list || [];\n  var lastIdentifiers = modulesToDom(list, options);\n  return function update(newList) {\n    newList = newList || [];\n    for (var i = 0; i < lastIdentifiers.length; i++) {\n      var identifier = lastIdentifiers[i];\n      var index = getIndexByIdentifier(identifier);\n      stylesInDOM[index].references--;\n    }\n    var newLastIdentifiers = modulesToDom(newList, options);\n    for (var _i = 0; _i < lastIdentifiers.length; _i++) {\n      var _identifier = lastIdentifiers[_i];\n      var _index = getIndexByIdentifier(_identifier);\n      if (stylesInDOM[_index].references === 0) {\n        stylesInDOM[_index].updater();\n        stylesInDOM.splice(_index, 1);\n      }\n    }\n    lastIdentifiers = newLastIdentifiers;\n  };\n};\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertBySelector.js"
+/*!***************************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertBySelector.js ***!
+  \***************************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\nvar memo = {};\n\n/* istanbul ignore next  */\nfunction getTarget(target) {\n  if (typeof memo[target] === \"undefined\") {\n    var styleTarget = document.querySelector(target);\n\n    // Special case to return head of iframe instead of iframe itself\n    if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {\n      try {\n        // This will throw an exception if access to iframe is blocked\n        // due to cross-origin restrictions\n        styleTarget = styleTarget.contentDocument.head;\n      } catch (e) {\n        // istanbul ignore next\n        styleTarget = null;\n      }\n    }\n    memo[target] = styleTarget;\n  }\n  return memo[target];\n}\n\n/* istanbul ignore next  */\nfunction insertBySelector(insert, style) {\n  var target = getTarget(insert);\n  if (!target) {\n    throw new Error(\"Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.\");\n  }\n  target.appendChild(style);\n}\nmodule.exports = insertBySelector;\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertBySelector.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertStyleElement.js"
+/*!*****************************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
+  \*****************************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\n/* istanbul ignore next  */\nfunction insertStyleElement(options) {\n  var element = document.createElement(\"style\");\n  options.setAttributes(element, options.attributes);\n  options.insert(element, options.options);\n  return element;\n}\nmodule.exports = insertStyleElement;\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/insertStyleElement.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js"
+/*!*****************************************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
+  \*****************************************************************************************************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{\n\n/* istanbul ignore next  */\nfunction setAttributesWithoutAttributes(styleElement) {\n  var nonce =  true ? __webpack_require__.nc : 0;\n  if (nonce) {\n    styleElement.setAttribute(\"nonce\", nonce);\n  }\n}\nmodule.exports = setAttributesWithoutAttributes;\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleDomAPI.js"
+/*!**********************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
+  \**********************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\n/* istanbul ignore next  */\nfunction apply(styleElement, options, obj) {\n  var css = \"\";\n  if (obj.supports) {\n    css += \"@supports (\".concat(obj.supports, \") {\");\n  }\n  if (obj.media) {\n    css += \"@media \".concat(obj.media, \" {\");\n  }\n  var needLayer = typeof obj.layer !== \"undefined\";\n  if (needLayer) {\n    css += \"@layer\".concat(obj.layer.length > 0 ? \" \".concat(obj.layer) : \"\", \" {\");\n  }\n  css += obj.css;\n  if (needLayer) {\n    css += \"}\";\n  }\n  if (obj.media) {\n    css += \"}\";\n  }\n  if (obj.supports) {\n    css += \"}\";\n  }\n  var sourceMap = obj.sourceMap;\n  if (sourceMap && typeof btoa !== \"undefined\") {\n    css += \"\\n/*# sourceMappingURL=data:application/json;base64,\".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), \" */\");\n  }\n\n  // For old IE\n  /* istanbul ignore if  */\n  options.styleTagTransform(css, styleElement, options.options);\n}\nfunction removeStyleElement(styleElement) {\n  // istanbul ignore if\n  if (styleElement.parentNode === null) {\n    return false;\n  }\n  styleElement.parentNode.removeChild(styleElement);\n}\n\n/* istanbul ignore next  */\nfunction domAPI(options) {\n  if (typeof document === \"undefined\") {\n    return {\n      update: function update() {},\n      remove: function remove() {}\n    };\n  }\n  var styleElement = options.insertStyleElement(options);\n  return {\n    update: function update(obj) {\n      apply(styleElement, options, obj);\n    },\n    remove: function remove() {\n      removeStyleElement(styleElement);\n    }\n  };\n}\nmodule.exports = domAPI;\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleDomAPI.js?\n}");
+
+/***/ },
+
+/***/ "../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleTagTransform.js"
+/*!****************************************************************************************************************************!*\
+  !*** ../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
+  \****************************************************************************************************************************/
+(module) {
+
+"use strict";
+eval("{\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElement) {\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = css;\n  } else {\n    while (styleElement.firstChild) {\n      styleElement.removeChild(styleElement.firstChild);\n    }\n    styleElement.appendChild(document.createTextNode(css));\n  }\n}\nmodule.exports = styleTagTransform;\n\n//# sourceURL=webpack:///../node_modules/.pnpm/style-loader@4.0.0_webpack@5.105.4/node_modules/style-loader/dist/runtime/styleTagTransform.js?\n}");
+
+/***/ },
+
+/***/ "./components/DomElement.ts"
+/*!**********************************!*\
+  !*** ./components/DomElement.ts ***!
+  \**********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ DomElement)\n/* harmony export */ });\nclass DomElement {\n    x;\n    y;\n    element;\n    style;\n    text;\n    constructor(x, y, element, style, text) {\n        this.x = x;\n        this.y = y;\n        this.element = element;\n        this.style = style;\n        this.text = text;\n    }\n    ;\n}\n\n\n//# sourceURL=webpack:///./components/DomElement.ts?\n}");
+
+/***/ },
+
+/***/ "./components/Menu/MenuElements.ts"
+/*!*****************************************!*\
+  !*** ./components/Menu/MenuElements.ts ***!
+  \*****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   boxCSS: () => (/* binding */ boxCSS),\n/* harmony export */   gameTitle: () => (/* binding */ gameTitle),\n/* harmony export */   gameTitleCSS: () => (/* binding */ gameTitleCSS),\n/* harmony export */   playerBox: () => (/* binding */ playerBox),\n/* harmony export */   playerDiv: () => (/* binding */ playerDiv)\n/* harmony export */ });\n/* harmony import */ var _DomElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DomElement */ \"./components/DomElement.ts\");\n\n// export const gameTitleCSS: string = `\n// font-family: 'Honk';`\nconst gameTitleCSS = `color: white;`;\nconst boxCSS = ` \n    background-color: purple;\n    width: 20vw;\n    height: 3vw;\n    border-radius: 30px;;`;\nconst gameTitle = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 0, 'h1', gameTitleCSS, 'Crazy Curves');\nconst playerBox = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 200, 'div', boxCSS);\nconst startButton = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 550, 'button', undefined, \"start\");\nconst playerDiv = (scene, playerName, offset) => {\n    scene.add.rectangle(400, 200 + offset, 500, 70, 0x008AB8);\n    scene.add.image(200, 200 + offset, 'Spaceship').setScale(0.18).setFlipX(true);\n    scene.add.text(400, 190 + offset, playerName);\n    const button = scene.add.dom(startButton.x, startButton.y, startButton.element, 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', startButton.text);\n    button.setInteractive();\n    button.once('pointerdown', () => {\n        scene.scene.start(\"MainGame\");\n    });\n};\n\n\n//# sourceURL=webpack:///./components/Menu/MenuElements.ts?\n}");
+
+/***/ },
+
+/***/ "./game/GameObjects/ExplodeSprite.ts"
+/*!*******************************************!*\
+  !*** ./game/GameObjects/ExplodeSprite.ts ***!
+  \*******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ExplodeSprite)\n/* harmony export */ });\nclass ExplodeSprite extends Phaser.GameObjects.Sprite {\n    constructor(scene, x, y) {\n        super(scene, x, y, \"Explosion\");\n        this.anims.create({\n            key: \"Explosion\",\n            frames: this.anims.generateFrameNumbers('Explosion'),\n            frameRate: 32\n        });\n        this.play({ key: 'Explosion' });\n        scene.add.existing(this).setScale(0.1);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/ExplodeSprite.ts?\n}");
+
+/***/ },
+
+/***/ "./game/GameObjects/Powers/JumpPower.ts"
+/*!**********************************************!*\
+  !*** ./game/GameObjects/Powers/JumpPower.ts ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ JumpPower)\n/* harmony export */ });\nclass JumpPower {\n    spaceship;\n    time = 350;\n    constructor(spaceship) {\n        this.spaceship = spaceship;\n    }\n    physics() {\n        this.spaceship.setScale(0.12);\n        this.spaceship.setIsCheckCollisionsOn(false);\n        setTimeout(() => {\n            this.spaceship.setScale(0.10);\n            this.spaceship.setIsCheckCollisionsOn(true);\n        }, this.time);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/Powers/JumpPower.ts?\n}");
+
+/***/ },
+
+/***/ "./game/GameObjects/SpaceshipSprite.ts"
+/*!*********************************************!*\
+  !*** ./game/GameObjects/SpaceshipSprite.ts ***!
+  \*********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SpaceshipSprite)\n/* harmony export */ });\n/* harmony import */ var _ExplodeSprite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExplodeSprite */ \"./game/GameObjects/ExplodeSprite.ts\");\n/* harmony import */ var _Powers_JumpPower__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Powers/JumpPower */ \"./game/GameObjects/Powers/JumpPower.ts\");\n/* harmony import */ var _TailSprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TailSprite */ \"./game/GameObjects/TailSprite.ts\");\n\n\n\nclass SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {\n    cursors;\n    offset = -20;\n    tail = [];\n    elapsedTime = 250;\n    randomNumber = 20;\n    downPower;\n    isCheckCollisionsOn = true;\n    constructor(scene, x, y) {\n        super(scene, x, y, \"Spaceship\");\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, false);\n        //setting scenes input\n        this.cursors = scene.input.keyboard?.createCursorKeys();\n        //setting sprite's hitbox\n        this.setScale(0.10);\n        this.setCircle(70, 200, 180);\n        this.setOrigin(0.5, 0.5);\n        //setting a random angle         \n        this.angle = Phaser.Math.Angle.RandomDegrees();\n        this.setCollideWorldBounds(true, 0, 0, true);\n        this.downPower = new _Powers_JumpPower__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this);\n        //setting the depth of the object. This is for the JumpPower\n        this.setDepth(1);\n    }\n    idle() {\n        this.setAngularVelocity(0);\n    }\n    moveLeft() {\n        this.setAngularVelocity(165);\n    }\n    moveRight() {\n        this.setAngularVelocity(-165);\n    }\n    addLine(deltaTime) {\n        if (this.elapsedTime === 250) {\n            this.randomNumber = Phaser.Math.Between(0, 50);\n            this.tail.push(new _TailSprite__WEBPACK_IMPORTED_MODULE_2__[\"default\"](this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));\n        }\n        if (this.randomNumber === 1) {\n            this.updateTime(deltaTime);\n        }\n    }\n    checkTailCollisions(isOn) {\n        if (isOn) {\n            this.scene.physics.collide(this, this.tail, () => {\n                this.explode(this.x, this.y);\n                this.disableBody(true, true);\n            });\n        }\n    }\n    updateTime(deltaTime) {\n        if (this.elapsedTime > 0) {\n            this.elapsedTime -= deltaTime;\n        }\n        else {\n            this.elapsedTime = 250;\n        }\n    }\n    checkWordBoundsCollisions() {\n        this.scene.physics.world.on('worldbounds', () => {\n            this.explode(this.x, this.y);\n            this.disableBody(true, true);\n        });\n    }\n    setIsCheckCollisionsOn(value) {\n        this.isCheckCollisionsOn = value;\n    }\n    move(deltaTime) {\n        this.checkWordBoundsCollisions();\n        this.checkTailCollisions(this.isCheckCollisionsOn);\n        this.addLine(deltaTime);\n        this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity);\n        if (this.cursors?.left.isUp || this.cursors?.right.isUp) {\n            this.idle();\n        }\n        if (this.cursors?.left.isDown) {\n            this.moveRight();\n        }\n        if (this.cursors?.right.isDown) {\n            this.moveLeft();\n        }\n        if (this.cursors?.down.isDown) {\n            this.downPower.physics();\n        }\n    }\n    explode(x, y) {\n        return new _ExplodeSprite__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.scene, this.x, this.y);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/SpaceshipSprite.ts?\n}");
+
+/***/ },
+
+/***/ "./game/GameObjects/TailSprite.ts"
+/*!****************************************!*\
+  !*** ./game/GameObjects/TailSprite.ts ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TailSprite)\n/* harmony export */ });\nclass TailSprite extends Phaser.Physics.Arcade.Sprite {\n    constructor(scene, x, y) {\n        super(scene, x, y, \"Tail\");\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, true);\n        this.setBodySize(10, 10);\n        this.setDisplaySize(10, 10);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/TailSprite.ts?\n}");
+
+/***/ },
+
 /***/ "./game/Scenes/Boot.ts"
 /*!*****************************!*\
   !*** ./game/Scenes/Boot.ts ***!
@@ -67,7 +243,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ BootLoader)\n/* harmony export */ });\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n\nclass BootLoader extends (phaser__WEBPACK_IMPORTED_MODULE_0___default().Scene) {\n    jugador;\n    constructor() {\n        super('MainGame');\n    }\n    create() {\n        this.add.image(400, 300, \"Background\").setToBack();\n        const music = this.sound.add('music1').setVolume(0.3);\n        music.play();\n    }\n    update(time, delta) {\n        if (this.jugador) {\n            this.jugador?.move(delta);\n        }\n    }\n    setPlayer(newPlayer) {\n        this.jugador = newPlayer;\n    }\n    getPlayer() {\n        return this.jugador;\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainGame.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ BootLoader)\n/* harmony export */ });\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _GameObjects_SpaceshipSprite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObjects/SpaceshipSprite */ \"./game/GameObjects/SpaceshipSprite.ts\");\n\n\nclass BootLoader extends (phaser__WEBPACK_IMPORTED_MODULE_0___default().Scene) {\n    jugador;\n    constructor() {\n        super('MainGame');\n    }\n    create() {\n        this.add.image(400, 300, \"Background\").setToBack();\n        const music = this.sound.add('music1').setVolume(0.3);\n        this.jugador = new _GameObjects_SpaceshipSprite__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this, 200, 200);\n        music.play();\n    }\n    update(time, delta) {\n        if (this.jugador) {\n            this.jugador?.move(delta);\n        }\n    }\n    setPlayer(newPlayer) {\n        this.jugador = newPlayer;\n    }\n    getPlayer() {\n        return this.jugador;\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainGame.ts?\n}");
 
 /***/ },
 
@@ -78,7 +254,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ MainMenu)\n/* harmony export */ });\n/* harmony import */ var _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../socket/socketFunctions */ \"./game/socket/socketFunctions.ts\");\n\nclass MainMenu extends Phaser.Scene {\n    constructor() {\n        super('MainMenu');\n    }\n    preload() {\n    }\n    create() {\n        (0,_socket_socketFunctions__WEBPACK_IMPORTED_MODULE_0__.emitNewPlayerInMenu)();\n        _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_0__.socket.on(\"getPlayers\", (players) => {\n            console.log(players);\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainMenu.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ MainMenu)\n/* harmony export */ });\n/* harmony import */ var _components_Menu_MenuElements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Menu/MenuElements */ \"./components/Menu/MenuElements.ts\");\n/* harmony import */ var _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../socket/socketFunctions */ \"./game/socket/socketFunctions.ts\");\n\n\nclass MainMenu extends Phaser.Scene {\n    constructor() {\n        super('MainMenu');\n    }\n    preload() {\n    }\n    create() {\n        (0,_socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.emitNewPlayerInMenu)();\n        _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.on(\"getAllPlayersFromServer\", (playersArray) => {\n            let offset = 0;\n            for (const player in playersArray) {\n                (0,_components_Menu_MenuElements__WEBPACK_IMPORTED_MODULE_0__.playerDiv)(this, 'HandsomeMCT', offset);\n                offset = offset + 80;\n            }\n        });\n        this.add.image(100, 100, 'Buttons', 0).setScale(4);\n        this.scene.start(\"MainGame\");\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainMenu.ts?\n}");
 
 /***/ },
 
@@ -89,7 +265,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Preloader)\n/* harmony export */ });\n/* harmony import */ var _assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/music/nastelbom-funk-437330.mp3 */ \"./assets/music/nastelbom-funk-437330.mp3\");\n/* harmony import */ var _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/images/Spaceship_01_BLUE.png */ \"./assets/images/Spaceship_01_BLUE.png\");\n/* harmony import */ var _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/images/New Piskel.png */ \"./assets/images/New Piskel.png\");\n/* harmony import */ var _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/Animations/Effect_Explosion_1_517x517.png */ \"./assets/Animations/Effect_Explosion_1_517x517.png\");\n/* harmony import */ var _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/background/export202405130010328162.png */ \"./assets/images/background/export202405130010328162.png\");\n\n\n\n\n\nclass Preloader extends Phaser.Scene {\n    constructor() {\n        super('Preloader');\n    }\n    preload() {\n        this.load.audio('music1', [_assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__]);\n        this.load.image(\"Spaceship\", _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__);\n        this.load.image(\"Tail\", _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__);\n        //animations\n        this.load.spritesheet(\"Explosion\", _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__, { frameWidth: 517, frameHeight: 517 });\n        //background\n        this.load.image(\"Background\", _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__);\n    }\n    create() {\n        const element = this.add.dom(200, 200, \"button\", 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', \"Start\");\n        element.setInteractive();\n        element.once('pointerdown', () => {\n            this.scene.start(\"MainMenu\");\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/Preloader.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Preloader)\n/* harmony export */ });\n/* harmony import */ var _assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/music/nastelbom-funk-437330.mp3 */ \"./assets/music/nastelbom-funk-437330.mp3\");\n/* harmony import */ var _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/images/Spaceship_01_BLUE.png */ \"./assets/images/Spaceship_01_BLUE.png\");\n/* harmony import */ var _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/images/New Piskel.png */ \"./assets/images/New Piskel.png\");\n/* harmony import */ var _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/Animations/Effect_Explosion_1_517x517.png */ \"./assets/Animations/Effect_Explosion_1_517x517.png\");\n/* harmony import */ var _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/background/export202405130010328162.png */ \"./assets/images/background/export202405130010328162.png\");\n/* harmony import */ var _assets_UI_UI_grey_buttons_light_1_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/UI/UI_grey_buttons_light_1.png */ \"./assets/UI/UI_grey_buttons_light_1.png\");\n\n\n\n\n\n\nclass Preloader extends Phaser.Scene {\n    constructor() {\n        super('Preloader');\n    }\n    preload() {\n        this.load.audio('music1', [_assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__]);\n        this.load.image(\"Spaceship\", _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__);\n        this.load.image(\"Tail\", _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__);\n        //animations\n        this.load.spritesheet(\"Explosion\", _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__, { frameWidth: 517, frameHeight: 517 });\n        this.load.spritesheet(\"Buttons\", _assets_UI_UI_grey_buttons_light_1_png__WEBPACK_IMPORTED_MODULE_5__, { frameWidth: 16, frameHeight: 16 });\n        //background\n        this.load.image(\"Background\", _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__);\n    }\n    create() {\n        const element = this.add.dom(200, 200, \"button\", 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', \"Start\");\n        element.setInteractive();\n        element.once('pointerdown', () => {\n            this.scene.start(\"MainMenu\");\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/Preloader.ts?\n}");
 
 /***/ },
 
@@ -100,7 +276,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scenes/Boot */ \"./game/Scenes/Boot.ts\");\n/* harmony import */ var _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Scenes/Preloader */ \"./game/Scenes/Preloader.ts\");\n/* harmony import */ var _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Scenes/MainMenu */ \"./game/Scenes/MainMenu.ts\");\n/* harmony import */ var _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Scenes/MainGame */ \"./game/Scenes/MainGame.ts\");\n\n\n\n\n\nvar config = {\n    type: Phaser.AUTO,\n    width: 800,\n    height: 600,\n    autoCenter: Phaser.Scale.CENTER_BOTH,\n    scene: [_Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__[\"default\"], _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__[\"default\"], _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__[\"default\"], _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__[\"default\"]],\n    physics: {\n        default: \"arcade\",\n        arcade: {\n            debug: false\n        }\n    },\n    parent: 'phaser-example',\n    dom: {\n        createContainer: true,\n    }\n};\nlet game = new phaser__WEBPACK_IMPORTED_MODULE_0__.Game(config);\n\n\n//# sourceURL=webpack:///./game/game.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scenes/Boot */ \"./game/Scenes/Boot.ts\");\n/* harmony import */ var _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Scenes/Preloader */ \"./game/Scenes/Preloader.ts\");\n/* harmony import */ var _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Scenes/MainMenu */ \"./game/Scenes/MainMenu.ts\");\n/* harmony import */ var _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Scenes/MainGame */ \"./game/Scenes/MainGame.ts\");\n/* harmony import */ var _indexStyles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../indexStyles.css */ \"./indexStyles.css\");\n\n\n\n\n\n\nvar config = {\n    type: Phaser.AUTO,\n    width: 800,\n    height: 600,\n    autoCenter: Phaser.Scale.CENTER_BOTH,\n    scene: [_Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__[\"default\"], _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__[\"default\"], _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__[\"default\"], _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__[\"default\"]],\n    physics: {\n        default: \"arcade\",\n        arcade: {\n            debug: false\n        }\n    },\n    parent: 'phaser-example',\n    dom: {\n        createContainer: true,\n    },\n    pixelArt: false\n};\n_indexStyles_css__WEBPACK_IMPORTED_MODULE_5__[\"default\"];\nlet game = new phaser__WEBPACK_IMPORTED_MODULE_0__.Game(config);\n\n\n//# sourceURL=webpack:///./game/game.ts?\n}");
 
 /***/ },
 
@@ -111,7 +287,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var pha
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   emitNewPlayerInMenu: () => (/* binding */ emitNewPlayerInMenu),\n/* harmony export */   onNewPlayerFromServer: () => (/* binding */ onNewPlayerFromServer),\n/* harmony export */   socket: () => (/* binding */ socket)\n/* harmony export */ });\n/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ \"../node_modules/.pnpm/socket.io-client@4.8.3/node_modules/socket.io-client/build/esm/index.js\");\n\nconst socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)();\nconst emitNewPlayerInMenu = () => {\n    socket.emit(\"newPlayerInMenuFromClient\");\n};\n// export const onNewPlayer = (scene:BootLoader):void =>{\n//     console.log(\"se supone que entro 2\")\n//     socket.on(\"newPlayerFromServer\",()=>{\n//         console.log(\"me invocaron desde el server\")\n//         scene.setPlayer(new SpaceshipSprite(scene, 100, 100))\n//     })\n// }\nconst onNewPlayerFromServer = (scene) => {\n    socket.on(\"newPlayerFromServer\", () => {\n    });\n};\n\n\n//# sourceURL=webpack:///./game/socket/socketFunctions.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   emitNewPlayerInMenu: () => (/* binding */ emitNewPlayerInMenu),\n/* harmony export */   onNewPlayerFromServer: () => (/* binding */ onNewPlayerFromServer),\n/* harmony export */   socket: () => (/* binding */ socket)\n/* harmony export */ });\n/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ \"../node_modules/.pnpm/socket.io-client@4.8.3/node_modules/socket.io-client/build/esm/index.js\");\n\nconst socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)();\nconst emitNewPlayerInMenu = () => {\n    socket.emit(\"newPlayerInMenuFromClient\");\n};\n// export const onNewPlayer = (scene:BootLoader):void =>{\n//     console.log(\"se supone que entro 2\")\n//     socket.on(\"newPlayerFromServer\",()=>{\n//         console.log(\"me invocaron desde el server\")\n//         scene.setPlayer(new SpaceshipSprite(scene, 100, 100))\n//     })\n// }\nconst onNewPlayerFromServer = (scene) => {\n    socket.on(\"newPlayerFromServer\", () => {\n    });\n};\nsocket.on(\"getAllPlayers\", (players) => {\n    console.log(players);\n});\n\n\n//# sourceURL=webpack:///./game/socket/socketFunctions.ts?\n}");
 
 /***/ },
 
@@ -123,6 +299,17 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 
 "use strict";
 eval("{module.exports = __webpack_require__.p + \"151d63b180061ad532fe.png\";\n\n//# sourceURL=webpack:///./assets/Animations/Effect_Explosion_1_517x517.png?\n}");
+
+/***/ },
+
+/***/ "./assets/UI/UI_grey_buttons_light_1.png"
+/*!***********************************************!*\
+  !*** ./assets/UI/UI_grey_buttons_light_1.png ***!
+  \***********************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"46b3dd4c1839834f89d7.png\";\n\n//# sourceURL=webpack:///./assets/UI/UI_grey_buttons_light_1.png?\n}");
 
 /***/ },
 
@@ -503,7 +690,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
+/******/ 			id: moduleId,
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
@@ -595,6 +782,11 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 /******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
 /******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
 /******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

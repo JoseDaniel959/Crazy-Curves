@@ -8,8 +8,8 @@ import indexStyles from "../indexStyles.css"
 
 var config: Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 1000,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     scene: [Boot, Preloader, MainMenu, MainGame],
     physics: {
