@@ -1,4 +1,4 @@
-import UIComponent from "./UIComponent";
+import UIComponent from "../UIComponent";
 
 export default class ButtonComponent extends UIComponent {
     scale: number;

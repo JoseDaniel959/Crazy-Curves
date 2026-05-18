@@ -1,7 +1,7 @@
 import { off } from "node:cluster";
 import DomElement from "../DomElement";
-import ButtonComponent from "./ButtonComponent";
-import PowerComponent from "./PowerComponent";
+import ButtonComponent from "./AtomicComponents/ButtonComponent";
+import PowerComponent from "./CompoundComponents/PowerComponent";
 // export const gameTitleCSS: string = `
 // font-family: 'Honk';`
 export const gameTitleCSS: string = `color: white;`

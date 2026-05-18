@@ -1,5 +1,5 @@
-import ButtonComponent from "./ButtonComponent";
-import UIComponent from "./UIComponent";
+import ButtonComponent from "../AtomicComponents/ButtonComponent";
+import UIComponent from "../UIComponent";
 
 export default class PowerComponent extends UIComponent {;
     backwardButton: ButtonComponent;
