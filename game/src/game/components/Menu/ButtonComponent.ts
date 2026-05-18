@@ -1,16 +1,11 @@
-export default class ButtonComponent {
-    scene: Phaser.Scene;
-    x: number;
-    y: number;
-    texture: string;
+import UIComponent from "./UIComponent";
+
+export default class ButtonComponent extends UIComponent {
     scale: number;
     callBack: Function
 
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, scale: number, callBack: Function) {
-        this.scene = scene;
-        this.x = x;
-        this.y = y;
-        this.texture = texture;
+        super(scene,x,y,texture);
         this.scale = scale;
         this.callBack = callBack;
 

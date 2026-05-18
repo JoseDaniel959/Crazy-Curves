@@ -25,7 +25,7 @@ export const playerTable = (scene: Phaser.Scene, playerName: string, offset: num
     const backWardButton  = scene.add.image(330,225,'BackwardButton').setScale(0.09)
     scene.add.image(350,225,'ForwardButton').setScale(0.09)
     const backWard1Button = new ButtonComponent(scene,410,168,'BackwardButton',0.09,()=>console.log("hola"))
-    new PowerComponent(scene, 420,160, backWard1Button,backWard1Button)
+    new PowerComponent(scene, 420,160, 'ForwardButton', backWard1Button,backWard1Button)
 
     const button = scene.add.dom(startButton.x, startButton.y, startButton.element, 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', startButton.text)
     button.setInteractive()
