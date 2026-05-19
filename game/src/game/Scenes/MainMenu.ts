@@ -1,4 +1,4 @@
-import { gameTitle, playerTable, } from '../components/Menu/MenuElements';
+import { gameTitle, playerTable, } from '../UI/Menu/MenuElements';
 import { emitNewPlayerInMenu, socket } from '../socket/socketFunctions';
 export default class MainMenu extends Phaser.Scene {
     constructor() {
@@ -8,15 +8,8 @@ export default class MainMenu extends Phaser.Scene {
     }
     create() {
         emitNewPlayerInMenu();
-        socket.on("getAllPlayersFromServer",(playersArray)=>{
-            let offset = 0; 
-            for (const player in playersArray) {
-                playerTable(this,'HandsomeMCT',offset);
-                offset = offset + 80;             
-            }
-        })
-                playerTable(this,'HandsomeMCT',0);
 
+        playerTable(this,"handsome",2);
         // this.scene.start("MainGame")
 
 
