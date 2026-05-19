@@ -1,6 +1,7 @@
 import TableComponent from "../AtomicComponents/TableComponetn";
 import UIComponent from "../UIComponent";
 import PowerSelectionComponent from "./PowerSelectionComponent";
+import SpaceshipSelectionComponent from "./SpaceshipSelectionComponent";
 
 export default class PlayerSelectionComponent extends UIComponent{
     constructor(
@@ -10,12 +11,13 @@ export default class PlayerSelectionComponent extends UIComponent{
         scale: number,
     ){
         super(scene,x,y,"backWardButton",1)
-        new TableComponent(scene,x,y,1.5    )
+        new TableComponent(scene,x,y,1.5)
+
+        scene.add.text(x+50,y-15,"HandSomeMCT")
+        //Spaceshi selection
+        new SpaceshipSelectionComponent(scene,x-170,y,"Spaceship",0.18)
         new PowerSelectionComponent(scene,x-50,y-50,"BackwardButton",0.15)
-        new PowerSelectionComponent(scene,x-50,y+10,"BackwardButton",0.15)
-
-
-        
+        new PowerSelectionComponent(scene,x-50,y+10,"BackwardButton",0.15)        
 
     }
 }
