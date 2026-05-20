@@ -1,5 +1,5 @@
 import { gameTitle, playerTable, } from '../UI/Menu/MenuElements';
-import { emitNewPlayerInMenu, socket } from '../socket/socketFunctions';
+import { emitNewPlayerInMenu, socket } from '../../Socket/socketFunctions';
 export default class MainMenu extends Phaser.Scene {
     constructor() {
         super('MainMenu');

@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import BootLoader from "../Scenes/MainGame";
+import BootLoader from "../game/Scenes/MainGame";
 export const socket: Socket = io();
 
 export const emitNewPlayerInMenu = ():void =>{
