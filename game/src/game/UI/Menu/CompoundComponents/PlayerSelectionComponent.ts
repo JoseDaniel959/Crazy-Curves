@@ -5,11 +5,11 @@ import SpaceshipSelectionComponent from "./SpaceshipSelectionComponent";
 import TailSelectionComponent from "./TailSelectionComponent";
 
 export default class PlayerSelectionComponent extends UIComponent{
+    
     constructor(
         scene: Phaser.Scene, 
         x: number, 
         y: number,
-        scale: number,
     ){
         super(scene,x,y,"backWardButton",1)
         new TableComponent(scene,x,y,1.5)
