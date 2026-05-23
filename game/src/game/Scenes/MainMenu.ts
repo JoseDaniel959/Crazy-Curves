@@ -18,7 +18,7 @@ export default class MainMenu extends Phaser.Scene {
                 offset += 150;
             }
         })
-
+          this.scene.start("MainGame")
     }
 
 }

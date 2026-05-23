@@ -1,0 +1,3 @@
+interface IPower {
+    physics() : void;
+}

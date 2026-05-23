@@ -1,5 +1,5 @@
 import ExplodeSprite from "./ExplodeSprite";
-import JumpPower from "./Powers/JumpPower";
+import JumpPower from "./Powers/JumpBoost";
 import TailSprite from "./TailSprite";
 
 export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
@@ -8,7 +8,8 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     private tail: TailSprite[] = [];
     private elapsedTime: number = 250;
     private randomNumber: number = 20;
-    private downPower: JumpPower;
+    private upPower: IPower;
+    private downPower: IPower;
     private isCheckCollisionsOn: boolean = true;
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, "Spaceship")
@@ -31,6 +32,8 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
         this.setCollideWorldBounds(true, 0, 0, true);
 
         this.downPower = new JumpPower(this);
+        this.upPower = new JumpPower(this);
+
 
         //setting the depth of the object. This is for the JumpPower
         this.setDepth(1)

@@ -1,6 +1,6 @@
 import SpaceshipSprite from "../SpaceshipSprite";
 
-export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.Sprite {
+export default abstract class AbstractProjectile extends Phaser.Physics.Arcade.Sprite implements IPower{
   private positionX: number;
   private positionY: number;
   private PowerVelocity: number;
