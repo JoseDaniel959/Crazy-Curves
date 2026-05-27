@@ -1,11 +1,20 @@
 import music1 from "../../assets/music/nastelbom-funk-437330.mp3"
+
+//Spaceships sprites
 import SpaceshipBlue from "../../assets/images/spaceships/Spaceship_01_BLUE.png"
 import SpaceshipGreen from "../../assets/images/spaceships/Spaceship_02_GREEN.png"
 import SpaceshipOrange from "../../assets/images/spaceships/Spaceship_04_ORANGE.png"
 import SpaceshipPurple from "../../assets/images/spaceships/Spaceship_05_PURPLE.png"
 import SpaceshipRed from "../../assets/images/spaceships/Spaceship_06_RED.png"
 
-import Tail from "../../assets/images/New Piskel.png"
+//Tail sprites
+import blueTail from "../../assets/images/tails/blue_tail.png"
+import greenTail from "../../assets/images/tails/green_tail.png"
+import orangeTail from "../../assets/images/tails/orange_tail.png"
+import purpleTail from "../../assets/images/tails/purple_tail.png"
+import redTail from "../../assets/images/tails/red_tail.png"
+
+
 import Explosion from "../../assets/Animations/Effect_Explosion_1_517x517.png"
 import Background from "../../assets/images/background/export202405130010328162.png"
 import Table from "../../assets/UI/Table.png"
@@ -28,7 +37,14 @@ export default class Preloader extends Phaser.Scene {
         this.load.image("SpaceshipPurple", SpaceshipPurple)
         this.load.image("SpaceshipRed", SpaceshipRed)
 
-        this.load.image("Tail", Tail)
+
+        //loading tail sprites
+        this.load.image("blueTail", blueTail)
+        this.load.image("greenTail", greenTail)
+        this.load.image("orangeTail", orangeTail)
+        this.load.image("purpleTail", purpleTail)
+        this.load.image("redTail", redTail)
+        
          //animations
         
         this.load.spritesheet("Explosion", Explosion, { frameWidth: 517, frameHeight: 517 })
