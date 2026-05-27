@@ -8,11 +8,11 @@ import SpaceshipPurple from "../../assets/images/spaceships/Spaceship_05_PURPLE.
 import SpaceshipRed from "../../assets/images/spaceships/Spaceship_06_RED.png"
 
 //Tail sprites
-import blueTail from "../../assets/images/tails/blue_tail.png"
-import greenTail from "../../assets/images/tails/green_tail.png"
-import orangeTail from "../../assets/images/tails/orange_tail.png"
-import purpleTail from "../../assets/images/tails/purple_tail.png"
-import redTail from "../../assets/images/tails/red_tail.png"
+import tailBlue from "../../assets/images/tails/blue_tail.png"
+import tailGreen from "../../assets/images/tails/green_tail.png"
+import tailOrange from "../../assets/images/tails/orange_tail.png"
+import tailPurple from "../../assets/images/tails/purple_tail.png"
+import tailRed from "../../assets/images/tails/red_tail.png"
 
 
 import Explosion from "../../assets/Animations/Effect_Explosion_1_517x517.png"
@@ -39,11 +39,11 @@ export default class Preloader extends Phaser.Scene {
 
 
         //loading tail sprites
-        this.load.image("blueTail", blueTail)
-        this.load.image("greenTail", greenTail)
-        this.load.image("orangeTail", orangeTail)
-        this.load.image("purpleTail", purpleTail)
-        this.load.image("redTail", redTail)
+        this.load.image("tailBlue", tailBlue)
+        this.load.image("tailGreen", tailGreen)
+        this.load.image("tailOrange", tailOrange)
+        this.load.image("tailPurple", tailPurple)
+        this.load.image("tailRed", tailRed)
         
          //animations
         
