@@ -19,7 +19,7 @@ export default class PlayerSelectionComponent extends UIComponent {
         new SpaceshipSelectionComponent(scene, x - 170, y, 0.18, "Spaceship")
         new PowerSelectionComponent(scene, x - 50, y - 50, "BackwardButton", 0.15)
         new PowerSelectionComponent(scene, x - 50, y + 10, "BackwardButton", 0.15)
-        new TailSelectionComponent(scene, x - 110, y - 15, "Tail", 0.5)
+        new TailSelectionComponent(scene, x - 110, y - 20, 0.5, "tail")
 
     }
 }

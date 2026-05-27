@@ -4,8 +4,8 @@ import UIComponent from "../../UIComponent";
 import AbstractSelectionComponent from "./AbstractSelectionComponent";
 
 export default class SpaceshipSelectionComponent extends AbstractSelectionComponent {
-    
     private SpaceshipComponent: SpaceshipComponent;
+    
     constructor(scene: Phaser.Scene, x: number, y: number, scale: number = 1, textureStartsWith: string) {
         super(scene, x, y, "", scale, textureStartsWith);
         this.SpaceshipComponent = new SpaceshipComponent(scene, x, y - 20, this.getTexture(), scale)
