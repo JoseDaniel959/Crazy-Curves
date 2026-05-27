@@ -1,5 +1,6 @@
 import music1 from "../../assets/music/nastelbom-funk-437330.mp3"
-import SpaceshipAsset from "../../assets/images/Spaceship_01_BLUE.png"
+import SpaceshipBlue from "../../assets/images/Spaceship_01_BLUE.png"
+import SpaceshipOrange from "../../assets/images/Spaceship_04_ORANGE.png"
 import Tail from "../../assets/images/New Piskel.png"
 import Explosion from "../../assets/Animations/Effect_Explosion_1_517x517.png"
 import Background from "../../assets/images/background/export202405130010328162.png"
@@ -14,8 +15,10 @@ export default class Preloader extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('music1', [music1]);
-        this.load.image("Spaceship", SpaceshipAsset)
+        this.load.audio('music1', [music1]); 
+        this.load.image("SpaceshipBlue", SpaceshipBlue)
+        this.load.image("SpaceshipOrange", SpaceshipOrange)
+
         this.load.image("Tail", Tail)
              //animations
         

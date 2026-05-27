@@ -1,5 +1,5 @@
 import { gameTitle, } from '../UI/Menu/MenuElements';
-import PlayerSelectionComponent from '../UI/Menu/CompoundComponents/PlayerSelectionComponent';
+import PlayerSelectionComponent from '../UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent';
 import { socket } from '../../Socket/socketFunctions';
 import { ServerSocketEvents } from '../../Socket/ServerSocketEvents';
 import { ClientSocketEvents } from '../../Socket/ClientSocketEvents';
@@ -18,7 +18,7 @@ export default class MainMenu extends Phaser.Scene {
                 offset += 150;
             }
         })
-          this.scene.start("MainGame")
+        new PlayerSelectionComponent(this,500,200)
     }
 
 }

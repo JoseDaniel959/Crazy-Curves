@@ -13,4 +13,13 @@ export default abstract class UIComponent {
         this.scale = scale;
 
     }
+
+     public getTexture():string{
+        return this.texture;
+    }
+
+    public setTexture(newTexture: string):void{
+        this.texture = newTexture;
+    }
+
 }
