@@ -18,8 +18,11 @@ import tailRed from "../../assets/images/tails/red_tail.png"
 import Explosion from "../../assets/Animations/Effect_Explosion_1_517x517.png"
 import Background from "../../assets/images/background/export202405130010328162.png"
 import Table from "../../assets/UI/Table.png"
+
+// Buttons
 import BackwardButton from "../../assets/UI/Buttons/Backward_BTN.png"
 import ForwardButton from "../../assets/UI/Buttons/Forward_BTN.png"
+import StartButton from "../../assets/UI/Buttons/Start_BTN.png"
 
 
 export default class Preloader extends Phaser.Scene {
@@ -57,7 +60,7 @@ export default class Preloader extends Phaser.Scene {
         // UI buttons
         this.load.image("BackwardButton",BackwardButton)
         this.load.image("ForwardButton",ForwardButton)
-
+        this.load.image("StartButton",StartButton)
 
     }
     create() {
