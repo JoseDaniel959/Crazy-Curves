@@ -1,6 +1,6 @@
 export default class TailSprite extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene: Phaser.Scene, x: number, y: number) {
-        super(scene, x, y, "Tail")
+    constructor(scene: Phaser.Scene, x: number, y: number, tailTextureKey: string) {
+        super(scene, x, y, tailTextureKey)
 
         //adding the sprite to the scene
         scene.add.existing(this)

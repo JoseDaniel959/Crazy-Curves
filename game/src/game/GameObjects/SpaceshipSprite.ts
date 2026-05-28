@@ -4,16 +4,17 @@ import TailSprite from "./TailSprite";
 
 export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
+    private tailTextureKey: string;
     private offset = -20;
-    private tail: TailSprite[] = [];
+    private  tail: TailSprite[] = [];
     private elapsedTime: number = 250;
     private randomNumber: number = 20;
     private upPower: IPower;
     private downPower: IPower;
     private isCheckCollisionsOn: boolean = true;
-    constructor(scene: Phaser.Scene, x: number, y: number) {
-        super(scene, x, y, "Spaceship")
-
+    constructor(scene: Phaser.Scene, x: number, y: number, spaceshipTextureKey: string, tailTextureKey: string) {
+        super(scene, x, y, spaceshipTextureKey)
+        this.tailTextureKey = tailTextureKey;
         //adding the sprite to the scene
         scene.add.existing(this)
         scene.physics.add.existing(this, false)
@@ -55,7 +56,7 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     addLine(deltaTime: number): void {
         if (this.elapsedTime === 250) {
             this.randomNumber = Phaser.Math.Between(0, 50);
-            this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));
+            this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
         }
         if (this.randomNumber === 1) {
             this.updateTime(deltaTime)
