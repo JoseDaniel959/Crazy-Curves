@@ -65,4 +65,13 @@ export default class PlayerSelectionComponent extends UIComponent {
     ): void {
         this.tailSelectionComponent = tailSelectionComponent;
     }
+
+    override toString(){
+        const playerSelectionDTO = {
+            spaceshipTexture: this.spaceshipSelectionComponent.getTexture(),
+            tailTexture: this.tailSelectionComponent.getTexture()
+        }
+
+        return playerSelectionDTO;
+    }
 }

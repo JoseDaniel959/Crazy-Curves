@@ -10,31 +10,32 @@ export default class MainMenu extends Phaser.Scene {
     constructor() {
         super('MainMenu');
     }
+    private starButtonCallBack() {
+        this.registry.set(registryKey.playerSelectionData,
+            {
+                spaceshipTexturekey: this.playerSelectionComponent?.
+                    getSpaceshipSelectionComponent()
+                    .getTexture(),
+
+                tailComponenteTextureKey: this.playerSelectionComponent?.
+                    getTailSelectionComponent()
+                    .getTexture(),
+
+            })
+        this.scene.start("MainGame")
+    }
     create() {
-        socket.emit(ClientSocketEvents.newPlayer)
+        this.playerSelectionComponent = new PlayerSelectionComponent(this, 500, 200)
+        socket.emit(ClientSocketEvents.newPlayer, this.playerSelectionComponent.toString())
         socket.on(ServerSocketEvents.getAllPlayers, (data: string[]) => {
             let offset = 0
             for (let id in data) {
-                new PlayerSelectionComponent(this, 650, 200 + offset)
+                new PlayerSelectionComponent(this, 500, 350 + offset)
                 offset += 150;
             }
         })
-        this.playerSelectionComponent = new PlayerSelectionComponent(this, 500, 200)
-        new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
-            console.log()
-            this.registry.set(registryKey.playerSelectionData,
-                {
-                    spaceshipTexturekey: this.playerSelectionComponent?.
-                        getSpaceshipSelectionComponent()
-                        .getTexture(),
 
-                    tailComponenteTextureKey: this.playerSelectionComponent?.
-                        getTailSelectionComponent()
-                        .getTexture(),
-
-                })
-            this.scene.start("MainGame")
-        })
+        new ButtonComponent(this, 500, 950, "StartButton", 0.5, this.starButtonCallBack)
     }
 
 }
