@@ -5,6 +5,8 @@ import SpaceshipSelectionComponent from "./SpaceshipSelectionComponent";
 import TailSelectionComponent from "./TailSelectionComponent";
 
 export default class PlayerSelectionComponent extends UIComponent {
+    
+    private tableComponent: TableComponent;
     private spaceshipSelectionComponent: SpaceshipSelectionComponent;
     private upPowerSelectionComponent: PowerSelectionComponent;
     private downPowerSelectionComponent: PowerSelectionComponent;
@@ -17,7 +19,7 @@ export default class PlayerSelectionComponent extends UIComponent {
         y: number,
     ) {
         super(scene, x, y, "backWardButton", 1)
-        new TableComponent(scene, x, y, 1.5)
+        this.tableComponent = new TableComponent(scene, x, y, 1.5)
 
         scene.add.text(x + 50, y - 15, "HandSomeMCT")
         this.spaceshipSelectionComponent = new SpaceshipSelectionComponent(scene, x - 170, y, 0.18, "Spaceship")
@@ -66,12 +68,34 @@ export default class PlayerSelectionComponent extends UIComponent {
         this.tailSelectionComponent = tailSelectionComponent;
     }
 
-    override toString(){
+     public getTableSelectionComponent(): TableComponent {
+        return this.tableComponent;
+    }
+
+    public setTableSelectionComponent(
+        tableComponent: TableComponent
+    ): void {
+        this.tableComponent = tableComponent;
+    }
+
+    public toDTO(){
         const playerSelectionDTO = {
-            spaceshipTexture: this.spaceshipSelectionComponent.getTexture(),
-            tailTexture: this.tailSelectionComponent.getTexture()
+            spaceshipTexture: this.spaceshipSelectionComponent.getAtomicComponent().getTexture(),
+            tailTexture: this.tailSelectionComponent.getAtomicComponent().getTexture()
         }
 
         return playerSelectionDTO;
+    }
+    
+    public listener(){
+        this.scene.game.events.addListener("updatePlayerSelection",()=>console.log(this.getSpaceshipSelectionComponent().getAtomicComponent().getTexture()))
+    }
+
+    public destroy(){
+        this.tableComponent.getPhaserImage().destroy()
+        this.spaceshipSelectionComponent.destroy()
+        this.upPowerSelectionComponent.destroy()
+        this.downPowerSelectionComponent.destroy()
+        this.tailSelectionComponent.destroy()    
     }
 }

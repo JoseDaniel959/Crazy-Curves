@@ -10,23 +10,25 @@ export default class MainMenu extends Phaser.Scene {
     constructor() {
         super('MainMenu');
     }
-    private starButtonCallBack() {
-        this.registry.set(registryKey.playerSelectionData,
-            {
-                spaceshipTexturekey: this.playerSelectionComponent?.
-                    getSpaceshipSelectionComponent()
-                    .getTexture(),
+    // private starButtonCallBack() {
+    //     this.registry.set(registryKey.playerSelectionData,
+    //         {
+    //             spaceshipTexturekey: this.playerSelectionComponent?.
+    //                 getSpaceshipSelectionComponent()
+    //                 .getTexture(),
 
-                tailComponenteTextureKey: this.playerSelectionComponent?.
-                    getTailSelectionComponent()
-                    .getTexture(),
+    //             tailComponenteTextureKey: this.playerSelectionComponent?.
+    //                 getTailSelectionComponent()
+    //                 .getTexture(),
 
-            })
-        this.scene.start("MainGame")
-    }
+    //         })
+    //     this.scene.start("MainGame")
+    // }
+    
     create() {
-        this.playerSelectionComponent = new PlayerSelectionComponent(this, 500, 200)
-        socket.emit(ClientSocketEvents.newPlayer, this.playerSelectionComponent.toString())
+        const jugador = new PlayerSelectionComponent(this, 500, 350);
+        // jugador.listener()
+        socket.emit(ClientSocketEvents.newPlayer)
         socket.on(ServerSocketEvents.getAllPlayers, (data: string[]) => {
             let offset = 0
             for (let id in data) {
@@ -35,7 +37,9 @@ export default class MainMenu extends Phaser.Scene {
             }
         })
 
-        new ButtonComponent(this, 500, 950, "StartButton", 0.5, this.starButtonCallBack)
+        new ButtonComponent(this, 500, 950, "StartButton", 0.5, ()=>{
+            jugador.destroy()
+        })
     }
 
 }

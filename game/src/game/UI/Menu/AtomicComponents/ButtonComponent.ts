@@ -8,9 +8,9 @@ export default class ButtonComponent extends UIComponent {
         this.callBack = callBack;
 
         //ButtonLogic
-        const backWardButton = scene.add.image(x, y, texture).setScale(scale);
-        backWardButton.setInteractive();
-        backWardButton.on('pointerdown', callBack)
+
+        this.getPhaserImage().setInteractive();
+        this.getPhaserImage().on('pointerdown', callBack)
 
     }
 

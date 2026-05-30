@@ -4,10 +4,8 @@ import UIComponent from "../../UIComponent";
 import AbstractSelectionComponent from "./AbstractSelectionComponent";
 
 export default class TailSelectionComponent extends AbstractSelectionComponent {
-    private TailComponent: TailComponent
     constructor(scene: Phaser.Scene, x: number, y: number, scale: number = 1, textureStartsWith: string) {
-        super(scene, x, y, "", scale, textureStartsWith);
-        this.TailComponent = new TailComponent(scene, x, y, this.getTexture(), scale)
+        super(scene, x, y, scale, textureStartsWith, new TailComponent(scene, x, y, "tailBlue", scale));
     }
 
     public nextTextureInArray(): void {
@@ -16,9 +14,9 @@ export default class TailSelectionComponent extends AbstractSelectionComponent {
 
         if (nextTextureInArray !== undefined) {
             console.log("entroo")
-            this.setTexture(nextTextureInArray)
-            this.TailComponent.getPhaserImage().destroy();
-            this.TailComponent = new TailComponent(this.scene, this.x, this.y, this.getTexture(), this.scale)
+            this.getAtomicComponent().setTexture(nextTextureInArray)
+            this.getAtomicComponent().getPhaserImage().destroy();
+            this.setAtomicComponent(new TailComponent(this.getScene(), this.x, this.y, this.getAtomicComponent().getTexture(), this.getScale()))
             this.setCurrentIndex(newCurrentIndex)
         }
     }
@@ -28,9 +26,9 @@ export default class TailSelectionComponent extends AbstractSelectionComponent {
         let previousTextureInArray = this.getTexturesKeyArray()[newCurrentIndex]
 
         if (previousTextureInArray !== undefined) {
-            this.setTexture(previousTextureInArray)
-            this.TailComponent.getPhaserImage().destroy();
-            this.TailComponent = new TailComponent(this.scene, this.x, this.y, this.getTexture(), this.scale)
+            this.getAtomicComponent().setTexture(previousTextureInArray)
+            this.getAtomicComponent().getPhaserImage().destroy();
+            this.setAtomicComponent(new TailComponent(this.getScene(), this.x, this.y, this.getAtomicComponent().getTexture(), this.getScale()))
             this.setCurrentIndex(newCurrentIndex)
         }
     }

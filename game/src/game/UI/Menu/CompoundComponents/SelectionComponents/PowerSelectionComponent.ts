@@ -1,20 +1,24 @@
 import ButtonComponent from "../../AtomicComponents/ButtonComponent";
 import UIComponent from "../../UIComponent";
+import AbstractSelectionComponent from "./AbstractSelectionComponent";
 
-export default class PowerSelectionComponent extends UIComponent {
-    backwardButton: ButtonComponent;
-    forwardButton: ButtonComponent;
-
-
+export default class PowerSelectionComponent extends AbstractSelectionComponent {
+    
+    
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string, scale: number,) {
-        super(scene,x,y,texture);
+        super(scene,x,y,scale,"sdf", new ButtonComponent(scene,x-12, y+28, 'BackwardButton',0.1,()=>console.log("hola")));
         // power image
-        scene.add.image(x, y, texture).setScale(scale)
-        this.backwardButton = new ButtonComponent(scene,x-12, y+28, 'BackwardButton',0.1,()=>console.log("hola"))
-        this.forwardButton = new ButtonComponent(scene,x+12, y+28, 'ForwardButton',0.1,()=>console.log("hola"))
- 
 
     }
+
+
+    nextTextureInArray(): void {
+        throw new Error("Method not implemented.");
+    }
+    previousTextureInArray(): void {
+        throw new Error("Method not implemented.");
+    }
+
 
 
 }

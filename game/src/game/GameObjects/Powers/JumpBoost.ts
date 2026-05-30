@@ -15,8 +15,6 @@ export default class JumpBoost extends AbstractBoost {
         },
             this.getTime()
         );
-
-
     }
 
 }
