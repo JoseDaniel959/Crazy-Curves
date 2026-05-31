@@ -1,6 +1,4 @@
-import ButtonComponent from "../../AtomicComponents/ButtonComponent";
 import TailComponent from "../../AtomicComponents/TailComponent";
-import UIComponent from "../../UIComponent";
 import AbstractSelectionComponent from "./AbstractSelectionComponent";
 
 export default class TailSelectionComponent extends AbstractSelectionComponent {
