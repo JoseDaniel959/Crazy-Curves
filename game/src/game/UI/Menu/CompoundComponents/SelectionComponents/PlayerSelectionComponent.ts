@@ -7,6 +7,7 @@ import TailSelectionComponent from "./TailSelectionComponent";
 export default class PlayerSelectionComponent extends UIComponent {
     
     private tableComponent: TableComponent;
+    private playerName: Phaser.GameObjects.Text;
     private spaceshipSelectionComponent: SpaceshipSelectionComponent;
     private upPowerSelectionComponent: PowerSelectionComponent;
     private downPowerSelectionComponent: PowerSelectionComponent;
@@ -21,7 +22,7 @@ export default class PlayerSelectionComponent extends UIComponent {
         super(scene, x, y, "backWardButton", 1)
         this.tableComponent = new TableComponent(scene, x, y, 1.5)
 
-        scene.add.text(x + 50, y - 15, "HandSomeMCT")
+        this.playerName = scene.add.text(x + 50, y - 15, "HandSomeMCT")
         this.spaceshipSelectionComponent = new SpaceshipSelectionComponent(scene, x - 170, y, 0.18, "Spaceship")
         this.upPowerSelectionComponent = new PowerSelectionComponent(scene, x - 50, y - 50, "BackwardButton", 0.15)
         this.downPowerSelectionComponent = new PowerSelectionComponent(scene, x - 50, y + 10, "BackwardButton", 0.15)
@@ -92,6 +93,7 @@ export default class PlayerSelectionComponent extends UIComponent {
     }
 
     public destroy(){
+        this.playerName.destroy()
         this.tableComponent.getPhaserImage().destroy()
         this.spaceshipSelectionComponent.destroy()
         this.upPowerSelectionComponent.destroy()
