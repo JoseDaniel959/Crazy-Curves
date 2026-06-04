@@ -1,8 +1,10 @@
+import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
 import ExplodeSprite from "./ExplodeSprite";
 import JumpPower from "./Powers/JumpBoost";
 import TailSprite from "./TailSprite";
 
 export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
+    public playerId : string = getPlayerSession();
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     private tailTextureKey: string;
     private offset = -20;
