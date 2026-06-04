@@ -18,11 +18,12 @@ export default class PlayerSelectionComponent extends UIComponent {
         scene: Phaser.Scene,
         x: number,
         y: number,
+        playerName: string
     ) {
         super(scene, x, y, "backWardButton", 1)
         this.tableComponent = new TableComponent(scene, x, y, 1.5)
 
-        this.playerName = scene.add.text(x + 50, y - 15, "HandSomeMCT")
+        this.playerName = scene.add.text(x + 50, y - 15, playerName)
         this.spaceshipSelectionComponent = new SpaceshipSelectionComponent(scene, x - 170, y, 0.18, "Spaceship")
         this.upPowerSelectionComponent = new PowerSelectionComponent(scene, x - 50, y - 50, "BackwardButton", 0.15)
         this.downPowerSelectionComponent = new PowerSelectionComponent(scene, x - 50, y + 10, "BackwardButton", 0.15)
