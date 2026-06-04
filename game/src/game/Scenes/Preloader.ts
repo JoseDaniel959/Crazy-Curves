@@ -23,16 +23,25 @@ import Table from "../../assets/UI/Table.png"
 import BackwardButton from "../../assets/UI/Buttons/Backward_BTN.png"
 import ForwardButton from "../../assets/UI/Buttons/Forward_BTN.png"
 import StartButton from "../../assets/UI/Buttons/Start_BTN.png"
+import { socket } from "../../Socket/socketFunctions"
+import { ClientSocketEvents } from "../../Socket/ClientSocketEvents"
+import PlayerSession from "../../playerSession/PlayerSession"
+import ButtonComponent from "../UI/Menu/AtomicComponents/ButtonComponent"
+import PlayerSelectionComponent from "../UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent"
+import { savePlayerSesssion } from "../../playerSession/LocalStorageFunctions"
+import { ServerSocketEvents } from "../../Socket/ServerSocketEvents"
+import { PlayerSessionDTO } from "../DTO/DTOTypes"
 
 
 export default class Preloader extends Phaser.Scene {
+
     constructor() {
         super('Preloader');
     }
 
     preload() {
-        this.load.audio('music1', [music1]); 
-        
+        this.load.audio('music1', [music1]);
+
         //Loading spaceship sprites
         this.load.image("SpaceshipBlue", SpaceshipBlue)
         this.load.image("SpaceshipGreen", SpaceshipGreen)
@@ -47,31 +56,40 @@ export default class Preloader extends Phaser.Scene {
         this.load.image("tailOrange", tailOrange)
         this.load.image("tailPurple", tailPurple)
         this.load.image("tailRed", tailRed)
-        
-         //animations
-        
+
+        //animations
+
         this.load.spritesheet("Explosion", Explosion, { frameWidth: 517, frameHeight: 517 })
 
         //background
-        this.load.image("Background",Background)
+        this.load.image("Background", Background)
 
         //UI elements 
-        this.load.image("Table",Table)
+        this.load.image("Table", Table)
         // UI buttons
-        this.load.image("BackwardButton",BackwardButton)
-        this.load.image("ForwardButton",ForwardButton)
-        this.load.image("StartButton",StartButton)
+        this.load.image("BackwardButton", BackwardButton)
+        this.load.image("ForwardButton", ForwardButton)
+        this.load.image("StartButton", StartButton)
 
     }
     create() {
 
-        const element = this.add.dom(200, 200, "button", 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', "Start")
-        element.setInteractive();
+        const input = this.add.dom(500, 200, 'input');
 
-        element.once('pointerdown', () => {
-            this.scene.start("MainMenu")
-        });
+        new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
+            const playerName = document.getElementsByTagName('input')[0].value
+            const newPlayerSession = new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' })
+            socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' }))
+        })
+
+        socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO) => {
+            console.log(playerSessionDTO)
+            if (playerSessionDTO) {
+                savePlayerSesssion(playerSessionDTO)
+                this.scene.start("MainMenu")
+            }
+        })
+
 
     }
-
 }
