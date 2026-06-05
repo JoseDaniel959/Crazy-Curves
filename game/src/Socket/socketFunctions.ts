@@ -2,15 +2,14 @@ import { io, Socket } from "socket.io-client";
 import { ServerSocketEvents } from "./ServerSocketEvents";
 import PlayerSession from "../playerSession/PlayerSession";
 import { PlayerSessionDTO } from "../game/DTO/DTOTypes";
+import { ClientSocketEvents } from "./ClientSocketEvents";
 export const socket: Socket = io();
 
 export let playersOnline: PlayerSessionDTO[] = [];
 
 
 socket.on(ServerSocketEvents.getAllPlayers, (data) =>{
-    console.log("nuevos usuarios")
     playersOnline = data;
-    console.log(playersOnline)
 })
 
 
