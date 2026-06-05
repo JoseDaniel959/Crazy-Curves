@@ -1,4 +1,4 @@
 export const ClientSocketEvents = {
-    newPlayer: "newPlayer",
-    getAllPlayersFromServer: "getAllPlayersFromServer",
+    addNewPlayer: "newPlayer",
+    getAllPlayers: "getAllPlayers",
 }
