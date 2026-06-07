@@ -159,25 +159,36 @@ eval("{\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleEle
 
 /***/ },
 
-/***/ "./components/DomElement.ts"
-/*!**********************************!*\
-  !*** ./components/DomElement.ts ***!
-  \**********************************/
+/***/ "./Socket/ClientSocketEvents.ts"
+/*!**************************************!*\
+  !*** ./Socket/ClientSocketEvents.ts ***!
+  \**************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ DomElement)\n/* harmony export */ });\nclass DomElement {\n    x;\n    y;\n    element;\n    style;\n    text;\n    constructor(x, y, element, style, text) {\n        this.x = x;\n        this.y = y;\n        this.element = element;\n        this.style = style;\n        this.text = text;\n    }\n    ;\n}\n\n\n//# sourceURL=webpack:///./components/DomElement.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ClientSocketEvents: () => (/* binding */ ClientSocketEvents)\n/* harmony export */ });\nconst ClientSocketEvents = {\n    addNewPlayer: \"newPlayer\",\n    getAllPlayers: \"getAllPlayers\",\n    sendInput: \"sendInput\",\n    initMatch: \"initMatch\"\n};\n\n\n//# sourceURL=webpack:///./Socket/ClientSocketEvents.ts?\n}");
 
 /***/ },
 
-/***/ "./components/Menu/MenuElements.ts"
-/*!*****************************************!*\
-  !*** ./components/Menu/MenuElements.ts ***!
-  \*****************************************/
+/***/ "./Socket/ServerSocketEvents.ts"
+/*!**************************************!*\
+  !*** ./Socket/ServerSocketEvents.ts ***!
+  \**************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   boxCSS: () => (/* binding */ boxCSS),\n/* harmony export */   gameTitle: () => (/* binding */ gameTitle),\n/* harmony export */   gameTitleCSS: () => (/* binding */ gameTitleCSS),\n/* harmony export */   playerBox: () => (/* binding */ playerBox),\n/* harmony export */   playerDiv: () => (/* binding */ playerDiv)\n/* harmony export */ });\n/* harmony import */ var _DomElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DomElement */ \"./components/DomElement.ts\");\n\n// export const gameTitleCSS: string = `\n// font-family: 'Honk';`\nconst gameTitleCSS = `color: white;`;\nconst boxCSS = ` \n    background-color: purple;\n    width: 20vw;\n    height: 3vw;\n    border-radius: 30px;;`;\nconst gameTitle = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 0, 'h1', gameTitleCSS, 'Crazy Curves');\nconst playerBox = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 200, 'div', boxCSS);\nconst startButton = new _DomElement__WEBPACK_IMPORTED_MODULE_0__[\"default\"](400, 550, 'button', undefined, \"start\");\nconst playerDiv = (scene, playerName, offset) => {\n    scene.add.rectangle(400, 200 + offset, 500, 70, 0x008AB8);\n    scene.add.image(200, 200 + offset, 'Spaceship').setScale(0.18).setFlipX(true);\n    scene.add.text(400, 190 + offset, playerName);\n    const button = scene.add.dom(startButton.x, startButton.y, startButton.element, 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', startButton.text);\n    button.setInteractive();\n    button.once('pointerdown', () => {\n        scene.scene.start(\"MainGame\");\n    });\n};\n\n\n//# sourceURL=webpack:///./components/Menu/MenuElements.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ServerSocketEvents: () => (/* binding */ ServerSocketEvents)\n/* harmony export */ });\nconst ServerSocketEvents = {\n    playerCreated: \"playerCreated\",\n    addNewPlayerInMenu: \"addNewPlayerInMenu\",\n    getAllPlayers: \"getAllPlayers\",\n    removePlayerFromMenu: \"removePlayerFromMenu\",\n    startMatch: \"startMatch\"\n};\n\n\n//# sourceURL=webpack:///./Socket/ServerSocketEvents.ts?\n}");
+
+/***/ },
+
+/***/ "./Socket/socketFunctions.ts"
+/*!***********************************!*\
+  !*** ./Socket/socketFunctions.ts ***!
+  \***********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   playersOnline: () => (/* binding */ playersOnline),\n/* harmony export */   socket: () => (/* binding */ socket)\n/* harmony export */ });\n/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ \"../node_modules/.pnpm/socket.io-client@4.8.3/node_modules/socket.io-client/build/esm/index.js\");\n/* harmony import */ var _ServerSocketEvents__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServerSocketEvents */ \"./Socket/ServerSocketEvents.ts\");\n\n\nconst socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)();\nlet playersOnline = [];\nsocket.on(_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_1__.ServerSocketEvents.getAllPlayers, (data) => {\n    playersOnline = data;\n});\nsocket.on(_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_1__.ServerSocketEvents.removePlayerFromMenu, (playerId) => {\n    playersOnline = playersOnline.filter((playerOnline) => playerOnline.playerId !== playerId);\n});\nsocket.emit;\nsocket.emit(\"hello\", \"world\", (val) => {\n    console.log(val);\n});\nsocket.emit('request', { foo: 'bar' }, 'baz', (err, response) => {\n    if (err) {\n        //data is the input data\n        //add not acknowledge request to array sent_request[]\n        // sent_request(data)\n        // this.jugador(data.x,data.y)\n        // the server did not acknowledge the event in the given delay\n    }\n    else {\n        //predicted momevent(response,data_sent)\n        /*\n            const comparation = preict momevemt == this.jugador.data\n            if(comparation){\n                nothing\n            }\n            else{\n                this.jugador.x = this.response.x\n                this.jugador.y = this.response.y\n    \n                }\n            \n        \n        sent_request.empty();\n        */\n        console.log(response.status); // 'ok'\n    }\n});\n\n\n//# sourceURL=webpack:///./Socket/socketFunctions.ts?\n}");
 
 /***/ },
 
@@ -192,25 +203,14 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 
 /***/ },
 
-/***/ "./game/GameObjects/Powers/JumpPower.ts"
+/***/ "./game/GameObjects/SpaceshipSpriteO.ts"
 /*!**********************************************!*\
-  !*** ./game/GameObjects/Powers/JumpPower.ts ***!
+  !*** ./game/GameObjects/SpaceshipSpriteO.ts ***!
   \**********************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ JumpPower)\n/* harmony export */ });\nclass JumpPower {\n    spaceship;\n    time = 350;\n    constructor(spaceship) {\n        this.spaceship = spaceship;\n    }\n    physics() {\n        this.spaceship.setScale(0.12);\n        this.spaceship.setIsCheckCollisionsOn(false);\n        setTimeout(() => {\n            this.spaceship.setScale(0.10);\n            this.spaceship.setIsCheckCollisionsOn(true);\n        }, this.time);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/Powers/JumpPower.ts?\n}");
-
-/***/ },
-
-/***/ "./game/GameObjects/SpaceshipSprite.ts"
-/*!*********************************************!*\
-  !*** ./game/GameObjects/SpaceshipSprite.ts ***!
-  \*********************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SpaceshipSprite)\n/* harmony export */ });\n/* harmony import */ var _ExplodeSprite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExplodeSprite */ \"./game/GameObjects/ExplodeSprite.ts\");\n/* harmony import */ var _Powers_JumpPower__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Powers/JumpPower */ \"./game/GameObjects/Powers/JumpPower.ts\");\n/* harmony import */ var _TailSprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TailSprite */ \"./game/GameObjects/TailSprite.ts\");\n\n\n\nclass SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {\n    cursors;\n    offset = -20;\n    tail = [];\n    elapsedTime = 250;\n    randomNumber = 20;\n    downPower;\n    isCheckCollisionsOn = true;\n    constructor(scene, x, y) {\n        super(scene, x, y, \"Spaceship\");\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, false);\n        //setting scenes input\n        this.cursors = scene.input.keyboard?.createCursorKeys();\n        //setting sprite's hitbox\n        this.setScale(0.10);\n        this.setCircle(70, 200, 180);\n        this.setOrigin(0.5, 0.5);\n        //setting a random angle         \n        this.angle = Phaser.Math.Angle.RandomDegrees();\n        this.setCollideWorldBounds(true, 0, 0, true);\n        this.downPower = new _Powers_JumpPower__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this);\n        //setting the depth of the object. This is for the JumpPower\n        this.setDepth(1);\n    }\n    idle() {\n        this.setAngularVelocity(0);\n    }\n    moveLeft() {\n        this.setAngularVelocity(165);\n    }\n    moveRight() {\n        this.setAngularVelocity(-165);\n    }\n    addLine(deltaTime) {\n        if (this.elapsedTime === 250) {\n            this.randomNumber = Phaser.Math.Between(0, 50);\n            this.tail.push(new _TailSprite__WEBPACK_IMPORTED_MODULE_2__[\"default\"](this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset));\n        }\n        if (this.randomNumber === 1) {\n            this.updateTime(deltaTime);\n        }\n    }\n    checkTailCollisions(isOn) {\n        if (isOn) {\n            this.scene.physics.collide(this, this.tail, () => {\n                this.explode(this.x, this.y);\n                this.disableBody(true, true);\n            });\n        }\n    }\n    updateTime(deltaTime) {\n        if (this.elapsedTime > 0) {\n            this.elapsedTime -= deltaTime;\n        }\n        else {\n            this.elapsedTime = 250;\n        }\n    }\n    checkWordBoundsCollisions() {\n        this.scene.physics.world.on('worldbounds', () => {\n            this.explode(this.x, this.y);\n            this.disableBody(true, true);\n        });\n    }\n    setIsCheckCollisionsOn(value) {\n        this.isCheckCollisionsOn = value;\n    }\n    move(deltaTime) {\n        this.checkWordBoundsCollisions();\n        this.checkTailCollisions(this.isCheckCollisionsOn);\n        this.addLine(deltaTime);\n        this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity);\n        if (this.cursors?.left.isUp || this.cursors?.right.isUp) {\n            this.idle();\n        }\n        if (this.cursors?.left.isDown) {\n            this.moveRight();\n        }\n        if (this.cursors?.right.isDown) {\n            this.moveLeft();\n        }\n        if (this.cursors?.down.isDown) {\n            this.downPower.physics();\n        }\n    }\n    explode(x, y) {\n        return new _ExplodeSprite__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.scene, this.x, this.y);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/SpaceshipSprite.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SpaceshipSpriteO)\n/* harmony export */ });\n/* harmony import */ var _playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../playerSession/LocalStorageFunctions */ \"./playerSession/LocalStorageFunctions.ts\");\n/* harmony import */ var _ExplodeSprite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExplodeSprite */ \"./game/GameObjects/ExplodeSprite.ts\");\n/* harmony import */ var _TailSprite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TailSprite */ \"./game/GameObjects/TailSprite.ts\");\n\n\n\nclass SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {\n    playerId = (0,_playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_0__.getPlayerSession)();\n    cursors;\n    tailTextureKey;\n    offset = -20;\n    tail = [];\n    elapsedTime = 250;\n    randomNumber = 20;\n    isCheckCollisionsOn = true;\n    inputSequence = 0;\n    constructor(scene, x, y, spaceshipTextureKey, tailTextureKey) {\n        super(scene, x, y, spaceshipTextureKey);\n        this.tailTextureKey = tailTextureKey;\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, false);\n        //setting scenes input\n        this.cursors = scene.input.keyboard?.createCursorKeys();\n        //setting sprite's hitbox\n        this.setScale(0.10);\n        this.setCircle(70, 200, 180);\n        this.setOrigin(0.5, 0.5);\n        //setting a random angle         \n        this.setCollideWorldBounds(true, 0, 0, true);\n        //setting the depth of the object. This is for the JumpPower\n        this.setDepth(1);\n    }\n    idle() {\n        this.setAngularVelocity(0);\n    }\n    moveLeft() {\n        this.setAngularVelocity(165);\n    }\n    moveRight() {\n        this.setAngularVelocity(-165);\n    }\n    addLine(deltaTime) {\n        if (this.elapsedTime === 250) {\n            this.randomNumber = Phaser.Math.Between(0, 50);\n            this.tail.push(new _TailSprite__WEBPACK_IMPORTED_MODULE_2__[\"default\"](this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));\n        }\n        if (this.randomNumber === 1) {\n            this.updateTime(deltaTime);\n        }\n    }\n    checkTailCollisions(isOn) {\n        if (isOn) {\n            this.scene.physics.collide(this, this.tail, () => {\n                this.explode(this.x, this.y);\n                this.disableBody(true, true);\n            });\n        }\n    }\n    updateTime(deltaTime) {\n        if (this.elapsedTime > 0) {\n            this.elapsedTime -= deltaTime;\n        }\n        else {\n            this.elapsedTime = 250;\n        }\n    }\n    checkWordBoundsCollisions() {\n        this.scene.physics.world.on('worldbounds', () => {\n            this.explode(this.x, this.y);\n            this.disableBody(true, true);\n        });\n    }\n    setIsCheckCollisionsOn(value) {\n        this.isCheckCollisionsOn = value;\n    }\n    move(deltaTime) {\n        const input = {\n            inputSequence: this.inputSequence,\n            input: \"\",\n        };\n        if (this.cursors?.left.isUp && this.cursors?.right.isUp) {\n            input.input = 'strait';\n            // socket.emit(ClientSocketEvents.updatePlayerPosition,input)\n        }\n        if (this.cursors?.left.isDown) {\n            input.input = 'left';\n        }\n        if (this.cursors?.right.isDown) {\n            input.input = 'right';\n        }\n        if (this.cursors?.down.isDown) {\n            input.input = 'down';\n        }\n        this.inputSequence++;\n        return (input);\n    }\n    explode(x, y) {\n        return new _ExplodeSprite__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this.scene, this.x, this.y);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/SpaceshipSpriteO.ts?\n}");
 
 /***/ },
 
@@ -221,7 +221,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TailSprite)\n/* harmony export */ });\nclass TailSprite extends Phaser.Physics.Arcade.Sprite {\n    constructor(scene, x, y) {\n        super(scene, x, y, \"Tail\");\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, true);\n        this.setBodySize(10, 10);\n        this.setDisplaySize(10, 10);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/TailSprite.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TailSprite)\n/* harmony export */ });\nclass TailSprite extends Phaser.Physics.Arcade.Sprite {\n    constructor(scene, x, y, tailTextureKey) {\n        super(scene, x, y, tailTextureKey);\n        //adding the sprite to the scene\n        scene.add.existing(this);\n        scene.physics.add.existing(this, true);\n        this.setBodySize(10, 10);\n        this.setDisplaySize(10, 10);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/GameObjects/TailSprite.ts?\n}");
 
 /***/ },
 
@@ -243,7 +243,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ BootLoader)\n/* harmony export */ });\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _GameObjects_SpaceshipSprite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../GameObjects/SpaceshipSprite */ \"./game/GameObjects/SpaceshipSprite.ts\");\n\n\nclass BootLoader extends (phaser__WEBPACK_IMPORTED_MODULE_0___default().Scene) {\n    jugador;\n    constructor() {\n        super('MainGame');\n    }\n    create() {\n        this.add.image(400, 300, \"Background\").setToBack();\n        const music = this.sound.add('music1').setVolume(0.3);\n        this.jugador = new _GameObjects_SpaceshipSprite__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this, 200, 200);\n        music.play();\n    }\n    update(time, delta) {\n        if (this.jugador) {\n            this.jugador?.move(delta);\n        }\n    }\n    setPlayer(newPlayer) {\n        this.jugador = newPlayer;\n    }\n    getPlayer() {\n        return this.jugador;\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainGame.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ BootLoader)\n/* harmony export */ });\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Socket/socketFunctions */ \"./Socket/socketFunctions.ts\");\n/* harmony import */ var _playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../playerSession/LocalStorageFunctions */ \"./playerSession/LocalStorageFunctions.ts\");\n/* harmony import */ var _Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Socket/ClientSocketEvents */ \"./Socket/ClientSocketEvents.ts\");\n/* harmony import */ var _GameObjects_SpaceshipSpriteO__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GameObjects/SpaceshipSpriteO */ \"./game/GameObjects/SpaceshipSpriteO.ts\");\n\n\n\n\n\nclass BootLoader extends (phaser__WEBPACK_IMPORTED_MODULE_0___default().Scene) {\n    jugador;\n    randomPositionX = phaser__WEBPACK_IMPORTED_MODULE_0___default().Math.Between(50, 950);\n    randomPositionY = phaser__WEBPACK_IMPORTED_MODULE_0___default().Math.Between(50, 950);\n    // sent request[]\n    constructor() {\n        super('MainGame');\n    }\n    create() {\n        this.add.image(400, 300, \"Background\").setToBack();\n        const music = this.sound.add('music1').setVolume(0.3);\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.on(\"a\", (data) => {\n            console.log(\"entrooo\", data.angle);\n            this.jugador?.setX(data.x);\n            this.jugador?.setY(data.y);\n            this.jugador?.setRotation(data.angle);\n        });\n        //Getting spaceship texture and tail texture from data manager\n        // const spaceshipTextureKey: string = this.registry.get(registryKey.playerSelectionData).spaceshipTexturekey;\n        // const tailTextureKey: string = this.registry.get(registryKey.playerSelectionData).tailComponenteTextureKey\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.playersOnline.forEach((playerSession) => {\n            if (playerSession.playerId === (0,_playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_2__.getPlayerSession)()) {\n                this.jugador = new _GameObjects_SpaceshipSpriteO__WEBPACK_IMPORTED_MODULE_4__[\"default\"](this, this.randomPositionX, this.randomPositionY, \"SpaceshipBlue\", \"tailBlue\");\n            }\n            else {\n                new _GameObjects_SpaceshipSpriteO__WEBPACK_IMPORTED_MODULE_4__[\"default\"](this, this.randomPositionX, this.randomPositionY, \"SpaceshipBlue\", \"tailBlue\");\n            }\n        });\n        music.play();\n    }\n    update(time, delta) {\n        if (this.jugador) {\n            const input = this.jugador?.move(delta);\n            _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.emit(_Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_3__.ClientSocketEvents.sendInput, input);\n        }\n    }\n    setPlayer(newPlayer) {\n        this.jugador = newPlayer;\n    }\n    getPlayer() {\n        return this.jugador;\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainGame.ts?\n}");
 
 /***/ },
 
@@ -254,7 +254,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ MainMenu)\n/* harmony export */ });\n/* harmony import */ var _components_Menu_MenuElements__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/Menu/MenuElements */ \"./components/Menu/MenuElements.ts\");\n/* harmony import */ var _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../socket/socketFunctions */ \"./game/socket/socketFunctions.ts\");\n\n\nclass MainMenu extends Phaser.Scene {\n    constructor() {\n        super('MainMenu');\n    }\n    preload() {\n    }\n    create() {\n        (0,_socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.emitNewPlayerInMenu)();\n        _socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.on(\"getAllPlayersFromServer\", (playersArray) => {\n            let offset = 0;\n            for (const player in playersArray) {\n                (0,_components_Menu_MenuElements__WEBPACK_IMPORTED_MODULE_0__.playerDiv)(this, 'HandsomeMCT', offset);\n                offset = offset + 80;\n            }\n        });\n        this.add.image(100, 100, 'Buttons', 0).setScale(4);\n        this.scene.start(\"MainGame\");\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainMenu.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ MainMenu)\n/* harmony export */ });\n/* harmony import */ var _UI_Menu_CompoundComponents_SelectionComponents_PlayerSelectionComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent.ts\");\n/* harmony import */ var _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Socket/socketFunctions */ \"./Socket/socketFunctions.ts\");\n/* harmony import */ var _Socket_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Socket/ServerSocketEvents */ \"./Socket/ServerSocketEvents.ts\");\n/* harmony import */ var _Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Socket/ClientSocketEvents */ \"./Socket/ClientSocketEvents.ts\");\n/* harmony import */ var _UI_Menu_AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../UI/Menu/AtomicComponents/ButtonComponent */ \"./game/UI/Menu/AtomicComponents/ButtonComponent.ts\");\n\n\n\n\n\nclass MainMenu extends Phaser.Scene {\n    constructor() {\n        super('MainMenu');\n    }\n    create() {\n        let playersSelectionComponent = [];\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.emit(_Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_3__.ClientSocketEvents.getAllPlayers);\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.on(_Socket_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_2__.ServerSocketEvents.getAllPlayers, () => {\n            let offset = 0;\n            _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.playersOnline.forEach((playerOnline) => {\n                const { playerId, playerName } = playerOnline;\n                console.log(\"playerSelectionComponent\");\n                console.log(playersSelectionComponent);\n                if (!this.isPlayerConnected(playersSelectionComponent, playerId)) {\n                    playersSelectionComponent.push(new _UI_Menu_CompoundComponents_SelectionComponents_PlayerSelectionComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this, 500, 350 + offset, playerName, playerId));\n                }\n                offset += 150;\n            });\n        });\n        //removing player from the menu\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.on(_Socket_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_2__.ServerSocketEvents.removePlayerFromMenu, (playerId) => {\n            console.log(\"desconecto a un usuario\");\n            this.disconectPlayer(playersSelectionComponent, playerId);\n        });\n        new _UI_Menu_AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_4__[\"default\"](this, 500, 950, \"StartButton\", 0.5, () => {\n            console.log(\"me presionaron\");\n            _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_1__.socket.emit(_Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_3__.ClientSocketEvents.initMatch, true);\n            this.scene.start('MainGame');\n        });\n    }\n    isPlayerConnected(playersSelectionComponent, playerIdToSeach) {\n        const playerSelectionFound = playersSelectionComponent.find((PlayerSelectionComponent) => {\n            if (PlayerSelectionComponent.playerId === playerIdToSeach) {\n                return playersSelectionComponent;\n            }\n        });\n        return playerSelectionFound ? true : false;\n    }\n    disconectPlayer(playersSelectionComponent, playerIdToDisconnect) {\n        playersSelectionComponent.some((playerSelectionComponent) => {\n            if (playerSelectionComponent.playerId == playerIdToDisconnect) {\n                playerSelectionComponent.destroy();\n            }\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/MainMenu.ts?\n}");
 
 /***/ },
 
@@ -265,7 +265,117 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Preloader)\n/* harmony export */ });\n/* harmony import */ var _assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/music/nastelbom-funk-437330.mp3 */ \"./assets/music/nastelbom-funk-437330.mp3\");\n/* harmony import */ var _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/images/Spaceship_01_BLUE.png */ \"./assets/images/Spaceship_01_BLUE.png\");\n/* harmony import */ var _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/images/New Piskel.png */ \"./assets/images/New Piskel.png\");\n/* harmony import */ var _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/Animations/Effect_Explosion_1_517x517.png */ \"./assets/Animations/Effect_Explosion_1_517x517.png\");\n/* harmony import */ var _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/background/export202405130010328162.png */ \"./assets/images/background/export202405130010328162.png\");\n/* harmony import */ var _assets_UI_UI_grey_buttons_light_1_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/UI/UI_grey_buttons_light_1.png */ \"./assets/UI/UI_grey_buttons_light_1.png\");\n\n\n\n\n\n\nclass Preloader extends Phaser.Scene {\n    constructor() {\n        super('Preloader');\n    }\n    preload() {\n        this.load.audio('music1', [_assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__]);\n        this.load.image(\"Spaceship\", _assets_images_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__);\n        this.load.image(\"Tail\", _assets_images_New_Piskel_png__WEBPACK_IMPORTED_MODULE_2__);\n        //animations\n        this.load.spritesheet(\"Explosion\", _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_3__, { frameWidth: 517, frameHeight: 517 });\n        this.load.spritesheet(\"Buttons\", _assets_UI_UI_grey_buttons_light_1_png__WEBPACK_IMPORTED_MODULE_5__, { frameWidth: 16, frameHeight: 16 });\n        //background\n        this.load.image(\"Background\", _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_4__);\n    }\n    create() {\n        const element = this.add.dom(200, 200, \"button\", 'background-color: lime; width: 220px; height: 100px; font: 48px Arial', \"Start\");\n        element.setInteractive();\n        element.once('pointerdown', () => {\n            this.scene.start(\"MainMenu\");\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/Preloader.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Preloader)\n/* harmony export */ });\n/* harmony import */ var _assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/music/nastelbom-funk-437330.mp3 */ \"./assets/music/nastelbom-funk-437330.mp3\");\n/* harmony import */ var _assets_images_spaceships_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/images/spaceships/Spaceship_01_BLUE.png */ \"./assets/images/spaceships/Spaceship_01_BLUE.png\");\n/* harmony import */ var _assets_images_spaceships_Spaceship_02_GREEN_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/images/spaceships/Spaceship_02_GREEN.png */ \"./assets/images/spaceships/Spaceship_02_GREEN.png\");\n/* harmony import */ var _assets_images_spaceships_Spaceship_04_ORANGE_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/images/spaceships/Spaceship_04_ORANGE.png */ \"./assets/images/spaceships/Spaceship_04_ORANGE.png\");\n/* harmony import */ var _assets_images_spaceships_Spaceship_05_PURPLE_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/images/spaceships/Spaceship_05_PURPLE.png */ \"./assets/images/spaceships/Spaceship_05_PURPLE.png\");\n/* harmony import */ var _assets_images_spaceships_Spaceship_06_RED_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/images/spaceships/Spaceship_06_RED.png */ \"./assets/images/spaceships/Spaceship_06_RED.png\");\n/* harmony import */ var _assets_images_tails_blue_tail_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../assets/images/tails/blue_tail.png */ \"./assets/images/tails/blue_tail.png\");\n/* harmony import */ var _assets_images_tails_green_tail_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../assets/images/tails/green_tail.png */ \"./assets/images/tails/green_tail.png\");\n/* harmony import */ var _assets_images_tails_orange_tail_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../assets/images/tails/orange_tail.png */ \"./assets/images/tails/orange_tail.png\");\n/* harmony import */ var _assets_images_tails_purple_tail_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../assets/images/tails/purple_tail.png */ \"./assets/images/tails/purple_tail.png\");\n/* harmony import */ var _assets_images_tails_red_tail_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../assets/images/tails/red_tail.png */ \"./assets/images/tails/red_tail.png\");\n/* harmony import */ var _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../assets/Animations/Effect_Explosion_1_517x517.png */ \"./assets/Animations/Effect_Explosion_1_517x517.png\");\n/* harmony import */ var _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../assets/images/background/export202405130010328162.png */ \"./assets/images/background/export202405130010328162.png\");\n/* harmony import */ var _assets_UI_Table_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../assets/UI/Table.png */ \"./assets/UI/Table.png\");\n/* harmony import */ var _assets_UI_Buttons_Backward_BTN_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../assets/UI/Buttons/Backward_BTN.png */ \"./assets/UI/Buttons/Backward_BTN.png\");\n/* harmony import */ var _assets_UI_Buttons_Forward_BTN_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../assets/UI/Buttons/Forward_BTN.png */ \"./assets/UI/Buttons/Forward_BTN.png\");\n/* harmony import */ var _assets_UI_Buttons_Start_BTN_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../assets/UI/Buttons/Start_BTN.png */ \"./assets/UI/Buttons/Start_BTN.png\");\n/* harmony import */ var _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../Socket/socketFunctions */ \"./Socket/socketFunctions.ts\");\n/* harmony import */ var _Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../Socket/ClientSocketEvents */ \"./Socket/ClientSocketEvents.ts\");\n/* harmony import */ var _playerSession_PlayerSession__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../../playerSession/PlayerSession */ \"./playerSession/PlayerSession.ts\");\n/* harmony import */ var _UI_Menu_AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../UI/Menu/AtomicComponents/ButtonComponent */ \"./game/UI/Menu/AtomicComponents/ButtonComponent.ts\");\n/* harmony import */ var _playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../../playerSession/LocalStorageFunctions */ \"./playerSession/LocalStorageFunctions.ts\");\n/* harmony import */ var _Socket_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../../Socket/ServerSocketEvents */ \"./Socket/ServerSocketEvents.ts\");\n\n//Spaceships sprites\n\n\n\n\n\n//Tail sprites\n\n\n\n\n\n\n\n\n// Buttons\n\n\n\n\n\n\n\n\n\nclass Preloader extends Phaser.Scene {\n    constructor() {\n        super('Preloader');\n    }\n    preload() {\n        this.load.audio('music1', [_assets_music_nastelbom_funk_437330_mp3__WEBPACK_IMPORTED_MODULE_0__]);\n        //Loading spaceship sprites\n        this.load.image(\"SpaceshipBlue\", _assets_images_spaceships_Spaceship_01_BLUE_png__WEBPACK_IMPORTED_MODULE_1__);\n        this.load.image(\"SpaceshipGreen\", _assets_images_spaceships_Spaceship_02_GREEN_png__WEBPACK_IMPORTED_MODULE_2__);\n        this.load.image(\"SpaceshipOrange\", _assets_images_spaceships_Spaceship_04_ORANGE_png__WEBPACK_IMPORTED_MODULE_3__);\n        this.load.image(\"SpaceshipPurple\", _assets_images_spaceships_Spaceship_05_PURPLE_png__WEBPACK_IMPORTED_MODULE_4__);\n        this.load.image(\"SpaceshipRed\", _assets_images_spaceships_Spaceship_06_RED_png__WEBPACK_IMPORTED_MODULE_5__);\n        //loading tail sprites\n        this.load.image(\"tailBlue\", _assets_images_tails_blue_tail_png__WEBPACK_IMPORTED_MODULE_6__);\n        this.load.image(\"tailGreen\", _assets_images_tails_green_tail_png__WEBPACK_IMPORTED_MODULE_7__);\n        this.load.image(\"tailOrange\", _assets_images_tails_orange_tail_png__WEBPACK_IMPORTED_MODULE_8__);\n        this.load.image(\"tailPurple\", _assets_images_tails_purple_tail_png__WEBPACK_IMPORTED_MODULE_9__);\n        this.load.image(\"tailRed\", _assets_images_tails_red_tail_png__WEBPACK_IMPORTED_MODULE_10__);\n        //animations\n        this.load.spritesheet(\"Explosion\", _assets_Animations_Effect_Explosion_1_517x517_png__WEBPACK_IMPORTED_MODULE_11__, { frameWidth: 517, frameHeight: 517 });\n        //background\n        this.load.image(\"Background\", _assets_images_background_export202405130010328162_png__WEBPACK_IMPORTED_MODULE_12__);\n        //UI elements \n        this.load.image(\"Table\", _assets_UI_Table_png__WEBPACK_IMPORTED_MODULE_13__);\n        // UI buttons\n        this.load.image(\"BackwardButton\", _assets_UI_Buttons_Backward_BTN_png__WEBPACK_IMPORTED_MODULE_14__);\n        this.load.image(\"ForwardButton\", _assets_UI_Buttons_Forward_BTN_png__WEBPACK_IMPORTED_MODULE_15__);\n        this.load.image(\"StartButton\", _assets_UI_Buttons_Start_BTN_png__WEBPACK_IMPORTED_MODULE_16__);\n    }\n    create() {\n        const input = this.add.dom(500, 200, 'input');\n        new _UI_Menu_AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_20__[\"default\"](this, 500, 950, \"StartButton\", 0.5, () => {\n            const playerName = document.getElementsByTagName('input')[0].value;\n            const newPlayerSession = new _playerSession_PlayerSession__WEBPACK_IMPORTED_MODULE_19__[\"default\"](playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' });\n            _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_17__.socket.emit(_Socket_ClientSocketEvents__WEBPACK_IMPORTED_MODULE_18__.ClientSocketEvents.addNewPlayer, new _playerSession_PlayerSession__WEBPACK_IMPORTED_MODULE_19__[\"default\"](playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' }));\n        });\n        _Socket_socketFunctions__WEBPACK_IMPORTED_MODULE_17__.socket.on(_Socket_ServerSocketEvents__WEBPACK_IMPORTED_MODULE_22__.ServerSocketEvents.playerCreated, (playerSessionDTO) => {\n            console.log(playerSessionDTO);\n            if (playerSessionDTO) {\n                (0,_playerSession_LocalStorageFunctions__WEBPACK_IMPORTED_MODULE_21__.savePlayerSesssion)(playerSessionDTO);\n                this.scene.start(\"MainMenu\");\n            }\n        });\n    }\n}\n\n\n//# sourceURL=webpack:///./game/Scenes/Preloader.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/AtomicComponents/ButtonComponent.ts"
+/*!**********************************************************!*\
+  !*** ./game/UI/Menu/AtomicComponents/ButtonComponent.ts ***!
+  \**********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ButtonComponent)\n/* harmony export */ });\n/* harmony import */ var _UIComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIComponent */ \"./game/UI/Menu/UIComponent.ts\");\n\nclass ButtonComponent extends _UIComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    callBack;\n    constructor(scene, x, y, texture, scale, callBack) {\n        super(scene, x, y, texture, scale);\n        this.callBack = callBack;\n        //ButtonLogic\n        this.getPhaserImage().setInteractive();\n        this.getPhaserImage().on('pointerdown', callBack);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/AtomicComponents/ButtonComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/AtomicComponents/SpaceshipComponent.ts"
+/*!*************************************************************!*\
+  !*** ./game/UI/Menu/AtomicComponents/SpaceshipComponent.ts ***!
+  \*************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SpaceshipComponent)\n/* harmony export */ });\n/* harmony import */ var _UIComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIComponent */ \"./game/UI/Menu/UIComponent.ts\");\n\nclass SpaceshipComponent extends _UIComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor(scene, x, y, texture, scale = 1) {\n        super(scene, x, y, texture, scale);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/AtomicComponents/SpaceshipComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/AtomicComponents/TableComponetn.ts"
+/*!*********************************************************!*\
+  !*** ./game/UI/Menu/AtomicComponents/TableComponetn.ts ***!
+  \*********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TableComponent)\n/* harmony export */ });\n/* harmony import */ var _UIComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIComponent */ \"./game/UI/Menu/UIComponent.ts\");\n\nclass TableComponent extends _UIComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor(scene, x, y, scaleX, scaleY) {\n        super(scene, x, y, \"Table\", scaleX);\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/AtomicComponents/TableComponetn.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/AtomicComponents/TailComponent.ts"
+/*!********************************************************!*\
+  !*** ./game/UI/Menu/AtomicComponents/TailComponent.ts ***!
+  \********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TailComponent)\n/* harmony export */ });\n/* harmony import */ var _UIComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UIComponent */ \"./game/UI/Menu/UIComponent.ts\");\n\nclass TailComponent extends _UIComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n    constructor(scene, x, y, texture, scale = 1) {\n        super(scene, x, y, texture, scale);\n        // this.phaserImage = scene.add.image(x, y, texture).setScale(scale).setFlipX(true)\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/AtomicComponents/TailComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts"
+/*!*******************************************************************************************!*\
+  !*** ./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts ***!
+  \*******************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ AbstractSelectionComponent)\n/* harmony export */ });\n/* harmony import */ var _AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AtomicComponents/ButtonComponent */ \"./game/UI/Menu/AtomicComponents/ButtonComponent.ts\");\n\nclass AbstractSelectionComponent {\n    x;\n    y;\n    scale;\n    scene;\n    atomicComponent;\n    currentIndex = 0;\n    texturesKeyArray = [];\n    textureStartsWith;\n    BackwardButton;\n    ForwardButton;\n    constructor(scene, x, y, scale = 1, textureStartsWith, atomicComponent) {\n        this.x = x;\n        this.y = y;\n        this.scale = scale;\n        this.textureStartsWith = textureStartsWith;\n        this.scene = scene;\n        this.setTexturesKeyArray(this.scene.textures.getTextureKeys().filter((textureKey) => textureKey.startsWith(this.textureStartsWith)));\n        //this is the current texture the user is selecting\n        // console.log(this.texturesKeyArray)\n        this.atomicComponent = atomicComponent;\n        this.BackwardButton = new _AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x - 12, y + 28, 'BackwardButton', 0.1, () => this.previousTextureInArray());\n        this.ForwardButton = new _AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x + 12, y + 28, 'ForwardButton', 0.1, () => this.nextTextureInArray());\n    }\n    getTexturesKeyArray() {\n        return this.texturesKeyArray;\n    }\n    setTexturesKeyArray(newtexturesKeyArray) {\n        this.texturesKeyArray = newtexturesKeyArray;\n    }\n    getTextureStartsWith() {\n        return this.textureStartsWith;\n    }\n    setTextureStartsWith(newTextureStartsWith) {\n        this.textureStartsWith = newTextureStartsWith;\n    }\n    getCurrentIndex() {\n        return this.currentIndex;\n    }\n    setCurrentIndex(newIndex) {\n        this.currentIndex = newIndex;\n    }\n    getBackwardButton() {\n        return this.BackwardButton;\n    }\n    setBackwardButton(backwardButton) {\n        this.BackwardButton = backwardButton;\n    }\n    getForwardButton() {\n        return this.ForwardButton;\n    }\n    setForwardButton(forwardButton) {\n        this.ForwardButton = forwardButton;\n    }\n    getAtomicComponent() {\n        return this.atomicComponent;\n    }\n    setAtomicComponent(atomicComponent) {\n        this.atomicComponent = atomicComponent;\n    }\n    getScene() {\n        return this.scene;\n    }\n    setScene(scene) {\n        this.scene = scene;\n    }\n    getScale() {\n        return this.scale;\n    }\n    setScale(scale) {\n        this.scale = scale;\n    }\n    destroy() {\n        this.getAtomicComponent().getPhaserImage().destroy();\n        this.getBackwardButton().getPhaserImage().destroy();\n        this.getForwardButton().getPhaserImage().destroy();\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent.ts"
+/*!*****************************************************************************************!*\
+  !*** ./game/UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent.ts ***!
+  \*****************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ PlayerSelectionComponent)\n/* harmony export */ });\n/* harmony import */ var _AtomicComponents_TableComponetn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AtomicComponents/TableComponetn */ \"./game/UI/Menu/AtomicComponents/TableComponetn.ts\");\n/* harmony import */ var _UIComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../UIComponent */ \"./game/UI/Menu/UIComponent.ts\");\n/* harmony import */ var _PowerSelectionComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PowerSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/PowerSelectionComponent.ts\");\n/* harmony import */ var _SpaceshipSelectionComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SpaceshipSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/SpaceshipSelectionComponent.ts\");\n/* harmony import */ var _TailSelectionComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TailSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/TailSelectionComponent.ts\");\n\n\n\n\n\nclass PlayerSelectionComponent extends _UIComponent__WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    playerId;\n    tableComponent;\n    playerName;\n    spaceshipSelectionComponent;\n    upPowerSelectionComponent;\n    downPowerSelectionComponent;\n    tailSelectionComponent;\n    constructor(scene, x, y, playerName, playerId) {\n        super(scene, x, y, \"backWardButton\", 1);\n        this.tableComponent = new _AtomicComponents_TableComponetn__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x, y, 1.5);\n        this.playerName = scene.add.text(x + 50, y - 15, playerName);\n        this.spaceshipSelectionComponent = new _SpaceshipSelectionComponent__WEBPACK_IMPORTED_MODULE_3__[\"default\"](scene, x - 170, y, 0.18, \"Spaceship\");\n        this.upPowerSelectionComponent = new _PowerSelectionComponent__WEBPACK_IMPORTED_MODULE_2__[\"default\"](scene, x - 50, y - 50, \"BackwardButton\", 0.15);\n        this.downPowerSelectionComponent = new _PowerSelectionComponent__WEBPACK_IMPORTED_MODULE_2__[\"default\"](scene, x - 50, y + 10, \"BackwardButton\", 0.15);\n        this.tailSelectionComponent = new _TailSelectionComponent__WEBPACK_IMPORTED_MODULE_4__[\"default\"](scene, x - 110, y - 20, 0.5, \"tail\");\n        this.playerId = playerId;\n    }\n    getSpaceshipSelectionComponent() {\n        return this.spaceshipSelectionComponent;\n    }\n    setSpaceshipSelectionComponent(spaceshipSelectionComponent) {\n        this.spaceshipSelectionComponent = spaceshipSelectionComponent;\n    }\n    getUpPowerSelectionComponent() {\n        return this.upPowerSelectionComponent;\n    }\n    setUpPowerSelectionComponent(upPowerSelectionComponent) {\n        this.upPowerSelectionComponent = upPowerSelectionComponent;\n    }\n    getDownPowerSelectionComponent() {\n        return this.downPowerSelectionComponent;\n    }\n    setDownPowerSelectionComponent(downPowerSelectionComponent) {\n        this.downPowerSelectionComponent = downPowerSelectionComponent;\n    }\n    getTailSelectionComponent() {\n        return this.tailSelectionComponent;\n    }\n    setTailSelectionComponent(tailSelectionComponent) {\n        this.tailSelectionComponent = tailSelectionComponent;\n    }\n    getTableSelectionComponent() {\n        return this.tableComponent;\n    }\n    setTableSelectionComponent(tableComponent) {\n        this.tableComponent = tableComponent;\n    }\n    toDTO() {\n        const playerSelectionDTO = {\n            spaceshipTexture: this.spaceshipSelectionComponent.getAtomicComponent().getTexture(),\n            tailTexture: this.tailSelectionComponent.getAtomicComponent().getTexture()\n        };\n        return playerSelectionDTO;\n    }\n    listener() {\n        this.scene.game.events.addListener(\"updatePlayerSelection\", () => console.log(this.getSpaceshipSelectionComponent().getAtomicComponent().getTexture()));\n    }\n    destroy() {\n        this.playerName.destroy();\n        this.tableComponent.getPhaserImage().destroy();\n        this.spaceshipSelectionComponent.destroy();\n        this.upPowerSelectionComponent.destroy();\n        this.downPowerSelectionComponent.destroy();\n        this.tailSelectionComponent.destroy();\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/CompoundComponents/SelectionComponents/PowerSelectionComponent.ts"
+/*!****************************************************************************************!*\
+  !*** ./game/UI/Menu/CompoundComponents/SelectionComponents/PowerSelectionComponent.ts ***!
+  \****************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ PowerSelectionComponent)\n/* harmony export */ });\n/* harmony import */ var _AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AtomicComponents/ButtonComponent */ \"./game/UI/Menu/AtomicComponents/ButtonComponent.ts\");\n/* harmony import */ var _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AbstractSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts\");\n\n\nclass PowerSelectionComponent extends _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(scene, x, y, texture, scale) {\n        super(scene, x, y, scale, \"sdf\", new _AtomicComponents_ButtonComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x - 12, y + 28, 'BackwardButton', 0.1, () => console.log(\"hola\")));\n        // power image\n    }\n    nextTextureInArray() {\n        throw new Error(\"Method not implemented.\");\n    }\n    previousTextureInArray() {\n        throw new Error(\"Method not implemented.\");\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/CompoundComponents/SelectionComponents/PowerSelectionComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/CompoundComponents/SelectionComponents/SpaceshipSelectionComponent.ts"
+/*!********************************************************************************************!*\
+  !*** ./game/UI/Menu/CompoundComponents/SelectionComponents/SpaceshipSelectionComponent.ts ***!
+  \********************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ SpaceshipSelectionComponent)\n/* harmony export */ });\n/* harmony import */ var _AtomicComponents_SpaceshipComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AtomicComponents/SpaceshipComponent */ \"./game/UI/Menu/AtomicComponents/SpaceshipComponent.ts\");\n/* harmony import */ var _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AbstractSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts\");\n\n\nclass SpaceshipSelectionComponent extends _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(scene, x, y, scale = 1, textureStartsWith) {\n        super(scene, x, y, scale, textureStartsWith, new _AtomicComponents_SpaceshipComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x, y - 20, \"SpaceshipBlue\", scale));\n        this.getAtomicComponent().getPhaserImage();\n    }\n    nextTextureInArray() {\n        this.getScene().game.events.emit(\"updatePlayerSelection\");\n        let newCurrentIndex = this.getCurrentIndex() + 1;\n        let nextTextureInArray = this.getTexturesKeyArray()[newCurrentIndex];\n        if (nextTextureInArray !== undefined) {\n            this.getAtomicComponent().setTexture(nextTextureInArray);\n            this.getAtomicComponent().getPhaserImage().destroy();\n            this.setAtomicComponent(new _AtomicComponents_SpaceshipComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.getScene(), this.x, this.y - 20, this.getAtomicComponent().getTexture(), this.getScale()));\n            this.setCurrentIndex(newCurrentIndex);\n        }\n    }\n    previousTextureInArray() {\n        let newCurrentIndex = this.getCurrentIndex() - 1;\n        let previousTextureInArray = this.getTexturesKeyArray()[newCurrentIndex];\n        if (previousTextureInArray !== undefined) {\n            this.getAtomicComponent().setTexture(previousTextureInArray);\n            this.getAtomicComponent().getPhaserImage().destroy();\n            this.setAtomicComponent(new _AtomicComponents_SpaceshipComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.getScene(), this.x, this.y - 20, this.getAtomicComponent().getTexture(), this.getScale()));\n            this.setCurrentIndex(newCurrentIndex);\n        }\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/CompoundComponents/SelectionComponents/SpaceshipSelectionComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/CompoundComponents/SelectionComponents/TailSelectionComponent.ts"
+/*!***************************************************************************************!*\
+  !*** ./game/UI/Menu/CompoundComponents/SelectionComponents/TailSelectionComponent.ts ***!
+  \***************************************************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TailSelectionComponent)\n/* harmony export */ });\n/* harmony import */ var _AtomicComponents_TailComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AtomicComponents/TailComponent */ \"./game/UI/Menu/AtomicComponents/TailComponent.ts\");\n/* harmony import */ var _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AbstractSelectionComponent */ \"./game/UI/Menu/CompoundComponents/SelectionComponents/AbstractSelectionComponent.ts\");\n\n\nclass TailSelectionComponent extends _AbstractSelectionComponent__WEBPACK_IMPORTED_MODULE_1__[\"default\"] {\n    constructor(scene, x, y, scale = 1, textureStartsWith) {\n        super(scene, x, y, scale, textureStartsWith, new _AtomicComponents_TailComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](scene, x, y, \"tailBlue\", scale));\n    }\n    nextTextureInArray() {\n        let newCurrentIndex = this.getCurrentIndex() + 1;\n        let nextTextureInArray = this.getTexturesKeyArray()[newCurrentIndex];\n        if (nextTextureInArray !== undefined) {\n            console.log(\"entroo\");\n            this.getAtomicComponent().setTexture(nextTextureInArray);\n            this.getAtomicComponent().getPhaserImage().destroy();\n            this.setAtomicComponent(new _AtomicComponents_TailComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.getScene(), this.x, this.y, this.getAtomicComponent().getTexture(), this.getScale()));\n            this.setCurrentIndex(newCurrentIndex);\n        }\n    }\n    previousTextureInArray() {\n        let newCurrentIndex = this.getCurrentIndex() - 1;\n        let previousTextureInArray = this.getTexturesKeyArray()[newCurrentIndex];\n        if (previousTextureInArray !== undefined) {\n            this.getAtomicComponent().setTexture(previousTextureInArray);\n            this.getAtomicComponent().getPhaserImage().destroy();\n            this.setAtomicComponent(new _AtomicComponents_TailComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"](this.getScene(), this.x, this.y, this.getAtomicComponent().getTexture(), this.getScale()));\n            this.setCurrentIndex(newCurrentIndex);\n        }\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/CompoundComponents/SelectionComponents/TailSelectionComponent.ts?\n}");
+
+/***/ },
+
+/***/ "./game/UI/Menu/UIComponent.ts"
+/*!*************************************!*\
+  !*** ./game/UI/Menu/UIComponent.ts ***!
+  \*************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ UIComponent)\n/* harmony export */ });\nclass UIComponent {\n    scene;\n    x;\n    y;\n    texture;\n    scale;\n    phaserImage;\n    constructor(scene, x, y, texture, scale) {\n        this.scene = scene;\n        this.x = x;\n        this.y = y;\n        this.texture = texture;\n        this.scale = scale;\n        this.phaserImage = scene.add.image(x, y, texture).setScale(scale);\n    }\n    getTexture() {\n        return this.texture;\n    }\n    setTexture(newTexture) {\n        this.texture = newTexture;\n    }\n    getPhaserImage() {\n        return this.phaserImage;\n    }\n    setPhaserImage(phaserImage) {\n        this.phaserImage = phaserImage;\n    }\n    destroy() {\n        this.phaserImage.destroy();\n    }\n}\n\n\n//# sourceURL=webpack:///./game/UI/Menu/UIComponent.ts?\n}");
 
 /***/ },
 
@@ -276,18 +386,29 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpa
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scenes/Boot */ \"./game/Scenes/Boot.ts\");\n/* harmony import */ var _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Scenes/Preloader */ \"./game/Scenes/Preloader.ts\");\n/* harmony import */ var _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Scenes/MainMenu */ \"./game/Scenes/MainMenu.ts\");\n/* harmony import */ var _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Scenes/MainGame */ \"./game/Scenes/MainGame.ts\");\n/* harmony import */ var _indexStyles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../indexStyles.css */ \"./indexStyles.css\");\n\n\n\n\n\n\nvar config = {\n    type: Phaser.AUTO,\n    width: 800,\n    height: 600,\n    autoCenter: Phaser.Scale.CENTER_BOTH,\n    scene: [_Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__[\"default\"], _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__[\"default\"], _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__[\"default\"], _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__[\"default\"]],\n    physics: {\n        default: \"arcade\",\n        arcade: {\n            debug: false\n        }\n    },\n    parent: 'phaser-example',\n    dom: {\n        createContainer: true,\n    },\n    pixelArt: false\n};\n_indexStyles_css__WEBPACK_IMPORTED_MODULE_5__[\"default\"];\nlet game = new phaser__WEBPACK_IMPORTED_MODULE_0__.Game(config);\n\n\n//# sourceURL=webpack:///./game/game.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! phaser */ \"../node_modules/.pnpm/phaser@3.90.0/node_modules/phaser/dist/phaser.js\");\n/* harmony import */ var phaser__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(phaser__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Scenes/Boot */ \"./game/Scenes/Boot.ts\");\n/* harmony import */ var _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Scenes/Preloader */ \"./game/Scenes/Preloader.ts\");\n/* harmony import */ var _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Scenes/MainMenu */ \"./game/Scenes/MainMenu.ts\");\n/* harmony import */ var _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Scenes/MainGame */ \"./game/Scenes/MainGame.ts\");\n/* harmony import */ var _indexStyles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../indexStyles.css */ \"./indexStyles.css\");\n\n\n\n\n\n\nvar config = {\n    type: Phaser.AUTO,\n    width: 1000,\n    height: 1000,\n    autoCenter: Phaser.Scale.CENTER_BOTH,\n    scene: [_Scenes_Boot__WEBPACK_IMPORTED_MODULE_1__[\"default\"], _Scenes_Preloader__WEBPACK_IMPORTED_MODULE_2__[\"default\"], _Scenes_MainMenu__WEBPACK_IMPORTED_MODULE_3__[\"default\"], _Scenes_MainGame__WEBPACK_IMPORTED_MODULE_4__[\"default\"]],\n    physics: {\n        default: \"arcade\",\n        arcade: {\n            debug: false\n        }\n    },\n    parent: 'phaser-example',\n    dom: {\n        createContainer: true,\n    },\n};\n_indexStyles_css__WEBPACK_IMPORTED_MODULE_5__[\"default\"];\nlet game = new phaser__WEBPACK_IMPORTED_MODULE_0__.Game(config);\n\n\n//# sourceURL=webpack:///./game/game.ts?\n}");
 
 /***/ },
 
-/***/ "./game/socket/socketFunctions.ts"
+/***/ "./playerSession/LocalStorageFunctions.ts"
+/*!************************************************!*\
+  !*** ./playerSession/LocalStorageFunctions.ts ***!
+  \************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getPlayerSession: () => (/* binding */ getPlayerSession),\n/* harmony export */   savePlayerSesssion: () => (/* binding */ savePlayerSesssion)\n/* harmony export */ });\nconst savePlayerSesssion = (playerSession) => {\n    window.localStorage.setItem('playerId', playerSession.playerId);\n};\nconst getPlayerSession = () => {\n    const playerId = window.localStorage.getItem('playerId') || '';\n    return playerId;\n};\n\n\n//# sourceURL=webpack:///./playerSession/LocalStorageFunctions.ts?\n}");
+
+/***/ },
+
+/***/ "./playerSession/PlayerSession.ts"
 /*!****************************************!*\
-  !*** ./game/socket/socketFunctions.ts ***!
+  !*** ./playerSession/PlayerSession.ts ***!
   \****************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   emitNewPlayerInMenu: () => (/* binding */ emitNewPlayerInMenu),\n/* harmony export */   onNewPlayerFromServer: () => (/* binding */ onNewPlayerFromServer),\n/* harmony export */   socket: () => (/* binding */ socket)\n/* harmony export */ });\n/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! socket.io-client */ \"../node_modules/.pnpm/socket.io-client@4.8.3/node_modules/socket.io-client/build/esm/index.js\");\n\nconst socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_0__.io)();\nconst emitNewPlayerInMenu = () => {\n    socket.emit(\"newPlayerInMenuFromClient\");\n};\n// export const onNewPlayer = (scene:BootLoader):void =>{\n//     console.log(\"se supone que entro 2\")\n//     socket.on(\"newPlayerFromServer\",()=>{\n//         console.log(\"me invocaron desde el server\")\n//         scene.setPlayer(new SpaceshipSprite(scene, 100, 100))\n//     })\n// }\nconst onNewPlayerFromServer = (scene) => {\n    socket.on(\"newPlayerFromServer\", () => {\n    });\n};\nsocket.on(\"getAllPlayers\", (players) => {\n    console.log(players);\n});\n\n\n//# sourceURL=webpack:///./game/socket/socketFunctions.ts?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ PlayerSession)\n/* harmony export */ });\nclass PlayerSession {\n    playerId = \"\";\n    playerName;\n    playerSelectionDTO;\n    isPlayerReady = false;\n    constructor(playerName, playerSelectionDTO) {\n        this.playerName = playerName;\n        this.playerSelectionDTO = playerSelectionDTO;\n    }\n    getPlayerId() {\n        return this.playerId;\n    }\n    setPlayerId(playerId) {\n        this.playerId = playerId;\n    }\n    getPlayerSelectionDTO() {\n        return this.playerSelectionDTO;\n    }\n    setPlayerSelectionDTO(playerSelectionDTO) {\n        this.playerSelectionDTO = playerSelectionDTO;\n    }\n    getPlayerName() {\n        return this.playerName;\n    }\n    setPlayerName(newPlayer) {\n        this.playerName = newPlayer;\n    }\n}\n\n\n//# sourceURL=webpack:///./playerSession/PlayerSession.ts?\n}");
 
 /***/ },
 
@@ -302,36 +423,47 @@ eval("{module.exports = __webpack_require__.p + \"151d63b180061ad532fe.png\";\n\
 
 /***/ },
 
-/***/ "./assets/UI/UI_grey_buttons_light_1.png"
-/*!***********************************************!*\
-  !*** ./assets/UI/UI_grey_buttons_light_1.png ***!
-  \***********************************************/
+/***/ "./assets/UI/Buttons/Backward_BTN.png"
+/*!********************************************!*\
+  !*** ./assets/UI/Buttons/Backward_BTN.png ***!
+  \********************************************/
 (module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-eval("{module.exports = __webpack_require__.p + \"46b3dd4c1839834f89d7.png\";\n\n//# sourceURL=webpack:///./assets/UI/UI_grey_buttons_light_1.png?\n}");
+eval("{module.exports = __webpack_require__.p + \"f4dbcadc54ad658eba1c.png\";\n\n//# sourceURL=webpack:///./assets/UI/Buttons/Backward_BTN.png?\n}");
 
 /***/ },
 
-/***/ "./assets/images/New Piskel.png"
-/*!**************************************!*\
-  !*** ./assets/images/New Piskel.png ***!
-  \**************************************/
+/***/ "./assets/UI/Buttons/Forward_BTN.png"
+/*!*******************************************!*\
+  !*** ./assets/UI/Buttons/Forward_BTN.png ***!
+  \*******************************************/
 (module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-eval("{module.exports = __webpack_require__.p + \"67dd9b185354cd796a89.png\";\n\n//# sourceURL=webpack:///./assets/images/New_Piskel.png?\n}");
+eval("{module.exports = __webpack_require__.p + \"75f7de17e74ee3228ceb.png\";\n\n//# sourceURL=webpack:///./assets/UI/Buttons/Forward_BTN.png?\n}");
 
 /***/ },
 
-/***/ "./assets/images/Spaceship_01_BLUE.png"
-/*!*********************************************!*\
-  !*** ./assets/images/Spaceship_01_BLUE.png ***!
-  \*********************************************/
+/***/ "./assets/UI/Buttons/Start_BTN.png"
+/*!*****************************************!*\
+  !*** ./assets/UI/Buttons/Start_BTN.png ***!
+  \*****************************************/
 (module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
-eval("{module.exports = __webpack_require__.p + \"f0f6378291268b4e05b5.png\";\n\n//# sourceURL=webpack:///./assets/images/Spaceship_01_BLUE.png?\n}");
+eval("{module.exports = __webpack_require__.p + \"5b6cd2eb45a04b954edb.png\";\n\n//# sourceURL=webpack:///./assets/UI/Buttons/Start_BTN.png?\n}");
+
+/***/ },
+
+/***/ "./assets/UI/Table.png"
+/*!*****************************!*\
+  !*** ./assets/UI/Table.png ***!
+  \*****************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"fcf5dd4c0354294b2132.png\";\n\n//# sourceURL=webpack:///./assets/UI/Table.png?\n}");
 
 /***/ },
 
@@ -343,6 +475,116 @@ eval("{module.exports = __webpack_require__.p + \"f0f6378291268b4e05b5.png\";\n\
 
 "use strict";
 eval("{module.exports = __webpack_require__.p + \"b249a81b55a723a49f13.png\";\n\n//# sourceURL=webpack:///./assets/images/background/export202405130010328162.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/spaceships/Spaceship_01_BLUE.png"
+/*!********************************************************!*\
+  !*** ./assets/images/spaceships/Spaceship_01_BLUE.png ***!
+  \********************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"f0f6378291268b4e05b5.png\";\n\n//# sourceURL=webpack:///./assets/images/spaceships/Spaceship_01_BLUE.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/spaceships/Spaceship_02_GREEN.png"
+/*!*********************************************************!*\
+  !*** ./assets/images/spaceships/Spaceship_02_GREEN.png ***!
+  \*********************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"31a838706e228ea78714.png\";\n\n//# sourceURL=webpack:///./assets/images/spaceships/Spaceship_02_GREEN.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/spaceships/Spaceship_04_ORANGE.png"
+/*!**********************************************************!*\
+  !*** ./assets/images/spaceships/Spaceship_04_ORANGE.png ***!
+  \**********************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"ae7496bc0a1c3e21f26e.png\";\n\n//# sourceURL=webpack:///./assets/images/spaceships/Spaceship_04_ORANGE.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/spaceships/Spaceship_05_PURPLE.png"
+/*!**********************************************************!*\
+  !*** ./assets/images/spaceships/Spaceship_05_PURPLE.png ***!
+  \**********************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"ae326b86f0588a1e0fa1.png\";\n\n//# sourceURL=webpack:///./assets/images/spaceships/Spaceship_05_PURPLE.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/spaceships/Spaceship_06_RED.png"
+/*!*******************************************************!*\
+  !*** ./assets/images/spaceships/Spaceship_06_RED.png ***!
+  \*******************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"c51ae74752825a0d104a.png\";\n\n//# sourceURL=webpack:///./assets/images/spaceships/Spaceship_06_RED.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/tails/blue_tail.png"
+/*!*******************************************!*\
+  !*** ./assets/images/tails/blue_tail.png ***!
+  \*******************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"ff2dcad88f16c3917f76.png\";\n\n//# sourceURL=webpack:///./assets/images/tails/blue_tail.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/tails/green_tail.png"
+/*!********************************************!*\
+  !*** ./assets/images/tails/green_tail.png ***!
+  \********************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"5acb3bea63ca0f60bc3a.png\";\n\n//# sourceURL=webpack:///./assets/images/tails/green_tail.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/tails/orange_tail.png"
+/*!*********************************************!*\
+  !*** ./assets/images/tails/orange_tail.png ***!
+  \*********************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"e2aecdc1f94d1eca9456.png\";\n\n//# sourceURL=webpack:///./assets/images/tails/orange_tail.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/tails/purple_tail.png"
+/*!*********************************************!*\
+  !*** ./assets/images/tails/purple_tail.png ***!
+  \*********************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"e2384e2807f2c315174d.png\";\n\n//# sourceURL=webpack:///./assets/images/tails/purple_tail.png?\n}");
+
+/***/ },
+
+/***/ "./assets/images/tails/red_tail.png"
+/*!******************************************!*\
+  !*** ./assets/images/tails/red_tail.png ***!
+  \******************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+eval("{module.exports = __webpack_require__.p + \"67dd9b185354cd796a89.png\";\n\n//# sourceURL=webpack:///./assets/images/tails/red_tail.png?\n}");
 
 /***/ },
 
