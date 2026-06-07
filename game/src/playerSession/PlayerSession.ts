@@ -4,6 +4,8 @@ export default class PlayerSession {
     private playerId: string = "";
     private playerName : string;
     private playerSelectionDTO: playerSelectionDTO;
+    private isPlayerReady: boolean = false;
+
 
     constructor(playerName:string, playerSelectionDTO: playerSelectionDTO) {
         this.playerName = playerName;
