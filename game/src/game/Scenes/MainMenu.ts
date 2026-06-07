@@ -46,6 +46,8 @@ export default class MainMenu extends Phaser.Scene {
 
 
         new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
+            console.log("me presionaron")
+            socket.emit(ClientSocketEvents.initMatch,true)
             this.scene.start('MainGame')
         })
     }
