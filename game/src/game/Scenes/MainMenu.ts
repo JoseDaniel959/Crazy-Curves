@@ -17,7 +17,7 @@ export default class MainMenu extends Phaser.Scene {
         let playersSelectionComponent: PlayerSelectionComponent[] = [];
 
         socket.emit(ClientSocketEvents.getAllPlayers)
-        
+
         socket.on(ServerSocketEvents.getAllPlayers, () => {
             let offset = 0
 
@@ -39,16 +39,23 @@ export default class MainMenu extends Phaser.Scene {
         })
 
         //removing player from the menu
-        socket.on(ServerSocketEvents.removePlayerFromMenu, (playerId:string) =>{
+        socket.on(ServerSocketEvents.removePlayerFromMenu, (playerId: string) => {
             console.log("desconecto a un usuario")
-            this.disconectPlayer(playersSelectionComponent,playerId)
+            this.disconectPlayer(playersSelectionComponent, playerId)
         })
 
 
         new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
             console.log("me presionaron")
-            socket.emit(ClientSocketEvents.initMatch,true)
-            this.scene.start('MainGame')
+            socket.emit(ClientSocketEvents.initMatch, true)
+
+            socket.on(ServerSocketEvents.startMatch, (startMatch) => {
+                if (startMatch) {
+                    this.scene.start('MainGame')
+                }
+
+            })
+
         })
     }
 
@@ -62,9 +69,9 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     disconectPlayer(playersSelectionComponent: PlayerSelectionComponent[], playerIdToDisconnect: string) {
-       playersSelectionComponent.some((playerSelectionComponent) => {
+        playersSelectionComponent.some((playerSelectionComponent) => {
             if (playerSelectionComponent.playerId == playerIdToDisconnect) {
-                 playerSelectionComponent.destroy();
+                playerSelectionComponent.destroy();
             }
         })
     }

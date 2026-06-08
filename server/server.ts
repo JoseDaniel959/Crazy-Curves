@@ -38,22 +38,24 @@ io.on("connection", (socket) => {
   })
 
   socket.once(ClientSocketEvents.initMatch, (isReady) => {
-    playersOnline.some((playerOnline)=>{
-      playerOnline.isPlayerReady = isReady;
-    })
-    console.log(playersOnline)
-    const playerNotReadyFound = playersOnline.some((playerOnline) => playerOnline.isPlayerReady === false)
-    if (playerNotReadyFound === false) {
-      console.log("nueva posicion")
-      globalState[newPlayerId] = {
-        x: Math.floor(Math.random() * 900) + 10,
-        y: Math.floor(Math.random() * 900) + 10,
-        angle: Math.floor(Math.random() * 360),
+    playersOnline.some((playerOnline) => {
+      if (playerOnline.playerId === newPlayerId) {
+        playerOnline.isPlayerReady = isReady;
       }
-      console.log(globalState[newPlayerId])
+    })
 
-      io.emit(ServerSocketEvents.startMatch, globalState[newPlayerId])
+    globalState[newPlayerId] = {
+      x: Math.floor(Math.random() * 900) + 10,
+      y: Math.floor(Math.random() * 900) + 10,
+      angle: Math.floor(Math.random() * 360),
+    }
 
+
+    const playerNotReadyFound = playersOnline.some((playerOnline) => playerOnline.isPlayerReady === false)
+    console.log("jugadores online",playersOnline)
+    console.log(playerNotReadyFound)
+    if (playerNotReadyFound === false) {
+      io.emit(ServerSocketEvents.startMatch, true)
     }
 
   })
@@ -67,7 +69,7 @@ io.on("connection", (socket) => {
 
   socket.on(ClientSocketEvents.sendInput, (data) => {
     let player = globalState[newPlayerId];
-    console.log(globalState[newPlayerId])
+    console.log(globalState)
 
     if (data.input == 'right') {
       globalState[newPlayerId].angle += 0.05;
