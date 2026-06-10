@@ -82,7 +82,7 @@ export default class Preloader extends Phaser.Scene {
             socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' }))
         })
 
-        socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO) => {
+        socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO: PlayerSessionDTO) => {
             console.log(playerSessionDTO)
             if (playerSessionDTO) {
                 savePlayerSesssion(playerSessionDTO)

@@ -1,4 +1,6 @@
 import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
+import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
+import { socket } from "../../Socket/socketFunctions";
 import ExplodeSprite from "./ExplodeSprite";
 import JumpPower from "./Powers/JumpBoost";
 import TailSprite from "./TailSprite";
@@ -97,22 +99,28 @@ export default class SpaceshipSprite extends Phaser.Physics.Arcade.Sprite {
     }
 
     move(deltaTime: number) {
-        this.checkWordBoundsCollisions()
-        this.checkTailCollisions(this.isCheckCollisionsOn)
-        this.addLine(deltaTime)
-        this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity)
+        // this.checkWordBoundsCollisions()
+        // this.checkTailCollisions(this.isCheckCollisionsOn)
+        // this.addLine(deltaTime)
+        // this.scene.physics.velocityFromAngle(this.angle, 150, this.body?.velocity)
 
         if (this.cursors?.left.isUp || this.cursors?.right.isUp) {
-            this.idle()
+            const currentPosition = {
+                x : this.x,
+                y : this.y,
+                angle: this.angle
+            }
+            // socket.emit(ClientSocketEvents.sendInput,currentPosition)
+            // this.idle()
         }
         if (this.cursors?.left.isDown) {
-            this.moveRight()
+            // this.moveRight()
         }
         if (this.cursors?.right.isDown) {
-            this.moveLeft()
+            // this.moveLeft()
         }
         if (this.cursors?.down.isDown) {
-            this.downPower.physics()
+            // this.downPower.physics()
 
         }
 

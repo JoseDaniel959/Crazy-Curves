@@ -3,5 +3,6 @@ export const ServerSocketEvents = {
     addNewPlayerInMenu: "addNewPlayerInMenu",
     getAllPlayers: "getAllPlayers",
     removePlayerFromMenu: "removePlayerFromMenu",
-    startMatch: "startMatch"
+    startMatch: "startMatch",
+    addPlayersToGlobalState: "1",
 }

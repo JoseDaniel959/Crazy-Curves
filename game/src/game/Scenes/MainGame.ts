@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 import SpaceshipSprite from "../GameObjects/SpaceshipSprite"
 import { registryKey } from "../Registry/RegistryKeys";
-import { playersOnline, socket } from "../../Socket/socketFunctions";
+import { globalState, playersOnline, socket } from "../../Socket/socketFunctions";
 import PlayerSession from "../../playerSession/PlayerSession";
 import { PlayerSessionDTO } from "../DTO/DTOTypes";
 import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
@@ -12,8 +12,7 @@ import SpaceshipSpriteO from "../GameObjects/SpaceshipSpriteO";
 
 export default class BootLoader extends Phaser.Scene {
     private jugador: SpaceshipSpriteO | undefined;
-    private randomPositionX = Phaser.Math.Between(50, 950);
-    private randomPositionY = Phaser.Math.Between(50, 950);
+    private playersSprite = new Map<string,SpaceshipSpriteO>();
 
     // sent request[]
     constructor() {
@@ -22,34 +21,31 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     create() {
+
         this.add.image(400, 300, "Background").setToBack()
         const music = this.sound.add('music1').setVolume(0.3);
+        globalState.forEach((value,key) =>{ 
+            if(getPlayerSession() === key){
+                console.log("ENTREE A MI SESION")
+                this.jugador = new SpaceshipSpriteO(this,value.x,value.y,"SpaceshipBlue","tailBlue")
+
+            }
+            this.playersSprite.set(key,new SpaceshipSpriteO(this,value.x,value.y,"SpaceshipBlue","tailBlue"))
+            
+        })
+        
         socket.on("a", (data) => {
-            console.log("entrooo",data.angle)
-            this.jugador?.setX(data.x);
-            this.jugador?.setY(data.y);
-            this.jugador?.setRotation(data.angle);
+            console.log("entrooo",data)
+            this.playersSprite.get(data.id)?.setX(data.x);
+            this.playersSprite.get(data.id)?.setY(data.y);
+            this.playersSprite.get(data.id)?.setRotation(data.angle);
+            this.playersSprite.get(data.id)?.addLine();
 
 
-
-        })
-        //Getting spaceship texture and tail texture from data manager
-        // const spaceshipTextureKey: string = this.registry.get(registryKey.playerSelectionData).spaceshipTexturekey;
-        // const tailTextureKey: string = this.registry.get(registryKey.playerSelectionData).tailComponenteTextureKey
-
-
-        playersOnline.forEach((playerSession: PlayerSessionDTO) => {
-
-            if (playerSession.playerId === getPlayerSession()) {
-                this.jugador = new SpaceshipSpriteO(this, this.randomPositionX, this.randomPositionY, "SpaceshipBlue", "tailBlue");
-            }
-            else {
-                new SpaceshipSpriteO(this, this.randomPositionX, this.randomPositionY, "SpaceshipBlue", "tailBlue")
-
-            }
 
 
         })
+
         music.play()
 
     }

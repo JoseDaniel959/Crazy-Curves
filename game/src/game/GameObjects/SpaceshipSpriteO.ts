@@ -54,14 +54,20 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
         this.setAngularVelocity(-165)
     }
 
-    addLine(deltaTime: number): void {
-        if (this.elapsedTime === 250) {
-            this.randomNumber = Phaser.Math.Between(0, 50);
-            this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
-        }
-        if (this.randomNumber === 1) {
-            this.updateTime(deltaTime)
-        }
+    addLine(): void {
+        console.log("entro y añado tail")
+    this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
+
+
+        // if (this.elapsedTime === 250) {
+        //     console.log("paso el elapsed")
+
+        //     this.randomNumber = Phaser.Math.Between(0, 50);
+        //     this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
+        // }
+        // if (this.randomNumber === 1) {
+        //     this.updateTime(deltaTime)
+        // }
     }
 
     checkTailCollisions(isOn: boolean): void {
@@ -120,8 +126,6 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
         this.inputSequence++;
 
         return (input);
-
-
 
     }
 

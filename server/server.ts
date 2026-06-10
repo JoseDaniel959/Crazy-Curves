@@ -14,7 +14,7 @@ const port = 3000
 const io = new Server(httpServer);
 
 let userId: number = 1;
-let globalState: any = {}
+const globalState = new Map();
 
 let playersOnline: PlayerSessionDTO[] = [];
 
@@ -44,17 +44,24 @@ io.on("connection", (socket) => {
       }
     })
 
-    globalState[newPlayerId] = {
+    globalState.set(
+      newPlayerId,
+      {
+      id: newPlayerId,
       x: Math.floor(Math.random() * 900) + 10,
       y: Math.floor(Math.random() * 900) + 10,
       angle: Math.floor(Math.random() * 360),
     }
+    )
 
 
     const playerNotReadyFound = playersOnline.some((playerOnline) => playerOnline.isPlayerReady === false)
     console.log("jugadores online",playersOnline)
     console.log(playerNotReadyFound)
     if (playerNotReadyFound === false) {
+      console.log(globalState.values())
+      io.emit(ServerSocketEvents.addPlayersToGlobalState,globalState.values().toArray())
+
       io.emit(ServerSocketEvents.startMatch, true)
     }
 
@@ -68,20 +75,21 @@ io.on("connection", (socket) => {
 
 
   socket.on(ClientSocketEvents.sendInput, (data) => {
-    let player = globalState[newPlayerId];
+    let playerPosition = globalState.get(newPlayerId);
     console.log(globalState)
 
     if (data.input == 'right') {
-      globalState[newPlayerId].angle += 0.05;
+      playerPosition.angle += 0.05;
     }
-    else if (data.input == 'left') {
-      globalState[newPlayerId].angle -= 0.05;
-    }
+     else if (data.input == 'left') {
+      playerPosition.angle -= 0.05;
+     }
 
-    globalState[newPlayerId].x += Math.cos(globalState[newPlayerId].angle) * 2;
-    globalState[newPlayerId].y += Math.sin(globalState[newPlayerId].angle) * 2;
+    playerPosition.x += Math.cos(playerPosition.angle) * 2;
+     playerPosition.y += Math.sin(playerPosition.angle) * 2;
+    globalState.set(newPlayerId,playerPosition)
 
-    io.emit("a", globalState[newPlayerId]);
+    io.emit("a", globalState.get(newPlayerId));
 
   })
 
