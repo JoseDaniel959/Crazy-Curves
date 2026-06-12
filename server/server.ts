@@ -54,6 +54,7 @@ io.on("connection", (socket:Socket) => {
         x: Math.floor(Math.random() * 900) + 10,
         y: Math.floor(Math.random() * 900) + 10,
         angle: Math.floor(Math.random() * 360),
+        isAddingTail:false
       }
     )
 
