@@ -9,6 +9,7 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
     public playerId: string = getPlayerSession();
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     private tailTextureKey: string;
+    private isPlayerAlive: boolean = true;
     private offset = -20;
     private tail: TailSprite[] = [];
     private elapsedTime: number = 250;
@@ -54,31 +55,17 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
         this.setAngularVelocity(-165)
     }
 
-    addLine(): void {
-        console.log("entro y añado tail")
-    this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
+    addLine(): TailSprite {
+        return new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey);
 
-
-        // if (this.elapsedTime === 250) {
-        //     console.log("paso el elapsed")
-
-        //     this.randomNumber = Phaser.Math.Between(0, 50);
-        //     this.tail.push(new TailSprite(this.scene, this.x + Math.cos(this.rotation) * this.offset, this.y + Math.sin(this.rotation) * this.offset, this.tailTextureKey));
-        // }
-        // if (this.randomNumber === 1) {
-        //     this.updateTime(deltaTime)
-        // }
     }
 
     checkTailCollisions(isOn: boolean): void {
-        if (isOn) {
-            this.scene.physics.collide(this, this.tail, () => {
-                this.explode(this.x, this.y)
-                this.disableBody(true, true)
+        this.scene.physics.collide(this, this.tail, () => {
+            this.explode(this.x, this.y)
+            this.disableBody(true, true)
 
-            });
-        }
-
+        });
     }
 
     updateTime(deltaTime: number): void {
@@ -133,5 +120,28 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
         return new ExplodeSprite(this.scene, this.x, this.y)
     }
 
+    public getTailTextureKey(): string {
+        return this.tailTextureKey;
+    }
+
+    public setTailTextureKey(tailTextureKey: string): void {
+        this.tailTextureKey = tailTextureKey;
+    }
+
+    public getOffset(): number {
+        return this.offset;
+    }
+
+    public setOffsset(offset: number): void {
+        this.offset = offset;
+    }
+
+    public getIsPlayerAlive(): boolean {
+        return this.isPlayerAlive;
+    }
+
+    public setIsPlayerAlive(isPlayerAlive: boolean): void {
+        this.isPlayerAlive = isPlayerAlive;
+    }
 
 }
