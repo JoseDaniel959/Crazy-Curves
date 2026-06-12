@@ -8,3 +8,11 @@ export type PlayerSessionDTO = {
     playerName : string;
     playerSelectionDTO: playerSelectionDTO;
 }
+
+export type playerStateDTO = {
+    id: string,
+    x: number,
+    y: number,
+    angle: number,
+
+}
