@@ -11,7 +11,6 @@ export default class TailSelectionComponent extends AbstractSelectionComponent {
         let nextTextureInArray = this.getTexturesKeyArray()[newCurrentIndex]
 
         if (nextTextureInArray !== undefined) {
-            console.log("entroo")
             this.getAtomicComponent().setTexture(nextTextureInArray)
             this.getAtomicComponent().getPhaserImage().destroy();
             this.setAtomicComponent(new TailComponent(this.getScene(), this.x, this.y, this.getAtomicComponent().getTexture(), this.getScale()))
