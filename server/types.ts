@@ -16,9 +16,11 @@ interface PlayerSelectionInMenu {
     tailTexture: string
 }
 
-interface PlayerPositionInMap {
+export type playerState = {
     id: string,
-    positionX: number,
-    positionY:number,
+    isAlive: boolean;
+    x: number,
+    y: number,
     angle: number,
+    isAddingTail: boolean
 }
