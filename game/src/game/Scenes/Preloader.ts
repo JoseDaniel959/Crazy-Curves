@@ -1,5 +1,8 @@
 import music1 from "../../assets/music/nastelbom-funk-437330.mp3"
 
+import MainTitle from "../../assets/UI/MainTitle.png"
+import MainMenuBackground from "../../assets/images/background/BG.png"
+
 //Spaceships sprites
 import SpaceshipBlue from "../../assets/images/spaceships/Spaceship_01_BLUE.png"
 import SpaceshipGreen from "../../assets/images/spaceships/Spaceship_02_GREEN.png"
@@ -31,6 +34,8 @@ import PlayerSelectionComponent from "../UI/Menu/CompoundComponents/SelectionCom
 import { savePlayerSesssion } from "../../playerSession/LocalStorageFunctions"
 import { ServerSocketEvents } from "../../Socket/ServerSocketEvents"
 import { PlayerSessionDTO } from "../DTO/DTOTypes"
+import {MID_SCREEN_WIDTH} from "../game"
+import BaseUIMenuComponent from "../UI/Menu/CompoundComponents/BaseUIMenuComponent"
 
 
 export default class Preloader extends Phaser.Scene {
@@ -41,6 +46,17 @@ export default class Preloader extends Phaser.Scene {
 
     preload() {
         this.load.audio('music1', [music1]);
+
+        //MainMenu UI elements
+        this.load.image("StartButton", StartButton)
+        this.load.image("MainMenuBackground",MainMenuBackground)
+        this.load.image("MainTitle",MainTitle)
+
+        //UI elements 
+        this.load.image("Table", Table)
+        // UI buttons
+        this.load.image("BackwardButton", BackwardButton)
+        this.load.image("ForwardButton", ForwardButton)
 
         //Loading spaceship sprites
         this.load.image("SpaceshipBlue", SpaceshipBlue)
@@ -64,20 +80,17 @@ export default class Preloader extends Phaser.Scene {
         //background
         this.load.image("Background", Background)
 
-        //UI elements 
-        this.load.image("Table", Table)
-        // UI buttons
-        this.load.image("BackwardButton", BackwardButton)
-        this.load.image("ForwardButton", ForwardButton)
-        this.load.image("StartButton", StartButton)
 
     }
     create() {
+        new BaseUIMenuComponent(this)
 
-        const input = this.add.dom(500, 200, 'input');
+        const input = this.add.dom(MID_SCREEN_WIDTH, 300, 'input');
 
-        new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
+        new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
             const playerName = document.getElementsByTagName('input')[0].value
+                this.scene.start("MainMenu")
+
             const newPlayerSession = new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' })
             socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' }))
         })
@@ -88,6 +101,7 @@ export default class Preloader extends Phaser.Scene {
                 savePlayerSesssion(playerSessionDTO)
                 this.scene.start("MainMenu")
             }
+
         })
 
 

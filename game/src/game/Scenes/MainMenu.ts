@@ -7,6 +7,10 @@ import ButtonComponent from '../UI/Menu/AtomicComponents/ButtonComponent';
 import { registryKey } from '../Registry/RegistryKeys';
 import PlayerSession from '../../playerSession/PlayerSession';
 import { PlayerSessionDTO } from '../DTO/DTOTypes';
+import {MID_SCREEN_WIDTH} from "../game"
+import BaseUIMenuComponent from '../UI/Menu/CompoundComponents/BaseUIMenuComponent';
+
+
 export default class MainMenu extends Phaser.Scene {
 
     constructor() {
@@ -14,6 +18,10 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     create() {
+        
+        
+        new BaseUIMenuComponent(this)
+        
         let playersSelectionComponent: PlayerSelectionComponent[] = [];
 
         socket.emit(ClientSocketEvents.getAllPlayers)
@@ -23,14 +31,11 @@ export default class MainMenu extends Phaser.Scene {
 
             playersOnline.forEach((playerOnline: PlayerSessionDTO) => {
                 const { playerId, playerName } = playerOnline
-                console.log("playerSelectionComponent")
-                console.log(playersSelectionComponent)
-
                 if (!this.isPlayerConnected(playersSelectionComponent, playerId)) {
 
 
                     playersSelectionComponent.push(
-                        new PlayerSelectionComponent(this, 500, 350 + offset, playerName, playerId)
+                        new PlayerSelectionComponent(this, MID_SCREEN_WIDTH, 350 + offset, playerName, playerId)
                     )
                 }
                 offset += 150;
@@ -45,7 +50,9 @@ export default class MainMenu extends Phaser.Scene {
         })
 
 
-        new ButtonComponent(this, 500, 950, "StartButton", 0.5, () => {
+        
+
+        new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
             console.log("me presionaron")
             socket.emit(ClientSocketEvents.initMatch, true)
 
