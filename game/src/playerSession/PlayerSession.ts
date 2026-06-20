@@ -3,13 +3,12 @@ import { playerSelectionDTO } from "../game/DTO/DTOTypes";
 export default class PlayerSession {
     private playerId: string = "";
     private playerName : string;
-    private playerSelectionDTO: playerSelectionDTO;
+    private playerSelectionDTO?: playerSelectionDTO;
     private isPlayerReady: boolean = false;
 
 
-    constructor(playerName:string, playerSelectionDTO: playerSelectionDTO) {
+    constructor(playerName:string) {
         this.playerName = playerName;
-        this.playerSelectionDTO = playerSelectionDTO;
     }
 
     public getPlayerId(): string {
@@ -20,7 +19,7 @@ export default class PlayerSession {
         this.playerId = playerId;
     }
 
-    public getPlayerSelectionDTO(): playerSelectionDTO {
+    public getPlayerSelectionDTO(): playerSelectionDTO | undefined {
         return this.playerSelectionDTO;
     }
 
