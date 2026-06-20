@@ -93,7 +93,7 @@ io.on("connection", (socket:Socket) => {
 
     }
 
-    io.emit("a", globalState.get(newPlayerId));
+    io.emit(ServerSocketEvents.updatePlayerCoordinates, globalState.get(newPlayerId));
 
   })
 
