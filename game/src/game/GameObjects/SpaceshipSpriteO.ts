@@ -1,4 +1,4 @@
-import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
+import { getPlayerId } from "../../playerSession/LocalStorageFunctions";
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
 import { socket } from "../../Socket/socketFunctions";
 import ExplodeSprite from "./ExplodeSprite";
@@ -6,7 +6,7 @@ import JumpPower from "./Powers/JumpBoost";
 import TailSprite from "./TailSprite";
 
 export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
-    public playerId: string = getPlayerSession();
+    public playerId: string = getPlayerId();
     private cursors: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
     private tailTextureKey: string;
     private isPlayerAlive: boolean = true;

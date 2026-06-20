@@ -31,7 +31,7 @@ import { ClientSocketEvents } from "../../Socket/ClientSocketEvents"
 import PlayerSession from "../../playerSession/PlayerSession"
 import ButtonComponent from "../UI/Menu/AtomicComponents/ButtonComponent"
 import PlayerSelectionComponent from "../UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent"
-import { savePlayerSesssion } from "../../playerSession/LocalStorageFunctions"
+import { savePlayerId } from "../../playerSession/LocalStorageFunctions"
 import { ServerSocketEvents } from "../../Socket/ServerSocketEvents"
 import { PlayerSessionDTO } from "../DTO/DTOTypes"
 import {MID_SCREEN_WIDTH} from "../game"
@@ -85,20 +85,19 @@ export default class Preloader extends Phaser.Scene {
     create() {
         new BaseUIMenuComponent(this)
 
-        const input = this.add.dom(MID_SCREEN_WIDTH, 300, 'input');
-
+        this.add.dom(MID_SCREEN_WIDTH, 300, 'input');
+        
         new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
             const playerName = document.getElementsByTagName('input')[0].value
                 this.scene.start("MainMenu")
 
-            const newPlayerSession = new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' })
-            socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName, { spaceshipTexture: 'SpaceshipBlue', tailTexture: 'tailBlue' }))
+           socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName))
         })
 
         socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO: PlayerSessionDTO) => {
             console.log(playerSessionDTO)
             if (playerSessionDTO) {
-                savePlayerSesssion(playerSessionDTO)
+                savePlayerId(playerSessionDTO)
                 this.scene.start("MainMenu")
             }
 

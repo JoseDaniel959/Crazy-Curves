@@ -4,7 +4,7 @@ import { registryKey } from "../Registry/RegistryKeys";
 import { globalState, playersOnline, socket } from "../../Socket/socketFunctions";
 import PlayerSession from "../../playerSession/PlayerSession";
 import { PlayerSessionDTO } from "../DTO/DTOTypes";
-import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
+import { getPlayerId } from "../../playerSession/LocalStorageFunctions";
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
 import SpaceshipSpriteO from "../GameObjects/SpaceshipSpriteO";
 import TailSprite from "../GameObjects/TailSprite";
@@ -28,7 +28,7 @@ export default class BootLoader extends Phaser.Scene {
         this.add.image(400, 300, "Background").setToBack()
         const music = this.sound.add('music1').setVolume(0.3);
         globalState.forEach((value, key) => {
-            if (getPlayerSession() === key) {
+            if (getPlayerId() === key) {
                 this.jugador = new SpaceshipSpriteO(this, value.x, value.y, "SpaceshipBlue", "tailBlue")
                 this.playersSprite.set(key,this.jugador)
             }
