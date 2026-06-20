@@ -32,11 +32,8 @@ export default class MainMenu extends Phaser.Scene {
             playersOnline.forEach((playerOnline: PlayerSessionDTO) => {
                 const { playerId, playerName } = playerOnline
                 if (!this.isPlayerConnected(playersSelectionComponent, playerId)) {
-
-
-                    playersSelectionComponent.push(
-                        new PlayerSelectionComponent(this, MID_SCREEN_WIDTH, 350 + offset, playerName, playerId)
-                    )
+                    const newPlayerSelectionComponent =  new PlayerSelectionComponent(this, MID_SCREEN_WIDTH, 350 + offset, playerName, playerId)
+                    playersSelectionComponent.push(newPlayerSelectionComponent)
                 }
                 offset += 150;
             })
