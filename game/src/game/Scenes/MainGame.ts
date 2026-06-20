@@ -8,6 +8,7 @@ import { getPlayerSession } from "../../playerSession/LocalStorageFunctions";
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
 import SpaceshipSpriteO from "../GameObjects/SpaceshipSpriteO";
 import TailSprite from "../GameObjects/TailSprite";
+import { ServerSocketEvents } from "../../Socket/ServerSocketEvents";
 
 
 
@@ -37,7 +38,7 @@ export default class BootLoader extends Phaser.Scene {
 
         })
 
-        socket.on("a", (data) => {
+        socket.on(ServerSocketEvents.updatePlayerCoordinates, (data) => {
             let currentPlayer = this.playersSprite.get(data.id);
             if (currentPlayer) {
                 currentPlayer.setX(data.x);

@@ -5,4 +5,5 @@ export const ServerSocketEvents = {
     removePlayerFromMenu: "removePlayerFromMenu",
     startMatch: "startMatch",
     addPlayersToGlobalState: "1",
+    updatePlayerCoordinates: "2",
 }
