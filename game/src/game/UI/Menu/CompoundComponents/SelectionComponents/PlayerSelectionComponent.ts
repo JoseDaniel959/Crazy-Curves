@@ -1,3 +1,6 @@
+import { ClientSocketEvents } from "../../../../../Socket/ClientSocketEvents";
+import { socket } from "../../../../../Socket/socketFunctions";
+import { playerSelectionDTO, PlayerSessionDTO } from "../../../../DTO/DTOTypes";
 import TableComponent from "../../AtomicComponents/TableComponetn";
 import UIComponent from "../../UIComponent";
 import PowerSelectionComponent from "./PowerSelectionComponent";
@@ -23,7 +26,7 @@ export default class PlayerSelectionComponent extends UIComponent {
     ) {
         super(scene, x, y, "backWardButton", 1)
         this.tableComponent = new TableComponent(scene, x, y, 1.5)
-
+        this.listener()
         this.playerName = scene.add.text(x + 50, y - 15, playerName)
         this.spaceshipSelectionComponent = new SpaceshipSelectionComponent(scene, x - 170, y, 0.18, "Spaceship")
         this.upPowerSelectionComponent = new PowerSelectionComponent(scene, x - 50, y - 50, "BackwardButton", 0.15)
@@ -82,17 +85,21 @@ export default class PlayerSelectionComponent extends UIComponent {
         this.tableComponent = tableComponent;
     }
 
-    public toDTO(){
-        const playerSelectionDTO = {
+    public toDTO():Partial<PlayerSessionDTO>{
+        const playerSelectionDTO:playerSelectionDTO = {
+            playerId: this.playerId,
             spaceshipTexture: this.spaceshipSelectionComponent.getAtomicComponent().getTexture(),
             tailTexture: this.tailSelectionComponent.getAtomicComponent().getTexture()
         }
-
         return playerSelectionDTO;
     }
     
     public listener(){
-        this.scene.game.events.addListener("updatePlayerSelection",()=>console.log(this.getSpaceshipSelectionComponent().getAtomicComponent().getTexture()))
+        this.scene.game.events.addListener("updateSelectionComponent",
+            ()=>{
+                socket.emit(ClientSocketEvents.updatePlayerSelection,this.toDTO())
+            } 
+        )
     }
 
     public destroy(){
