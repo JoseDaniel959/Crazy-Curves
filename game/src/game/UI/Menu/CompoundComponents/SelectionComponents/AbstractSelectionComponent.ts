@@ -30,12 +30,14 @@ export default abstract class AbstractSelectionComponent {
         // console.log(this.texturesKeyArray)
         this.atomicComponent = atomicComponent;
         this.BackwardButton = new ButtonComponent(scene, x - 12, y + 28, 'BackwardButton', 0.1, () =>{
-            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
             this.previousTextureInArray()
+            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
+
         })
         this.ForwardButton = new ButtonComponent(scene, x + 12, y + 28, 'ForwardButton', 0.1, () =>{
-            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
             this.nextTextureInArray()
+            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
+
         })
     }
     abstract nextTextureInArray(): void
