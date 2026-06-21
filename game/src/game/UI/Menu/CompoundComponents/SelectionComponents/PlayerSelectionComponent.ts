@@ -1,6 +1,7 @@
 import { ClientSocketEvents } from "../../../../../Socket/ClientSocketEvents";
 import { socket } from "../../../../../Socket/socketFunctions";
 import { playerSelectionDTO, PlayerSessionDTO } from "../../../../DTO/DTOTypes";
+import { PhaserEvents } from "../../../../Events/PhaserEvents";
 import TableComponent from "../../AtomicComponents/TableComponetn";
 import UIComponent from "../../UIComponent";
 import PowerSelectionComponent from "./PowerSelectionComponent";
@@ -87,15 +88,19 @@ export default class PlayerSelectionComponent extends UIComponent {
 
     public toDTO():Partial<PlayerSessionDTO>{
         const playerSelectionDTO:playerSelectionDTO = {
-            playerId: this.playerId,
             spaceshipTexture: this.spaceshipSelectionComponent.getAtomicComponent().getTexture(),
             tailTexture: this.tailSelectionComponent.getAtomicComponent().getTexture()
         }
-        return playerSelectionDTO;
+
+        const newPlayerSession: Partial<PlayerSessionDTO> = {
+            playerId: this.playerId,
+            playerSelectionDTO
+        }
+        return newPlayerSession;
     }
     
     public listener(){
-        this.scene.game.events.addListener("updateSelectionComponent",
+        this.scene.game.events.addListener(PhaserEvents.updateSelectionCompononent,
             ()=>{
                 socket.emit(ClientSocketEvents.updatePlayerSelection,this.toDTO())
             } 
