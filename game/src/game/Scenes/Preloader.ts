@@ -89,7 +89,6 @@ export default class Preloader extends Phaser.Scene {
         
         new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
             const playerName = document.getElementsByTagName('input')[0].value
-                this.scene.start("MainMenu")
 
            socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName))
         })
