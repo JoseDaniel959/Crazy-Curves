@@ -1,5 +1,4 @@
 export type playerSelectionDTO = {
-    playerId: string,
     spaceshipTexture: string;
     tailTexture: string;
 }
