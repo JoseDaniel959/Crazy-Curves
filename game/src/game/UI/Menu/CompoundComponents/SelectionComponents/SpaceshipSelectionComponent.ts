@@ -11,7 +11,6 @@ export default class SpaceshipSelectionComponent extends AbstractSelectionCompon
     }
 
     public nextTextureInArray(): void {
-        this.getScene().game.events.emit("updatePlayerSelection")
         let newCurrentIndex = this.getCurrentIndex() + 1
         let nextTextureInArray = this.getTexturesKeyArray()[newCurrentIndex]
 
