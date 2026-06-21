@@ -1,3 +1,4 @@
+import { PhaserEventEmiter, PhaserEvents } from "../../../../Events/PhaserEvents";
 import ButtonComponent from "../../AtomicComponents/ButtonComponent";
 import UIComponent from "../../UIComponent";
 
@@ -28,8 +29,14 @@ export default abstract class AbstractSelectionComponent {
         //this is the current texture the user is selecting
         // console.log(this.texturesKeyArray)
         this.atomicComponent = atomicComponent;
-        this.BackwardButton = new ButtonComponent(scene, x - 12, y + 28, 'BackwardButton', 0.1, () => this.previousTextureInArray())
-        this.ForwardButton = new ButtonComponent(scene, x + 12, y + 28, 'ForwardButton', 0.1, () => this.nextTextureInArray())
+        this.BackwardButton = new ButtonComponent(scene, x - 12, y + 28, 'BackwardButton', 0.1, () =>{
+            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
+            this.previousTextureInArray()
+        })
+        this.ForwardButton = new ButtonComponent(scene, x + 12, y + 28, 'ForwardButton', 0.1, () =>{
+            PhaserEventEmiter(this.scene,PhaserEvents.updateSelectionCompononent)
+            this.nextTextureInArray()
+        })
     }
     abstract nextTextureInArray(): void
 
