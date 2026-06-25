@@ -86,6 +86,11 @@ export default class PlayerSelectionComponent extends UIComponent {
         this.tableComponent = tableComponent;
     }
 
+    public getPlayerId():string{
+        return this.playerId
+
+    }
+
     public toDTO():Partial<PlayerSessionDTO>{
         const playerSelectionDTO:playerSelectionDTO = {
             spaceshipTexture: this.spaceshipSelectionComponent.getAtomicComponent().getTexture(),
