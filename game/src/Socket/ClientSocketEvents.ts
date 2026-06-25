@@ -3,6 +3,7 @@ export const ClientSocketEvents = {
     getAllPlayers: "getAllPlayers",
     sendInput: "sendInput",
     initMatch: "initMatch",
-    updatePlayerSelection: "updatePlayerSelection"
+    updatePlayerSelection: "updatePlayerSelection",
+    
 }
 

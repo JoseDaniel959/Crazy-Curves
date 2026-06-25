@@ -6,4 +6,5 @@ export const ServerSocketEvents = {
     startMatch: "startMatch",
     addPlayersToGlobalState: "1",
     updatePlayerCoordinates: "2",
+    newPlayerSelection: "3",
 }
