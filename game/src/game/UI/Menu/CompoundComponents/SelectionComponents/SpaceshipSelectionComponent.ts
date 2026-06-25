@@ -1,3 +1,4 @@
+import { PlayerSessionDTO } from "../../../../DTO/DTOTypes";
 import ButtonComponent from "../../AtomicComponents/ButtonComponent";
 import SpaceshipComponent from "../../AtomicComponents/SpaceshipComponent";
 import UIComponent from "../../UIComponent";
@@ -16,8 +17,6 @@ export default class SpaceshipSelectionComponent extends AbstractSelectionCompon
 
         if (nextTextureInArray !== undefined) {
             this.getAtomicComponent().setTexture(nextTextureInArray)
-            this.getAtomicComponent().getPhaserImage().destroy();
-            this.setAtomicComponent(new SpaceshipComponent(this.getScene(), this.x, this.y - 20, this.getAtomicComponent().getTexture(), this.getScale()));
             this.setCurrentIndex(newCurrentIndex)
 
         }
@@ -29,10 +28,12 @@ export default class SpaceshipSelectionComponent extends AbstractSelectionCompon
 
         if (previousTextureInArray !== undefined) {
             this.getAtomicComponent().setTexture(previousTextureInArray)
-            this.getAtomicComponent().getPhaserImage().destroy();
-             this.setAtomicComponent(new SpaceshipComponent(this.getScene(), this.x, this.y - 20, this.getAtomicComponent().getTexture(), this.getScale()))
             this.setCurrentIndex(newCurrentIndex)
         }
     }
 
+    public newAtomicComponent(newTexture:string){
+        this.getAtomicComponent().destroy();
+        this.setAtomicComponent(new SpaceshipComponent(this.getScene(), this.x, this.y - 20, newTexture, this.getScale()));
+    }
 }
