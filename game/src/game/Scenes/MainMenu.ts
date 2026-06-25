@@ -6,7 +6,7 @@ import { ClientSocketEvents } from '../../Socket/ClientSocketEvents';
 import ButtonComponent from '../UI/Menu/AtomicComponents/ButtonComponent';
 import { registryKey } from '../Registry/RegistryKeys';
 import PlayerSession from '../../playerSession/PlayerSession';
-import { PlayerSessionDTO } from '../DTO/DTOTypes';
+import { playerSelectionDTO, PlayerSessionDTO } from '../DTO/DTOTypes';
 import {MID_SCREEN_WIDTH} from "../game"
 import BaseUIMenuComponent from '../UI/Menu/CompoundComponents/BaseUIMenuComponent';
 
@@ -44,6 +44,24 @@ export default class MainMenu extends Phaser.Scene {
         socket.on(ServerSocketEvents.removePlayerFromMenu, (playerId: string) => {
             console.log("desconecto a un usuario")
             this.disconectPlayer(playersSelectionComponent, playerId)
+        })
+
+        socket.on(ServerSocketEvents.newPlayerSelection, (newPlayerSelection: PlayerSessionDTO)=>{
+                    console.log("se supone que entro")
+
+            playersSelectionComponent.find((playerSelectionComponent:PlayerSelectionComponent,index:number)=>{
+                if(playerSelectionComponent.getPlayerId() === newPlayerSelection.playerId){
+                    const {playerSelectionDTO} = newPlayerSelection;
+                    const foundPlayerSelectionComponent = playersSelectionComponent[index]
+                    foundPlayerSelectionComponent.getSpaceshipSelectionComponent().newAtomicComponent(playerSelectionDTO.spaceshipTexture);
+                    foundPlayerSelectionComponent.getTailSelectionComponent().newAtomicComponent(playerSelectionDTO.tailTexture)
+
+
+                    console.log("actualice el jugador")
+                    console.log(foundPlayerSelectionComponent.getSpaceshipSelectionComponent().getCurrentIndex())
+
+                }
+            })
         })
 
 
