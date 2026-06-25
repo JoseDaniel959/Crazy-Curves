@@ -73,6 +73,19 @@ io.on("connection", (socket:Socket) => {
     io.emit(ServerSocketEvents.getAllPlayers, playersOnline)
   })
 
+  //Listener to update player selection component
+  socket.on(ClientSocketEvents.updatePlayerSelection,(newPlayerSelection: Partial<PlayerSessionDTO>)=>{
+    playersOnline = playersOnline.map((playerOnline: PlayerSessionDTO)=>{
+      if( playerOnline.playerId === newPlayerSelection.playerId && newPlayerSelection.playerSelectionDTO){
+          playerOnline.playerSelectionDTO = newPlayerSelection.playerSelectionDTO
+          io.emit(ServerSocketEvents.newPlayerSelection,playerOnline)
+            console.log("mando este jugador al frontend")
+            console.log(playersOnline)  
+      }
+      return playerOnline
+    })
+  
+  })
 
   //Listener to send player coordinates according to their sent input data
   socket.on(ClientSocketEvents.sendInput, (data) => {
