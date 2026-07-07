@@ -23,4 +23,5 @@ export type playerState = {
     y: number,
     angle: number,
     isAddingTail: boolean
+    tailTime: number;
 }
