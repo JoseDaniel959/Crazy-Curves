@@ -6,6 +6,7 @@ import { dirname } from 'path';
 import { ClientSocketEvents } from '../game/src/Socket/ClientSocketEvents.ts'
 import { ServerSocketEvents } from '../game/src/Socket/ServerSocketEvents.ts'
 import type { PlayerSessionDTO, playerState } from "./types.ts";
+import { updatePlayerState } from "./PhysicsFunctions.ts"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
 const app = express();
@@ -13,7 +14,6 @@ const httpServer = createServer(app);
 const port = 3000
 const io = new Server(httpServer);
 
-let userId: number = 1;
 const globalState = new Map<string, playerState>();
 
 let playersOnline: PlayerSessionDTO[] = [];
@@ -27,9 +27,9 @@ app.get('/', function (req, res) {
 
 
 
-io.on("connection", (socket:Socket) => {
+io.on("connection", (socket: Socket) => {
   const newPlayerId = socket.id
-  
+
   //Listener when user enters to the MainMenu Scene
   socket.on(ClientSocketEvents.addNewPlayer, (newPlayer) => {
     newPlayer.playerId = newPlayerId;
@@ -39,7 +39,7 @@ io.on("connection", (socket:Socket) => {
   })
 
   //Listener when all user has pressed the startbutton
-  socket.on(ClientSocketEvents.initMatch, (isReady:boolean) => {
+  socket.on(ClientSocketEvents.initMatch, (isReady: boolean) => {
     playersOnline.some((playerOnline) => {
       if (playerOnline.playerId === newPlayerId) {
         playerOnline.isPlayerReady = isReady;
@@ -54,7 +54,8 @@ io.on("connection", (socket:Socket) => {
         x: Math.floor(Math.random() * 900) + 10,
         y: Math.floor(Math.random() * 900) + 10,
         angle: Math.floor(Math.random() * 360),
-        isAddingTail:false
+        isAddingTail: false,
+        tailTime: 250,
       }
     )
 
@@ -74,39 +75,28 @@ io.on("connection", (socket:Socket) => {
   })
 
   //Listener to update player selection component
-  socket.on(ClientSocketEvents.updatePlayerSelection,(newPlayerSelection: Partial<PlayerSessionDTO>)=>{
-    playersOnline = playersOnline.map((playerOnline: PlayerSessionDTO)=>{
-      if( playerOnline.playerId === newPlayerSelection.playerId && newPlayerSelection.playerSelectionDTO){
-          playerOnline.playerSelectionDTO = newPlayerSelection.playerSelectionDTO
-          io.emit(ServerSocketEvents.newPlayerSelection,playerOnline)
-            console.log("mando este jugador al frontend")
-            console.log(playersOnline)  
+  socket.on(ClientSocketEvents.updatePlayerSelection, (newPlayerSelection: Partial<PlayerSessionDTO>) => {
+    playersOnline = playersOnline.map((playerOnline: PlayerSessionDTO) => {
+      if (playerOnline.playerId === newPlayerSelection.playerId && newPlayerSelection.playerSelectionDTO) {
+        playerOnline.playerSelectionDTO = newPlayerSelection.playerSelectionDTO
+        io.emit(ServerSocketEvents.newPlayerSelection, playerOnline)
+        console.log("mando este jugador al frontend")
+        console.log(playersOnline)
       }
       return playerOnline
     })
-  
+
   })
 
   //Listener to send player coordinates according to their sent input data
   socket.on(ClientSocketEvents.sendInput, (data) => {
-    let playerPosition = globalState.get(newPlayerId);
-
-    if (playerPosition) {
-      if (data.input == 'right') {
-        playerPosition.angle += 0.05;
-      }
-      else if (data.input == 'left') {
-        playerPosition.angle -= 0.05;
-      }
-
-      playerPosition.x += Math.cos(playerPosition.angle) * 2;
-      playerPosition.y += Math.sin(playerPosition.angle) * 2;
-      globalState.set(newPlayerId, playerPosition)
-
-
+    let playerState = globalState.get(newPlayerId);
+    if (playerState) {
+      const newPlayerState = updatePlayerState(playerState, data);
+      globalState.set(newPlayerId, newPlayerState)
+    
     }
-
-    io.emit(ServerSocketEvents.updatePlayerCoordinates, globalState.get(newPlayerId));
+      io.emit(ServerSocketEvents.updatePlayerCoordinates, globalState.get(newPlayerId));
 
   })
 
