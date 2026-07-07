@@ -3,7 +3,7 @@ import SpaceshipSprite from "../GameObjects/SpaceshipSprite"
 import { registryKey } from "../Registry/RegistryKeys";
 import { globalState, playersOnline, socket } from "../../Socket/socketFunctions";
 import PlayerSession from "../../playerSession/PlayerSession";
-import { PlayerSessionDTO } from "../DTO/DTOTypes";
+import { PlayerSessionDTO, playerStateDTO } from "../DTO/DTOTypes";
 import { getPlayerId } from "../../playerSession/LocalStorageFunctions";
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
 import SpaceshipSpriteO from "../GameObjects/SpaceshipSpriteO";
@@ -30,23 +30,25 @@ export default class BootLoader extends Phaser.Scene {
         globalState.forEach((value, key) => {
             if (getPlayerId() === key) {
                 this.jugador = new SpaceshipSpriteO(this, value.x, value.y, "SpaceshipBlue", "tailBlue")
-                this.playersSprite.set(key,this.jugador)
+                this.playersSprite.set(key, this.jugador)
             }
-            else{
+            else {
                 this.playersSprite.set(key, new SpaceshipSpriteO(this, value.x, value.y, "SpaceshipBlue", "tailBlue"))
             }
 
         })
 
-        socket.on(ServerSocketEvents.updatePlayerCoordinates, (data) => {
+        socket.on(ServerSocketEvents.updatePlayerCoordinates, (data: playerStateDTO) => {
             let currentPlayer = this.playersSprite.get(data.id);
             if (currentPlayer) {
                 currentPlayer.setX(data.x);
                 currentPlayer.setY(data.y);
                 currentPlayer.setRotation(data.angle);
-                currentPlayer.addLine();
-                this.allTails.push(currentPlayer.addLine())
+                // currentPlayer.addLine();
                 this.checkTailCollisions(currentPlayer)
+                console.log(data.isAddingTail === false)
+                if (data.isAddingTail === true) this.addLine(currentPlayer)
+                
             }
 
         })
@@ -59,7 +61,7 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     update(time: number, delta: number): void {
-        
+
         if (this.jugador?.getIsPlayerAlive()) {
             const input = this.jugador?.move(delta);
             socket.emit(ClientSocketEvents.sendInput, input)
@@ -76,12 +78,17 @@ export default class BootLoader extends Phaser.Scene {
         return this.jugador;
     }
 
-     checkTailCollisions(playerToChek: SpaceshipSpriteO): void {
+    checkTailCollisions(playerToChek: SpaceshipSpriteO): void {
         playerToChek.scene.physics.collide(playerToChek, this.allTails, () => {
             playerToChek.explode(playerToChek.x, playerToChek.y);
             playerToChek.disableBody(true, true);
             this.jugador?.setIsPlayerAlive(false);
 
         });
+    }
+
+    public addLine(currentPlayer: SpaceshipSpriteO) {
+        console.log("entro a la función add line ")
+        this.allTails.push(currentPlayer.addLine())
     }
 }
