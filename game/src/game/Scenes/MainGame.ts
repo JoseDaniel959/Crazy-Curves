@@ -24,7 +24,6 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     create() {
-
         this.add.image(400, 300, "Background").setToBack()
         const music = this.sound.add('music1').setVolume(0.3);
         globalState.forEach((value, key) => {
@@ -46,7 +45,6 @@ export default class BootLoader extends Phaser.Scene {
                 currentPlayer.setRotation(data.angle);
                 // currentPlayer.addLine();
                 this.checkTailCollisions(currentPlayer)
-                console.log(data.isAddingTail === false)
                 if (data.isAddingTail === true) this.addLine(currentPlayer)
                 
             }
@@ -61,6 +59,7 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     update(time: number, delta: number): void {
+        console.log(this.allTails.length);
 
         if (this.jugador?.getIsPlayerAlive()) {
             const input = this.jugador?.move(delta);
@@ -88,7 +87,6 @@ export default class BootLoader extends Phaser.Scene {
     }
 
     public addLine(currentPlayer: SpaceshipSpriteO) {
-        console.log("entro a la función add line ")
         this.allTails.push(currentPlayer.addLine())
     }
 }
