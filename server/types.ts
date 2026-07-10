@@ -24,4 +24,11 @@ export type playerState = {
     angle: number,
     isAddingTail: boolean
     tailTime: number;
+    deltaTime?: number
+}
+
+export type inputDTO = {
+    inputSequence: number,
+    input: string,
+    deltaTime: number,
 }

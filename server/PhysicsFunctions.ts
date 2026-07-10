@@ -1,7 +1,9 @@
-import type { playerState } from "./types.ts";
+import type { inputDTO, playerState } from "./types.ts";
 
-export const updatePlayerState = (playerState: playerState, data: any): playerState => {
+export const updatePlayerState = (playerState: playerState, data: inputDTO): playerState => {
+    let { deltaTime} = data;
     let newPlayerState: playerState = playerState;
+    console.log(data)
     newPlayerState = updatePlayerAddingTail(newPlayerState);
     if (data.input == 'right') {
         newPlayerState.angle += 0.025;
@@ -10,9 +12,8 @@ export const updatePlayerState = (playerState: playerState, data: any): playerSt
         newPlayerState.angle -= 0.025;
     }
 
-    newPlayerState.x += Math.cos(newPlayerState.angle) * 1;
-    newPlayerState.y += Math.sin(newPlayerState.angle) * 1;
-
+    newPlayerState.x += Math.cos(newPlayerState.angle) * deltaTime * 0.15
+    newPlayerState.y += Math.sin(newPlayerState.angle) * deltaTime * 0.15
     return newPlayerState;
 
 

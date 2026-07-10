@@ -92,6 +92,7 @@ export default class SpaceshipSpriteO extends Phaser.Physics.Arcade.Sprite {
         const input = {
             inputSequence: this.inputSequence,
             input: "",
+            deltaTime,
         }
         if (this.cursors?.left.isUp && this.cursors?.right.isUp) {
 

@@ -59,7 +59,8 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     update(time: number, delta: number): void {
-        console.log(this.allTails.length);
+        
+        
 
         if (this.jugador?.getIsPlayerAlive()) {
             const input = this.jugador?.move(delta);
