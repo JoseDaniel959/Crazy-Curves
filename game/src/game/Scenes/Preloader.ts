@@ -16,7 +16,7 @@ import preloadAssets from "../utils/PreloaderFunctions"
 
 
 export default class Preloader extends Phaser.Scene {
-
+    private playerName: string = "";
     constructor() {
         super('Preloader');
     }
@@ -33,14 +33,14 @@ export default class Preloader extends Phaser.Scene {
         this.add.dom(MID_SCREEN_WIDTH, 300, 'input');
         
         new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
-            const playerName = document.getElementsByTagName('input')[0].value
+            this.playerName = document.getElementsByTagName('input')[0].value
 
-           socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(playerName))
+           socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(this.playerName))
         })
 
         socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO: PlayerSessionDTO) => {
             console.log(playerSessionDTO)
-            if (playerSessionDTO) {
+            if (playerSessionDTO.playerName === this.playerName) {
                 savePlayerId(playerSessionDTO)
                 this.scene.start("MainMenu")
             }
