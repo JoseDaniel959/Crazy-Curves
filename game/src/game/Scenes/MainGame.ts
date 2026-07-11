@@ -16,7 +16,7 @@ export default class BootLoader extends Phaser.Scene {
     private jugador: SpaceshipSpriteO | undefined;
     private playersSprite = new Map<string, SpaceshipSpriteO>();
     private allTails: TailSprite[] = [];
-
+    private elapsedTime = 10;
     // sent request[]
     constructor() {
         super('MainGame')
@@ -45,22 +45,24 @@ export default class BootLoader extends Phaser.Scene {
                 currentPlayer.setRotation(data.angle);
                 // currentPlayer.addLine();
                 this.checkTailCollisions(currentPlayer)
-                if (data.isAddingTail === true) this.addLine(currentPlayer)
+                if (this.elapsedTime === 0 && data.isAddingTail) this.addLine(currentPlayer)
                 
             }
 
         })
 
-        console.log("jugadores conectados")
-        console.log(this.playersSprite)
 
 
         music.play()
 
     }
     update(time: number, delta: number): void {
-        
-        
+        if(this.elapsedTime > 0){
+            this.elapsedTime -= 1
+        }
+        else{
+            this.elapsedTime = 10
+        }
 
         if (this.jugador?.getIsPlayerAlive()) {
             const input = this.jugador?.move(delta);
