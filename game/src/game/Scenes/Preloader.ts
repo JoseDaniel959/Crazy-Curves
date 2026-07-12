@@ -5,11 +5,11 @@ import Explosion from "../../assets/Animations/Effect_Explosion_1_517x517.png"
 
 import { socket } from "../../Socket/socketFunctions"
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents"
-import PlayerSession from "../../playerSession/PlayerSession"
+import PlayerState from "../../playerSession/PlayerState"
 import ButtonComponent from "../UI/Menu/AtomicComponents/ButtonComponent"
 import { savePlayerId } from "../../playerSession/LocalStorageFunctions"
 import { ServerSocketEvents } from "../../Socket/ServerSocketEvents"
-import { PlayerSessionDTO } from "../DTO/DTOTypes"
+import { playerStateDTO } from "../DTO/DTOTypes"
 import {MID_SCREEN_WIDTH} from "../game"
 import BaseUIMenuComponent from "../UI/Menu/CompoundComponents/BaseUIMenuComponent"
 import preloadAssets from "../utils/PreloaderFunctions"
@@ -35,13 +35,13 @@ export default class Preloader extends Phaser.Scene {
         new ButtonComponent(this, MID_SCREEN_WIDTH, 950, "StartButton", 0.5, () => {
             this.playerName = document.getElementsByTagName('input')[0].value
 
-           socket.emit(ClientSocketEvents.addNewPlayer, new PlayerSession(this.playerName))
+           socket.emit(ClientSocketEvents.addNewPlayer, new PlayerState(this.playerName))
         })
 
-        socket.on(ServerSocketEvents.playerCreated, (playerSessionDTO: PlayerSessionDTO) => {
-            console.log(playerSessionDTO)
-            if (playerSessionDTO.playerName === this.playerName) {
-                savePlayerId(playerSessionDTO)
+        socket.on(ServerSocketEvents.playerCreated, (playerStateDTO: playerStateDTO) => {
+            console.log("me crearon",playerStateDTO)
+            if (playerStateDTO.playerName === this.playerName) {
+                savePlayerId(playerStateDTO)
                 this.scene.start("MainMenu")
             }
 

@@ -5,30 +5,21 @@ export type playerSelectionDTO = {
 
 export type PlayerSessionDTO = {
     playerId: string;
-    playerName : string;
+    playerName: string;
     playerSelectionDTO: playerSelectionDTO;
-    isPlayerReady: boolean
 }
 
-
-interface PlayerSelectionInMenu {
-    spaceshipTexture: string
-    tailTexture: string
-}
-
-export type playerState = {
-    id: string,
+export type playerStateDTO = {
+    playerId: string;
+    playerName: string;
+    isPlayerReady: boolean;
+    playerSelection: playerSelectionDTO,
+    playerSession: PlayerSessionDTO,
     isAlive: boolean;
     x: number,
     y: number,
     angle: number,
     isAddingTail: boolean
     tailTime: number;
-    deltaTime?: number
 }
 
-export type inputDTO = {
-    inputSequence: number,
-    input: string,
-    deltaTime: number,
-}

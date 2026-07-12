@@ -10,7 +10,11 @@ export type PlayerSessionDTO = {
 }
 
 export type playerStateDTO = {
-    id: string,
+    playerId: string;
+    playerName: string;
+    isPlayerReady: boolean;
+    playerSelection: playerSelectionDTO,
+    playerSession: PlayerSessionDTO,
     isAlive: boolean;
     x: number,
     y: number,

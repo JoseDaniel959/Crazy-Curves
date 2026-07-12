@@ -1,8 +1,8 @@
 import Phaser from "phaser"
 import SpaceshipSprite from "../GameObjects/SpaceshipSprite"
 import { registryKey } from "../Registry/RegistryKeys";
-import { globalState, playersOnline, socket } from "../../Socket/socketFunctions";
-import PlayerSession from "../../playerSession/PlayerSession";
+import { globalState, socket } from "../../Socket/socketFunctions";
+import PlayerSession from "../../playerSession/PlayerState";
 import { PlayerSessionDTO, playerStateDTO } from "../DTO/DTOTypes";
 import { getPlayerId } from "../../playerSession/LocalStorageFunctions";
 import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
@@ -38,7 +38,7 @@ export default class BootLoader extends Phaser.Scene {
         })
 
         socket.on(ServerSocketEvents.updatePlayerCoordinates, (data: playerStateDTO) => {
-            let currentPlayer = this.playersSprite.get(data.id);
+            let currentPlayer = this.playersSprite.get(data.playerId);
             if (currentPlayer) {
                 currentPlayer.setX(data.x);
                 currentPlayer.setY(data.y);

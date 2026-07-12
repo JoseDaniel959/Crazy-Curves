@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { ClientSocketEvents } from '../game/src/Socket/ClientSocketEvents.ts'
 import { ServerSocketEvents } from '../game/src/Socket/ServerSocketEvents.ts'
-import type { PlayerSessionDTO, playerState } from "./types.ts";
+import type { playerStateDTO } from "./types.ts";
 import { updatePlayerState } from "./PhysicsFunctions.ts"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
@@ -14,9 +14,7 @@ const httpServer = createServer(app);
 const port = 3000
 const io = new Server(httpServer);
 
-const globalState = new Map<string, playerState>();
-
-let playersOnline: PlayerSessionDTO[] = [];
+const globalState = new Map<string, playerStateDTO>();
 
 app.use(express.static(__dirname + '/public'));
 
@@ -33,37 +31,40 @@ io.on("connection", (socket: Socket) => {
   //Listener when user enters to the MainMenu Scene
   socket.on(ClientSocketEvents.addNewPlayer, (newPlayer) => {
     newPlayer.playerId = newPlayerId;
-    playersOnline.push(newPlayer);
+    globalState.set(newPlayerId, newPlayer)
     io.emit(ServerSocketEvents.playerCreated, newPlayer)
 
   })
 
   //Listener when all user has pressed the startbutton
   socket.on(ClientSocketEvents.initMatch, (isReady: boolean) => {
-    playersOnline.some((playerOnline) => {
-      if (playerOnline.playerId === newPlayerId) {
-        playerOnline.isPlayerReady = isReady;
-      }
-    })
 
-    globalState.set(
-      newPlayerId,
-      {
-        id: newPlayerId,
+    let playerState = globalState.get(newPlayerId);
+    if (playerState) {
+      playerState.isPlayerReady = true;
+      globalState.set(newPlayerId, {
+        ...playerState,
+        isPlayerReady: true,
         isAlive: true,
         x: Math.floor(Math.random() * 900) + 10,
         y: Math.floor(Math.random() * 900) + 10,
         angle: Math.floor(Math.random() * 360),
         isAddingTail: false,
         tailTime: 250,
+      })
+    }
+
+
+
+    let playerNotReadyFound = false;
+    for (const [key, playerStateDTO] of globalState) {
+      if (playerStateDTO.isPlayerReady === false) {
+        playerNotReadyFound = true
+        break;
       }
-    )
-
-
-    const playerNotReadyFound = playersOnline.some((playerOnline) => playerOnline.isPlayerReady === false)
+    }
     if (playerNotReadyFound === false) {
       io.emit(ServerSocketEvents.addPlayersToGlobalState, globalState.values().toArray())
-
       io.emit(ServerSocketEvents.startMatch, true)
     }
 
@@ -71,21 +72,24 @@ io.on("connection", (socket: Socket) => {
 
   //Listener to get all players connected in MainMenu
   socket.on(ClientSocketEvents.getAllPlayers, () => {
-    io.emit(ServerSocketEvents.getAllPlayers, playersOnline)
+    io.emit(ServerSocketEvents.getAllPlayers,[...globalState.values()])
   })
 
   //Listener to update player selection component
-  socket.on(ClientSocketEvents.updatePlayerSelection, (newPlayerSelection: Partial<PlayerSessionDTO>) => {
-    playersOnline = playersOnline.map((playerOnline: PlayerSessionDTO) => {
-      if (playerOnline.playerId === newPlayerSelection.playerId && newPlayerSelection.playerSelectionDTO) {
-        playerOnline.playerSelectionDTO = newPlayerSelection.playerSelectionDTO
-        io.emit(ServerSocketEvents.newPlayerSelection, playerOnline)
-        console.log("mando este jugador al frontend")
-        console.log(playersOnline)
-      }
-      return playerOnline
-    })
+  socket.on(ClientSocketEvents.updatePlayerSelection, (newPlayerSelection) => {
+    console.log("actualizo la seleccion del jugador")
+    console.log(newPlayerSelection)
 
+
+    let playerStateDTO = globalState.get(newPlayerId);
+    if (playerStateDTO) {
+      globalState.set(newPlayerId, {
+        ...playerStateDTO,
+        playerSelection: newPlayerSelection?.playerSelectionDTO
+      })
+    }
+    console.log(globalState.get(newPlayerId))
+    io.emit(ServerSocketEvents.newPlayerSelection, globalState.get(newPlayerId))
   })
 
   //Listener to send player coordinates according to their sent input data
@@ -94,9 +98,9 @@ io.on("connection", (socket: Socket) => {
     if (playerState) {
       const newPlayerState = updatePlayerState(playerState, data);
       globalState.set(newPlayerId, newPlayerState)
-    
+
     }
-      io.emit(ServerSocketEvents.updatePlayerCoordinates, globalState.get(newPlayerId));
+    io.emit(ServerSocketEvents.updatePlayerCoordinates, globalState.get(newPlayerId));
 
   })
 
@@ -104,9 +108,9 @@ io.on("connection", (socket: Socket) => {
   //Listener to the disconnect event
   socket.on('disconnect', (socket) => {
     console.log("se desconeto", newPlayerId)
-    playersOnline = playersOnline.filter((playerOnline) => playerOnline.playerId !== newPlayerId)
+    globalState.delete(newPlayerId)
     io.emit(ServerSocketEvents.removePlayerFromMenu, newPlayerId);
-    io.emit(ServerSocketEvents.getAllPlayers, playersOnline);
+    io.emit(ServerSocketEvents.getAllPlayers, globalState);
   });
 });
 

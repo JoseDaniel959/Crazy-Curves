@@ -1,12 +1,12 @@
 import { gameTitle, } from '../UI/Menu/MenuElements';
 import PlayerSelectionComponent from '../UI/Menu/CompoundComponents/SelectionComponents/PlayerSelectionComponent';
-import { playersOnline, socket } from '../../Socket/socketFunctions';
+import { globalState, socket } from '../../Socket/socketFunctions';
 import { ServerSocketEvents } from '../../Socket/ServerSocketEvents';
 import { ClientSocketEvents } from '../../Socket/ClientSocketEvents';
 import ButtonComponent from '../UI/Menu/AtomicComponents/ButtonComponent';
 import { registryKey } from '../Registry/RegistryKeys';
-import PlayerSession from '../../playerSession/PlayerSession';
-import { playerSelectionDTO, PlayerSessionDTO } from '../DTO/DTOTypes';
+import PlayerSession from '../../playerSession/PlayerState';
+import { playerSelectionDTO, PlayerSessionDTO, playerStateDTO } from '../DTO/DTOTypes';
 import {MID_SCREEN_WIDTH} from "../game"
 import BaseUIMenuComponent from '../UI/Menu/CompoundComponents/BaseUIMenuComponent';
 
@@ -29,7 +29,7 @@ export default class MainMenu extends Phaser.Scene {
         socket.on(ServerSocketEvents.getAllPlayers, () => {
             let offset = 0
 
-            playersOnline.forEach((playerOnline: PlayerSessionDTO) => {
+            globalState.forEach((playerOnline: playerStateDTO) => {
                 const { playerId, playerName } = playerOnline
                 if (!this.isPlayerConnected(playersSelectionComponent, playerId)) {
                     const newPlayerSelectionComponent =  new PlayerSelectionComponent(this, MID_SCREEN_WIDTH, 350 + offset, playerName, playerId)
@@ -46,18 +46,17 @@ export default class MainMenu extends Phaser.Scene {
             this.disconectPlayer(playersSelectionComponent, playerId)
         })
 
-        socket.on(ServerSocketEvents.newPlayerSelection, (newPlayerSelection: PlayerSessionDTO)=>{
-                    console.log("se supone que entro")
-
+        socket.on(ServerSocketEvents.newPlayerSelection, (newPlayerSelection: playerStateDTO)=>{
+            console.log("entro a actualizar el jugador",newPlayerSelection)
             playersSelectionComponent.find((playerSelectionComponent:PlayerSelectionComponent,index:number)=>{
                 if(playerSelectionComponent.getPlayerId() === newPlayerSelection.playerId){
-                    const {playerSelectionDTO} = newPlayerSelection;
+                    const {playerSelection} = newPlayerSelection;
+                    console.log
                     const foundPlayerSelectionComponent = playersSelectionComponent[index]
-                    foundPlayerSelectionComponent.getSpaceshipSelectionComponent().newAtomicComponent(playerSelectionDTO.spaceshipTexture);
-                    foundPlayerSelectionComponent.getTailSelectionComponent().newAtomicComponent(playerSelectionDTO.tailTexture)
+                    foundPlayerSelectionComponent.getSpaceshipSelectionComponent().newAtomicComponent(playerSelection.spaceshipTexture);
+                    foundPlayerSelectionComponent.getTailSelectionComponent().newAtomicComponent(playerSelection.tailTexture)
 
 
-                    console.log("actualice el jugador")
                     console.log(foundPlayerSelectionComponent.getSpaceshipSelectionComponent().getCurrentIndex())
 
                 }
