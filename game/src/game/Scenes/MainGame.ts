@@ -9,6 +9,7 @@ import { ClientSocketEvents } from "../../Socket/ClientSocketEvents";
 import SpaceshipSpriteO from "../GameObjects/SpaceshipSpriteO";
 import TailSprite from "../GameObjects/TailSprite";
 import { ServerSocketEvents } from "../../Socket/ServerSocketEvents";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../game";
 
 
 
@@ -24,7 +25,7 @@ export default class BootLoader extends Phaser.Scene {
 
     }
     create() {
-        this.add.image(400, 300, "Background").setToBack()
+        this.add.image(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, "BackgroundAsset").setToBack()
         const music = this.sound.add('music1').setVolume(0.3);
         globalState.forEach((value, key) => {
             if (getPlayerId() === key) {
