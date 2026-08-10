@@ -65,7 +65,6 @@ io.on("connection", (socket: Socket) => {
     }
     if (playerNotReadyFound === false) {
       io.emit(ServerSocketEvents.startMatch, true)
-      console.log(globalState)
     }
 
   })

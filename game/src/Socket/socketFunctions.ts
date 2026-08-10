@@ -15,14 +15,3 @@ socket.on(ServerSocketEvents.getAllPlayers, (playersOnline:playerStateDTO[]) => 
 socket.on(ServerSocketEvents.removePlayerFromMenu, (playerId) => {
     globalState.delete(playerId);
 })
-
-
-// socket.on(ServerSocketEvents.addPlayersToGlobalState,(data)=>{
-//     data.forEach((element:any) => {
-//         globalState.set(element.id,element)
-        
-//     });
-// })
-
-
-
