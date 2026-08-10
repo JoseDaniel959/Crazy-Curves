@@ -44,7 +44,7 @@ io.on("connection", (socket: Socket) => {
       playerState.isPlayerReady = true;
       globalState.set(newPlayerId, {
         ...playerState,
-        isPlayerReady: true,
+        isPlayerReady: isReady,
         isAlive: true,
         x: Math.floor(Math.random() * 900) + 10,
         y: Math.floor(Math.random() * 900) + 10,
