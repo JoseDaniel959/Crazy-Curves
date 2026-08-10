@@ -24,7 +24,7 @@ import StartButton from "../../assets/UI/Buttons/Start_BTN.png"
 import Table from "../../assets/UI/Table.png"
 import MainTitle from "../../assets/UI/MainTitle.png"
 import MainMenuBackground from "../../assets/images/background/BG.png"
-import Background from "../../assets/images/background/export202405130010328162.png"
+import BackgroundAsset from "../../assets/images/background/BackgroundAsset.png"
 
 
 //Music 
@@ -77,7 +77,7 @@ const preloadUIAssets = (Scene:Scene):void =>{
         ["Table",Table],
         ["MainTitle",MainTitle],
         ["MainMenuBackground",MainMenuBackground],
-        ["Background",Background]
+        ["BackgroundAsset",BackgroundAsset]
     ])
     loadAssets(UI,Scene);
 }
