@@ -64,8 +64,8 @@ io.on("connection", (socket: Socket) => {
       }
     }
     if (playerNotReadyFound === false) {
-      io.emit(ServerSocketEvents.addPlayersToGlobalState, globalState.values().toArray())
       io.emit(ServerSocketEvents.startMatch, true)
+      console.log(globalState)
     }
 
   })
@@ -77,8 +77,6 @@ io.on("connection", (socket: Socket) => {
 
   //Listener to update player selection component
   socket.on(ClientSocketEvents.updatePlayerSelection, (newPlayerSelection) => {
-    console.log("actualizo la seleccion del jugador")
-    console.log(newPlayerSelection)
 
 
     let playerStateDTO = globalState.get(newPlayerId);
@@ -88,7 +86,6 @@ io.on("connection", (socket: Socket) => {
         playerSelection: newPlayerSelection?.playerSelectionDTO
       })
     }
-    console.log(globalState.get(newPlayerId))
     io.emit(ServerSocketEvents.newPlayerSelection, globalState.get(newPlayerId))
   })
 

@@ -17,12 +17,12 @@ socket.on(ServerSocketEvents.removePlayerFromMenu, (playerId) => {
 })
 
 
-socket.on(ServerSocketEvents.addPlayersToGlobalState,(data)=>{
-    data.forEach((element:any) => {
-        globalState.set(element.id,element)
+// socket.on(ServerSocketEvents.addPlayersToGlobalState,(data)=>{
+//     data.forEach((element:any) => {
+//         globalState.set(element.id,element)
         
-    });
-})
+//     });
+// })
 
 
 
